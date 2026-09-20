@@ -1,0 +1,10 @@
+import { readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
+import { zstdDecompressSync } from 'node:zlib';
+const root = new URL('../reference/roblox/scene/', import.meta.url);
+const files = (await readdir(root)).filter(f => f.endsWith('.b64')).sort((a,b) => Number(a.split('.')[0])-Number(b.split('.')[0]));
+const parts = [];
+for (const file of files) parts.push(...JSON.parse(zstdDecompressSync(Buffer.from(await readFile(new URL(file, root), 'utf8'), 'base64'))));
+if (parts.length !== 25446 || parts.some((p,i) => p.id !== i+1)) throw new Error('Incomplete Studio export');
+await mkdir(new URL('../public/tycoon/', import.meta.url), { recursive: true });
+await writeFile(new URL('../public/tycoon/dealership.json', import.meta.url), JSON.stringify({ placeId: 105869926920733, name: 'Sell Cars Integration', exportedAt: '2026-09-16', parts }));
+console.log(`Imported ${parts.length} authored parts.`);

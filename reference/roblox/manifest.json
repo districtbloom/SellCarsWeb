@@ -1,0 +1,733 @@
+{
+  "placeId": 105869926920733,
+  "placeName": "Sell Cars Integration",
+  "exportedAt": "2026-09-16",
+  "activeEntryPoints": [
+    "ServerScriptService.HubServer",
+    "StarterPlayer.StarterPlayerScripts.HubClient"
+  ],
+  "runtime": "TypeScript / Three.js / cannon-es",
+  "scripts": [
+    {
+      "bytes": 2617,
+      "path": "ReplicatedStorage.CorePrototypeConfig"
+    },
+    {
+      "bytes": 11820,
+      "path": "ReplicatedStorage.CoreUX.AudioFeedback"
+    },
+    {
+      "bytes": 5890,
+      "path": "ReplicatedStorage.CoreUX.BusinessJourney"
+    },
+    {
+      "bytes": 14300,
+      "path": "ReplicatedStorage.CoreUX.CustomizationPresenter"
+    },
+    {
+      "bytes": 2372,
+      "path": "ReplicatedStorage.CoreUX.DealClosurePresenter"
+    },
+    {
+      "bytes": 9614,
+      "path": "ReplicatedStorage.CoreUX.DealPresenter"
+    },
+    {
+      "bytes": 2565,
+      "path": "ReplicatedStorage.CoreUX.DealScene"
+    },
+    {
+      "bytes": 1339,
+      "path": "ReplicatedStorage.CoreUX.FocusController"
+    },
+    {
+      "bytes": 8944,
+      "path": "ReplicatedStorage.CoreUX.GuidancePresenter"
+    },
+    {
+      "bytes": 2378,
+      "path": "ReplicatedStorage.CoreUX.Motion"
+    },
+    {
+      "bytes": 13124,
+      "path": "ReplicatedStorage.CoreUX.PromptPresenter"
+    },
+    {
+      "bytes": 16435,
+      "path": "ReplicatedStorage.CoreUX.PurchasePadPresenter"
+    },
+    {
+      "bytes": 1304,
+      "path": "ReplicatedStorage.CoreUX.Theme"
+    },
+    {
+      "bytes": 43270,
+      "path": "ReplicatedStorage.CoreWorldBuilder"
+    },
+    {
+      "bytes": 8799,
+      "path": "ReplicatedStorage.HubSlice.HubData"
+    },
+    {
+      "bytes": 14671,
+      "path": "ReplicatedStorage.HubSlice.HubModel"
+    },
+    {
+      "bytes": 9361,
+      "path": "ReplicatedStorage.HubSlice.HubWorld"
+    },
+    {
+      "bytes": 134483,
+      "path": "ReplicatedStorage.SellCarsV5FullJourneyData"
+    },
+    {
+      "bytes": 1173,
+      "path": "ReplicatedStorage.SellCarsV5GuidedTourData"
+    },
+    {
+      "bytes": 53937,
+      "path": "ReplicatedStorage.SellCarsV5JourneyData"
+    },
+    {
+      "bytes": 194694,
+      "path": "ReplicatedStorage.SellCarsV5PurchaseBenefits"
+    },
+    {
+      "bytes": 4030,
+      "path": "ReplicatedStorage.SellCarsV5SoundMap"
+    },
+    {
+      "bytes": 8918,
+      "path": "ReplicatedStorage.SellCarsV5WalkJourneyClient"
+    },
+    {
+      "bytes": 65677,
+      "path": "ServerScriptService.CorePrototypeServer",
+      "disabled": true
+    },
+    {
+      "bytes": 6651,
+      "path": "ServerScriptService.HubServer"
+    },
+    {
+      "bytes": 6872,
+      "path": "ServerScriptService.SellCarsIntegrationFirstPad",
+      "disabled": true
+    },
+    {
+      "bytes": 35204,
+      "path": "ServerScriptService.SellCarsV3FlowStressServer",
+      "disabled": true
+    },
+    {
+      "bytes": 35201,
+      "path": "ServerScriptService.SellCarsV4DedicatedFlowServer",
+      "disabled": true
+    },
+    {
+      "bytes": 3750,
+      "path": "ServerScriptService.SellCarsV4PhaseReviewBridgeServer",
+      "disabled": true
+    },
+    {
+      "bytes": 35158,
+      "path": "ServerScriptService.SellCarsV4WorkingFlowServer",
+      "disabled": true
+    },
+    {
+      "bytes": 3694,
+      "path": "ServerScriptService.SellCarsV5FullJourneyServer"
+    },
+    {
+      "bytes": 721,
+      "path": "ServerScriptService.SellCarsV5InstitutionAtmosphereServer",
+      "disabled": true
+    },
+    {
+      "bytes": 769,
+      "path": "ServerScriptService.SellCarsV5InstitutionFrontageOccupationServer",
+      "disabled": true
+    },
+    {
+      "bytes": 753,
+      "path": "ServerScriptService.SellCarsV5InstitutionProductionOccupationServer",
+      "disabled": true
+    },
+    {
+      "bytes": 764,
+      "path": "ServerScriptService.SellCarsV5InstitutionRearOccupationServer",
+      "disabled": true
+    },
+    {
+      "bytes": 22784,
+      "path": "ServerScriptService.SellCarsV5InstitutionRouteProofServer",
+      "disabled": true
+    },
+    {
+      "bytes": 2676,
+      "path": "ServerScriptService.SellCarsV5JourneyPreviewServer",
+      "disabled": true
+    },
+    {
+      "bytes": 811,
+      "path": "ServerScriptService.SellCarsV5ProfessionalReview01Server",
+      "disabled": true
+    },
+    {
+      "bytes": 16364,
+      "path": "ServerStorage.FJ240_EditRuntime_2"
+    },
+    {
+      "bytes": 16802,
+      "path": "ServerStorage.FJ240_EditRuntime_3"
+    },
+    {
+      "bytes": 16829,
+      "path": "ServerStorage.FJ240_EditRuntime_Final"
+    },
+    {
+      "bytes": 66215,
+      "path": "ServerStorage.GreyboxDetailBuilderV2"
+    },
+    {
+      "bytes": 27526,
+      "path": "ServerStorage.GreyboxFantasyCompletionV3"
+    },
+    {
+      "bytes": 28101,
+      "path": "ServerStorage.GreyboxProgressionPeopleV4"
+    },
+    {
+      "bytes": 8753,
+      "path": "ServerStorage.SellCarsIntegrationAutomation"
+    },
+    {
+      "bytes": 2153,
+      "path": "ServerStorage.SellCarsIntegrationNegotiation"
+    },
+    {
+      "bytes": 27257,
+      "path": "ServerStorage.SellCarsIntegrationOpeningComposer"
+    },
+    {
+      "bytes": 1592,
+      "path": "ServerStorage.SellCarsIntegrationRoutes"
+    },
+    {
+      "bytes": 2156,
+      "path": "ServerStorage.SellCarsIntegrationSave"
+    },
+    {
+      "bytes": 11468,
+      "path": "ServerStorage.SellCarsIntegrationSpecialist"
+    },
+    {
+      "bytes": 8769,
+      "path": "ServerStorage.SellCarsIntegrationWorld"
+    },
+    {
+      "bytes": 8278,
+      "path": "ServerStorage.SellCarsV5ArtCulture"
+    },
+    {
+      "bytes": 7036,
+      "path": "ServerStorage.SellCarsV5AtmosphereCraft03Details"
+    },
+    {
+      "bytes": 3590,
+      "path": "ServerStorage.SellCarsV5AtmosphereCraft03Materials"
+    },
+    {
+      "bytes": 5698,
+      "path": "ServerStorage.SellCarsV5BirthCirculation"
+    },
+    {
+      "bytes": 1072,
+      "path": "ServerStorage.SellCarsV5BirthCirculationLayout"
+    },
+    {
+      "bytes": 1518,
+      "path": "ServerStorage.SellCarsV5BirthCirculationRoutes"
+    },
+    {
+      "bytes": 14846,
+      "path": "ServerStorage.SellCarsV5BirthWorkingCraft"
+    },
+    {
+      "bytes": 8968,
+      "path": "ServerStorage.SellCarsV5Campus03Kit"
+    },
+    {
+      "bytes": 10190,
+      "path": "ServerStorage.SellCarsV5Campus03Operations"
+    },
+    {
+      "bytes": 12040,
+      "path": "ServerStorage.SellCarsV5Campus03Parts"
+    },
+    {
+      "bytes": 2314,
+      "path": "ServerStorage.SellCarsV5Campus03Promenade"
+    },
+    {
+      "bytes": 10512,
+      "path": "ServerStorage.SellCarsV5CampusArt"
+    },
+    {
+      "bytes": 1399,
+      "path": "ServerStorage.SellCarsV5CampusFinishEdit"
+    },
+    {
+      "bytes": 3744,
+      "path": "ServerStorage.SellCarsV5CampusJoinery"
+    },
+    {
+      "bytes": 858,
+      "path": "ServerStorage.SellCarsV5CampusPlacement01"
+    },
+    {
+      "bytes": 7924,
+      "path": "ServerStorage.SellCarsV5CollectorBackward01"
+    },
+    {
+      "bytes": 3771,
+      "path": "ServerStorage.SellCarsV5CraftsmanshipKit"
+    },
+    {
+      "bytes": 12173,
+      "path": "ServerStorage.SellCarsV5DepartmentArtDirection"
+    },
+    {
+      "bytes": 2965,
+      "path": "ServerStorage.SellCarsV5DistrictFinish02Kit"
+    },
+    {
+      "bytes": 3242,
+      "path": "ServerStorage.SellCarsV5DistrictFinish02Production"
+    },
+    {
+      "bytes": 10328,
+      "path": "ServerStorage.SellCarsV5DistrictFinish02Rear"
+    },
+    {
+      "bytes": 14875,
+      "path": "ServerStorage.SellCarsV5EverydayLife"
+    },
+    {
+      "bytes": 6436,
+      "path": "ServerStorage.SellCarsV5EverydayLifeR6"
+    },
+    {
+      "bytes": 3561,
+      "path": "ServerStorage.SellCarsV5FabricationCraftsmanship"
+    },
+    {
+      "bytes": 4198,
+      "path": "ServerStorage.SellCarsV5FinishCraftsmanship"
+    },
+    {
+      "bytes": 10380,
+      "path": "ServerStorage.SellCarsV5FirstLoopGeometry"
+    },
+    {
+      "bytes": 8395,
+      "path": "ServerStorage.SellCarsV5FirstLoopPreview"
+    },
+    {
+      "bytes": 13418,
+      "path": "ServerStorage.SellCarsV5Frontage04Architecture"
+    },
+    {
+      "bytes": 10528,
+      "path": "ServerStorage.SellCarsV5Frontage04Ground"
+    },
+    {
+      "bytes": 13888,
+      "path": "ServerStorage.SellCarsV5Frontage04Hospitality"
+    },
+    {
+      "bytes": 1637,
+      "path": "ServerStorage.SellCarsV5Frontage04Kit"
+    },
+    {
+      "bytes": 7222,
+      "path": "ServerStorage.SellCarsV5Frontage04Landscape"
+    },
+    {
+      "bytes": 7401,
+      "path": "ServerStorage.SellCarsV5Frontage04Lighting"
+    },
+    {
+      "bytes": 14122,
+      "path": "ServerStorage.SellCarsV5Frontage04Receiving"
+    },
+    {
+      "bytes": 3806,
+      "path": "ServerStorage.SellCarsV5Frontage04Runtime"
+    },
+    {
+      "bytes": 14105,
+      "path": "ServerStorage.SellCarsV5Frontage04Sales"
+    },
+    {
+      "bytes": 12924,
+      "path": "ServerStorage.SellCarsV5Frontage04VehiclePreview"
+    },
+    {
+      "bytes": 26232,
+      "path": "ServerStorage.SellCarsV5FullJourneyComposer"
+    },
+    {
+      "bytes": 14582,
+      "path": "ServerStorage.SellCarsV5FullJourneyExtras"
+    },
+    {
+      "bytes": 13788,
+      "path": "ServerStorage.SellCarsV5FullJourneyRules"
+    },
+    {
+      "bytes": 8818,
+      "path": "ServerStorage.SellCarsV5GrowthExperience"
+    },
+    {
+      "bytes": 6457,
+      "path": "ServerStorage.SellCarsV5HumanScaleCraft"
+    },
+    {
+      "bytes": 5634,
+      "path": "ServerStorage.SellCarsV5InstitutionAtmosphereCraft03Installer"
+    },
+    {
+      "bytes": 2736,
+      "path": "ServerStorage.SellCarsV5InstitutionCampus03Installer"
+    },
+    {
+      "bytes": 21850,
+      "path": "ServerStorage.SellCarsV5InstitutionCourtyard02Installer"
+    },
+    {
+      "bytes": 4248,
+      "path": "ServerStorage.SellCarsV5InstitutionDistrictFinish02Installer"
+    },
+    {
+      "bytes": 15536,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01AInstaller"
+    },
+    {
+      "bytes": 13096,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01BInstaller"
+    },
+    {
+      "bytes": 15375,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01CInstaller"
+    },
+    {
+      "bytes": 16839,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01DInstaller"
+    },
+    {
+      "bytes": 17420,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01EInstaller"
+    },
+    {
+      "bytes": 22051,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01FInstaller"
+    },
+    {
+      "bytes": 15438,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01GInstaller"
+    },
+    {
+      "bytes": 16257,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01HInstaller"
+    },
+    {
+      "bytes": 16429,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01IInstaller"
+    },
+    {
+      "bytes": 14662,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01JInstaller"
+    },
+    {
+      "bytes": 15153,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01KInstaller"
+    },
+    {
+      "bytes": 16040,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01MInstaller"
+    },
+    {
+      "bytes": 17903,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01NInstaller"
+    },
+    {
+      "bytes": 18207,
+      "path": "ServerStorage.SellCarsV5InstitutionElevation01OInstaller"
+    },
+    {
+      "bytes": 28615,
+      "path": "ServerStorage.SellCarsV5InstitutionEnvelopeInstaller"
+    },
+    {
+      "bytes": 24261,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase0Installer"
+    },
+    {
+      "bytes": 10018,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase1Installer"
+    },
+    {
+      "bytes": 29607,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase2Installer"
+    },
+    {
+      "bytes": 25440,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase3Installer"
+    },
+    {
+      "bytes": 25114,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase4AWashInstaller"
+    },
+    {
+      "bytes": 22770,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase4BBodyInstaller"
+    },
+    {
+      "bytes": 22456,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase4CTuneInstaller"
+    },
+    {
+      "bytes": 20777,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase4DDetailInstaller"
+    },
+    {
+      "bytes": 21572,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase4EPhotoInstaller"
+    },
+    {
+      "bytes": 23378,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase5AIntakeInstaller"
+    },
+    {
+      "bytes": 23981,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase5BSalesInstaller"
+    },
+    {
+      "bytes": 25280,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase5COwnerInstaller"
+    },
+    {
+      "bytes": 22457,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase6ACollectorInstaller"
+    },
+    {
+      "bytes": 17100,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase6B1HQCirculationInstaller"
+    },
+    {
+      "bytes": 24513,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase6B2HQArtInstaller"
+    },
+    {
+      "bytes": 21035,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase6CEstateInstaller"
+    },
+    {
+      "bytes": 17830,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase7A1GroundInstaller"
+    },
+    {
+      "bytes": 18012,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase7A2LandscapeInstaller"
+    },
+    {
+      "bytes": 17369,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase7BLightingInstaller"
+    },
+    {
+      "bytes": 15989,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase7C1ActivityInstaller"
+    },
+    {
+      "bytes": 22617,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase7C2ARearOccupationInstaller"
+    },
+    {
+      "bytes": 29854,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase7C2B1ProductionOccupationInstaller"
+    },
+    {
+      "bytes": 28939,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelityPhase7C2B2FrontageOccupationInstaller"
+    },
+    {
+      "bytes": 24710,
+      "path": "ServerStorage.SellCarsV5InstitutionFidelitySharedKit"
+    },
+    {
+      "bytes": 4777,
+      "path": "ServerStorage.SellCarsV5InstitutionFrontage04FitoutInstaller"
+    },
+    {
+      "bytes": 10779,
+      "path": "ServerStorage.SellCarsV5InstitutionFrontage04Installer"
+    },
+    {
+      "bytes": 15648,
+      "path": "ServerStorage.SellCarsV5InstitutionFrontage04IntegrationInstaller"
+    },
+    {
+      "bytes": 5222,
+      "path": "ServerStorage.SellCarsV5InstitutionFrontage04SalesInstaller"
+    },
+    {
+      "bytes": 41659,
+      "path": "ServerStorage.SellCarsV5InstitutionProductionAInstaller"
+    },
+    {
+      "bytes": 55097,
+      "path": "ServerStorage.SellCarsV5InstitutionProductionBInstaller"
+    },
+    {
+      "bytes": 5529,
+      "path": "ServerStorage.SellCarsV5InstitutionWorkshopCraft01"
+    },
+    {
+      "bytes": 12269,
+      "path": "ServerStorage.SellCarsV5MechanicalCraftsmanship"
+    },
+    {
+      "bytes": 12749,
+      "path": "ServerStorage.SellCarsV5OperationalCraft"
+    },
+    {
+      "bytes": 3304,
+      "path": "ServerStorage.SellCarsV5PersonalCraftsmanship"
+    },
+    {
+      "bytes": 6732,
+      "path": "ServerStorage.SellCarsV5ProfessionalReview01"
+    },
+    {
+      "bytes": 12018,
+      "path": "ServerStorage.SellCarsV5ProfessionalReview01Recipes"
+    },
+    {
+      "bytes": 13266,
+      "path": "ServerStorage.SellCarsV5ProgressionCohesion"
+    },
+    {
+      "bytes": 13029,
+      "path": "ServerStorage.SellCarsV5ProgressionRefinements"
+    },
+    {
+      "bytes": 23432,
+      "path": "ServerStorage.SellCarsV5ShopCharacter"
+    },
+    {
+      "bytes": 4283,
+      "path": "ServerStorage.SellCarsV5WalkJourney"
+    },
+    {
+      "bytes": 83767,
+      "path": "StarterPlayer.StarterPlayerScripts.CorePrototypeClient",
+      "disabled": true
+    },
+    {
+      "bytes": 35243,
+      "path": "StarterPlayer.StarterPlayerScripts.CorePrototypeHighFidelitySkin",
+      "disabled": true
+    },
+    {
+      "bytes": 37335,
+      "path": "StarterPlayer.StarterPlayerScripts.HubClient"
+    },
+    {
+      "bytes": 4701,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsIntegrationBusinessHUD",
+      "disabled": true
+    },
+    {
+      "bytes": 7240,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsIntegrationFirstPad",
+      "disabled": true
+    },
+    {
+      "bytes": 7961,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsIntegrationHUD",
+      "disabled": true
+    },
+    {
+      "bytes": 5882,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsV3FlowStressClient",
+      "disabled": true
+    },
+    {
+      "bytes": 6148,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsV4DedicatedFlowClient",
+      "disabled": true
+    },
+    {
+      "bytes": 6066,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsV4PhaseReviewClient",
+      "disabled": true
+    },
+    {
+      "bytes": 6130,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsV4WorkingFlowClient",
+      "disabled": true
+    },
+    {
+      "bytes": 15043,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsV5DealershipAudio"
+    },
+    {
+      "bytes": 3446,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsV5EquipmentDemonstration"
+    },
+    {
+      "bytes": 15040,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsV5EverydayLifeClient"
+    },
+    {
+      "bytes": 14417,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsV5FullJourneyPanel"
+    },
+    {
+      "bytes": 11548,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsV5GuidedTourPanel",
+      "disabled": true
+    },
+    {
+      "bytes": 9512,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsV5JourneyPreviewPanel",
+      "disabled": true
+    },
+    {
+      "bytes": 4958,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsV5JourneyRoofView"
+    },
+    {
+      "bytes": 3271,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsV5ProfessionalReview01Panel",
+      "disabled": true
+    },
+    {
+      "bytes": 8886,
+      "path": "StarterPlayer.StarterPlayerScripts.SellCarsV5ShopStories"
+    }
+  ],
+  "scene": {
+    "root": "Workspace.SellCars_Dealership_FullJourney",
+    "parts": 25446,
+    "batches": 43,
+    "sourceEncoding": "Zstandard compressed JSON, base64",
+    "exportScript": "scripts/export-tycoon.luau"
+  },
+  "notes": [
+    "Current top-level ServerStorage modules and script trees retained; nested recovery archives are excluded.",
+    "Legacy V5 Studio review scripts are gated to a different place ID; HubServer/HubClient form the playable Integration loop.",
+    "The 240-step catalog describes environment growth; its unwired gameplay benefits remain data."
+  ]
+}

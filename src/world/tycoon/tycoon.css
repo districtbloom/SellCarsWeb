@@ -1,0 +1,116 @@
+.tycoon-ui { --ink:#203030; --paper:#f6f1e1; --green:#90c97a; position:fixed; inset:0; color:var(--ink); font:14px/1.45 system-ui,sans-serif; pointer-events:none; z-index:5; }
+.tycoon-review { position:fixed; top:16px; left:16px; right:16px; z-index:8; padding:14px; border:2px solid #203030; border-radius:12px; background:#f6f1e1ef; color:#203030; font:14px/1.4 system-ui; }
+.tycoon-review p { margin:5px 0 10px; }
+.tycoon-review button,.tycoon-review a { margin:0 6px 4px 0; padding:6px 12px; border:1px solid #203030; background:#90c97a; color:#203030; border-radius:6px; cursor:pointer; }
+.tycoon-ui [hidden] { display:none !important; }
+.tycoon-ui button { min-height:42px; border:2px solid var(--ink); border-radius:9px; padding:10px 14px; color:var(--ink); background:var(--green); font:700 14px/1.2 system-ui,sans-serif; cursor:pointer; pointer-events:auto; }
+.tycoon-ui button:hover { filter:brightness(1.06); }
+.tycoon-ui button:focus-visible { outline:3px solid #ebba48; outline-offset:3px; }
+.tycoon-ui button:disabled { opacity:.5; cursor:default; }
+.tycoon-top { position:absolute; top:18px; left:22px; right:22px; display:flex; align-items:start; gap:16px; }
+.tycoon-brand { margin-right:auto; color:#fff; text-shadow:0 2px 5px #203030; font-size:21px; font-weight:900; letter-spacing:2px; }
+.tycoon-brand small { display:block; font-size:11px; font-weight:500; letter-spacing:1px; }
+.tycoon-ui .tycoon-wallet { background:#40a653; color:#fff; font-size:23px; min-width:140px; }
+.tycoon-top { z-index:2; }
+.tycoon-top.wallet-only > :not(.tycoon-wallet) { visibility:hidden; pointer-events:none; }
+.tycoon-hint-category { display:block; font-weight:800; text-shadow:0 1px 2px #000; }
+.tycoon-category { align-self:flex-start; padding:4px 8px; border-radius:6px; background:#203030; font-weight:800; }
+.tycoon-cash-effects { z-index:100; }
+.tycoon-ui .tycoon-cash-gain { position:fixed; pointer-events:none!important; margin:0; padding:0; min-width:0; border:0; background:none; color:#fff; text-shadow:0 2px 2px #153e22,0 0 12px #65f28c; white-space:nowrap; will-change:transform,left,top,opacity; }
+.tycoon-selling-progress { position:fixed; z-index:6; width:155px; padding:7px 10px; transform:translate(-50%,-100%); border:1px solid #8bc8b3; border-radius:9px; background:#123329ed; color:#e8fff2; text-align:center; font:800 9px/1.4 system-ui,sans-serif; letter-spacing:.07em; pointer-events:none; box-shadow:0 3px 12px #0005; }
+.tycoon-selling-progress[hidden],.tycoon-cash-effects[hidden] { display:none; }
+.tycoon-selling-track { height:7px; margin-top:5px; overflow:hidden; border-radius:4px; background:#081d16; }
+.tycoon-selling-fill { height:100%; width:0; border-radius:4px; background:#7ce6a0; }
+.tycoon-ui .tycoon-phone { background:var(--paper); }
+.has-garage .vehicle-prompt, .has-garage .tycoon-work, .has-garage .tycoon-hint { display:none; }
+.tycoon-panel.tycoon-garage { inset:0; width:auto; max-width:none; max-height:none; transform:none; border:0; border-radius:0; box-shadow:none; background:transparent; color:#f4f3e8; pointer-events:none; }
+.tycoon-garage .tycoon-panel-header { padding:24px 32px; border:0; background:linear-gradient(#12221fdd,transparent); }
+.tycoon-garage .tycoon-panel-header h2 { font-size:23px; }
+.tycoon-garage .tycoon-panel-header p { color:#a9c2b2; }
+.tycoon-garage .tycoon-close { color:#f4f3e8; }
+.tycoon-garage .tycoon-panel-content { padding:0; overflow:visible; }
+.garage-selector { position:absolute; left:5%; right:5%; top:32%; display:flex; justify-content:space-between; }
+.tycoon-ui .garage-arrow { width:64px; height:76px; padding:0; border:1px solid #c8ead344; border-radius:16px; background:#19352bc9; color:#edfff2; font-size:52px; font-weight:400; }
+.garage-details { position:absolute; bottom:max(20px,env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%); width:min(650px,calc(100% - 48px)); box-sizing:border-box; border:1px solid #a4c5b32b; border-radius:18px; padding:20px 24px; background:#182c25ef; box-shadow:0 16px 48px #0003; pointer-events:auto; }
+.garage-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.garage-eyebrow { color:#a9c2b2; font-size:11px; letter-spacing:2px; font-weight:700; }
+.tycoon-garage .garage-heading h2 { font-size:26px; margin:3px 0 6px; }
+.garage-price { font-size:25px; color:#b3eda9; white-space:nowrap; }
+.garage-description { color:#c5d7cb; font-size:13px; }
+.garage-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; padding:14px 0; margin:12px 0; border-top:1px solid #a4c5b32b; border-bottom:1px solid #a4c5b32b; }
+.garage-stats small { display:block; color:#9db6a6; font-size:11px; }
+.garage-stats strong { display:block; font-size:17px; margin-top:3px; }
+.garage-actions { display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
+.garage-balance { margin-left:auto; color:#c5d7cb; font-size:12px; }
+.tycoon-panel-content .garage-note { margin-top:12px; color:#a9c2b2; font-size:12px; }
+@media(max-width:620px) {
+  .tycoon-garage .tycoon-panel-header { padding:16px; }
+  .garage-selector { left:12px; right:12px; top:28%; }
+  .tycoon-ui .garage-arrow { width:45px; height:60px; font-size:40px; }
+  .garage-details { width:calc(100% - 24px); padding:14px; bottom:max(12px,env(safe-area-inset-bottom)); }
+  .garage-stats { gap:6px; margin:9px 0; padding:9px 0; }
+  .garage-stats strong { font-size:13px; }
+  .tycoon-garage .garage-heading h2 { font-size:21px; }
+  .garage-price { font-size:20px; }
+}
+@media(max-width:460px) { .tycoon-top .tycoon-brand { display:none; } .tycoon-top { justify-content:space-between; } }
+@media(max-height:500px) and (min-width:621px) {
+  .garage-details { left:auto; right:18px; transform:none; width:330px; padding:12px; bottom:12px; }
+  .garage-description { display:none; }
+  .garage-selector { right:370px; top:48%; }
+  .garage-stats { gap:6px; margin:8px 0; padding:8px 0; }
+  .garage-stats strong { font-size:13px; }
+}
+.tycoon-ui .ringing { background:#eacb6d; }
+.tycoon-guide { position:absolute; bottom:18px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:14px; width:min(530px,calc(100vw - 50px)); box-sizing:border-box; padding:12px; background:var(--paper); border:2px solid var(--ink); border-radius:14px; box-shadow:0 4px 0 #20303033; }
+.tycoon-guide p { flex:1; min-width:0; margin:0; font-weight:600; }
+.tycoon-guide-avatar { display:block; width:72px; height:72px; flex:0 0 72px; border:2px solid #20303033; border-radius:14px; box-sizing:border-box; background:radial-gradient(circle at 45% 30%,#dcecc6,#7da69a); }
+.tycoon-panel { position:absolute; right:20px; top:50%; transform:translateY(-50%); width:360px; max-width:calc(100vw - 40px); max-height:calc(100dvh - 36px); overflow:hidden; display:flex; flex-direction:column; background:var(--paper); border:2px solid var(--ink); border-radius:16px; box-shadow:0 8px 30px #0003; pointer-events:auto; }
+.tycoon-panel-header { display:flex; align-items:start; justify-content:space-between; gap:8px; padding:16px; border-bottom:1px solid #20303022; }
+.tycoon-panel h2 { font-size:21px; margin:0; }
+.tycoon-panel-header p { color:#4a8786; margin:3px 0 0; }
+.tycoon-ui .tycoon-close { border:0; background:transparent; min-width:40px; padding:0; font-size:28px; }
+.tycoon-panel-content { overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; overscroll-behavior:contain; }
+.tycoon-panel-content p { margin:0; white-space:pre-line; }
+.tycoon-ui .secondary { background:#dee5d7; }
+.tycoon-quote { border-radius:10px; background:#dee5d7; padding:16px; font-size:18px; }
+.tycoon-price { font-weight:900; font-size:32px; }
+.tycoon-subtitle { font-weight:800; font-size:17px; margin-top:8px !important; }
+.tycoon-ui .profit { color:#3f7a59; }
+.tycoon-ui .loss { color:#a23f2e; }
+.tycoon-muted { font-size:12px; color:#63746b; }
+.tycoon-counter { display:flex; align-items:center; gap:10px; }
+.tycoon-counter output { flex:1; text-align:center; font-size:22px; font-weight:700; }
+.tycoon-tabs { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; }
+.tycoon-ui .tycoon-tabs button { padding:8px 3px; font-size:12px; border-width:1px; background:#dee5d7; }
+.tycoon-ui button.selected { background:var(--green); box-shadow:inset 0 0 0 2px var(--ink); }
+.tycoon-swatches { display:flex; flex-wrap:wrap; gap:7px; }
+.tycoon-ui .tycoon-swatches button { padding:8px; font-size:12px; background:#dee5d7; }
+.tycoon-ledger { padding:10px 0; border-bottom:1px solid #20303020; }
+.tycoon-toast { position:absolute; top:85px; left:50%; transform:translateX(-50%); padding:10px 18px; border-radius:9px; background:#f6f1e1f5; max-width:calc(100vw - 50px); text-align:center; }
+.tycoon-hint { position:absolute; left:50%; bottom:122px; transform:translateX(-50%); background:#203030e8; color:white; border:1px solid #ffffff66; border-radius:9px; padding:8px 14px; text-align:center; }
+.tycoon-work { position:absolute; left:50%; top:90px; transform:translateX(-50%); background:var(--paper); padding:9px 16px; border-radius:8px; }
+.tycoon-ui .tycoon-route-drive { position:absolute; right:24px; bottom:125px; min-width:100px; min-height:64px; touch-action:none; }
+@media(max-width:620px) { .tycoon-brand { font-size:15px; letter-spacing:1px; } .tycoon-top { left:12px; right:12px; gap:8px; } .tycoon-ui .tycoon-wallet { min-width:110px; font-size:18px; } .tycoon-guide { width:calc(100vw - 24px); bottom:10px; gap:8px; padding:8px; font-size:12px; } .tycoon-guide-avatar { width:54px; height:54px; flex-basis:54px; border-radius:11px; } .tycoon-guide button { max-width:110px; font-size:12px; padding:8px; } .tycoon-panel { right:12px; max-width:calc(100vw - 24px); } }
+.tycoon-ui button { min-height:44px; touch-action:manipulation; }
+.tycoon-top { padding-top:env(safe-area-inset-top); }
+.tycoon-panel { padding-bottom:env(safe-area-inset-bottom); }
+@media(max-width:767px) {
+  .tycoon-top { top:10px; left:max(10px,env(safe-area-inset-left)); right:max(10px,env(safe-area-inset-right)); gap:6px; }
+  .tycoon-brand { font-size:14px; letter-spacing:0; }
+  .tycoon-brand small { display:none; }
+  .tycoon-ui .tycoon-wallet { min-width:88px; font-size:17px; padding:8px; }
+  .tycoon-ui .tycoon-phone { font-size:12px; padding:8px; }
+  .tycoon-panel { right:max(12px,env(safe-area-inset-right)); width:min(360px,calc(100vw - 24px)); max-height:calc(100dvh - 24px); }
+  .tycoon-panel-header { padding:10px; }
+}
+@media(min-width:768px) and (max-width:1100px) {
+  .tycoon-panel { width:400px; max-height:calc(100dvh - 48px); right:24px; }
+}
+@media(max-height:450px) {
+  .tycoon-panel { top:8px; transform:none; max-height:calc(100dvh - 16px); }
+  .tycoon-guide { bottom:8px; padding:8px; }
+  .tycoon-top .tycoon-brand small { display:none; }
+}
+
+.parts-world-prompt{position:fixed;transform:translate(-50%,-100%);z-index:15;display:flex;flex-direction:column;gap:5px;min-width:205px;padding:10px;border:1px solid #a7d5ba80;border-radius:12px;background:#18382deb;color:#f2fff6;font:13px system-ui;box-shadow:0 5px 20px #0004;pointer-events:auto;text-align:center}.parts-world-prompt[hidden]{display:none}.parts-world-prompt button{padding:8px;border:0;border-radius:6px;background:#d5edb9;color:#173c2d;font-weight:700;cursor:pointer}.parts-world-prompt button:disabled{opacity:.5}.parts-world-prompt small{color:#b8d2c3;font-size:10px}

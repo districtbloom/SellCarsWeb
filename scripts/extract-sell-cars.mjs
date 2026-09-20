@@ -1,0 +1,13 @@
+import { readFile, writeFile } from 'node:fs/promises';
+import { zstdDecompressSync } from 'node:zlib';
+const root = new URL('../', import.meta.url);
+const source = await readFile(new URL('reference/roblox-sell-cars/ServerScriptService/FullJourneySystem/FullJourneyCatalog.luau', root), 'utf8');
+const raw = JSON.parse(source.match(/\[====\[([\s\S]*?)\]====\]/)[1]);
+const fixture = JSON.parse(zstdDecompressSync(Buffer.from(await readFile(new URL('reference/roblox-sell-cars/catalog-fixture.b64', root), 'utf8'), 'base64')));
+const thresholds = Object.fromEntries([...source.match(/Catalog.CapabilityThresholds = \{([\s\S]*?)\n\}/)[1].matchAll(/(\w+)\s*=\s*(\d+)/g)].map(([,key,n])=>[key,Number(n)]));
+const pads = Object.fromEntries([...source.match(/local explicitPads = \{([\s\S]*?)\n\}/)[1].matchAll(/\[(\d+)\] = Vector3.new\(([^)]+)\)/g)].map(([,n,v])=>[n,v.split(',').map(Number)]));
+const entries = raw.Entries.map(e=>({ ...e, geometryFocus:e.geometryFocus }));
+await writeFile(new URL('src/world/tycoon/journeyData.ts', root), '// Generated from Sell Cars FullJourneyCatalog. Run npm run tycoon:data.\nimport type { JourneySourceEntry, JourneyMilestone } from "./FullJourneyCatalog.js";\nexport const sourceEntries: JourneySourceEntry[] = '+JSON.stringify(entries)+';\nexport const milestones: JourneyMilestone[] = '+JSON.stringify(raw.Milestones)+';\nexport const thresholds: Record<string, number> = '+JSON.stringify(thresholds)+';\nexport const explicitPads: Record<number, [number,number,number]> = '+JSON.stringify(pads)+';\n');
+await writeFile(new URL('scripts/fixtures/sell-cars-catalog.json', root), JSON.stringify(fixture));
+await writeFile(new URL('public/tycoon/journey.json', root), JSON.stringify(raw));
+console.log(`Extracted ${entries.length} Sell Cars upgrades, ${Object.keys(thresholds).length} capabilities and source runtime fixture`);

@@ -1,0 +1,17 @@
+.tycoon-smartphone { position:fixed; right:24px; bottom:18px; width:254px; padding:10px; border:2px solid #59646a; border-radius:34px; background:#101316; box-shadow:0 18px 60px #0009; transform:translateY(calc(100% + 40px)) rotate(5deg); visibility:hidden; transition:transform .42s cubic-bezier(.2,.7,.2,1),visibility 0s .42s; pointer-events:none; }
+.tycoon-smartphone:before { content:''; position:absolute; top:13px; left:92px; width:70px; height:10px; background:#101316; border-radius:0 0 10px 10px; z-index:1; }
+.tycoon-smartphone.visible { visibility:visible; transform:translateY(0) rotate(0); transition-delay:0s; pointer-events:auto; }
+.smartphone-screen { padding:16px 13px 12px; border-radius:24px; background:linear-gradient(155deg,#153a47,#0f2531 65%,#243c39); color:#e7f4f5; display:flex; flex-direction:column; align-items:stretch; gap:9px; }
+.smartphone-status { font-size:9px; color:#adc7d0; letter-spacing:2px; margin-bottom:10px; }
+.smartphone-screen>small { color:#90dcc0; text-align:center; letter-spacing:2px; font-size:10px; }
+.smartphone-avatar { margin:3px auto 0; width:54px; height:54px; display:grid; place-items:center; background:#4b857a; border-radius:50%; font-size:25px; font-weight:800; }
+.smartphone-screen h3 { text-align:center; font-size:24px; margin:0; }
+.smartphone-message { margin:0 0 5px; padding:11px; border-radius:12px; background:#ffffff0c; color:#c4d8df; font-size:12px; line-height:1.5; }
+.tycoon-ui .tycoon-smartphone button { min-height:35px; padding:8px; border:0; font-size:11px; color:#eaf8f5; background:#31525f; }
+.tycoon-ui .tycoon-smartphone .smartphone-answer { background:#39a96e; font-size:13px; }
+.tycoon-ui .tycoon-smartphone .smartphone-remind { background:#876931; }
+.tycoon-ui .tycoon-smartphone .smartphone-dismiss { background:transparent; color:#9fb8c0; min-height:25px; }
+.tycoon-panel.tycoon-call-dialog { border-radius:22px; background:#f5f2e5; }
+@media(max-width:600px) { .tycoon-smartphone { width:230px; right:10px; bottom:10px; } .tycoon-smartphone:before { left:80px; } }
+@media(max-height:520px) { .tycoon-smartphone { width:220px; bottom:6px; } .smartphone-avatar { display:none; } .smartphone-screen { gap:5px; padding:12px 10px 7px; } .smartphone-status { margin-bottom:4px; } .smartphone-message { max-height:60px; overflow:auto; } }
+@media(prefers-reduced-motion:reduce) { .tycoon-smartphone { transition:none; } }

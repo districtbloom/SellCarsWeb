@@ -1,0 +1,3262 @@
+newmtl Lbbrake2Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ke 1 1 1
+Ks 0.0862745 0.0862745 0.0862745 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl11_diff.png
+map_Kd Wheelrl11_diff.png
+map_d Wheelrl11_diff.png
+
+map_Bump Wheelrl11_nmap.png
+
+map_Ns Wheelrl11_spec.png
+
+map_Ke Lbbrake2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrr4Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfr4_diff.png
+map_Kd Wheelfr4_diff.png
+map_d Wheelfr4_diff.png
+
+map_Ns Wheelfr4_spec.png
+
+map_Ke Wheelrr4_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrr3Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl3_diff.png
+map_Kd Wheelrl3_diff.png
+map_d Wheelrl3_diff.png
+
+map_Ns Wheelrl3_spec.png
+
+map_Ke Wheelrr3_emap.png
+
+rbx_alphamode overlay
+
+newmtl Backlicenseplate1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate11_diff.png
+map_Kd Frontlicenseplate11_diff.png
+map_d Frontlicenseplate11_diff.png
+
+map_Ns Frontlicenseplate11_spec.png
+
+map_Ke Backlicenseplate1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl1_diff.png
+map_Kd Wheelrl1_diff.png
+map_d Wheelrl1_diff.png
+
+map_Bump Wheelrl1_nmap.png
+
+map_Ns Wheelrl1_spec.png
+
+map_Ke Wheelrl1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Lfrontlight1Mtl
+Material Color
+Ka 0.835528 0.91575 1
+Kd 0.835528 0.91575 1
+Ks 0.0753613 0.0825971 0.0901961 
+
+d 1
+
+Ns 0
+
+newmtl Interior1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior1_diff.png
+map_Kd Interior1_diff.png
+map_d Interior1_diff.png
+
+map_Bump Interior1_nmap.png
+
+map_Ns Interior1_spec.png
+
+map_Ke Interior1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfl4Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfr4_diff.png
+map_Kd Wheelfr4_diff.png
+map_d Wheelfr4_diff.png
+
+map_Ns Wheelfr4_spec.png
+
+map_Ke Wheelfl4_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrr1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl1_diff.png
+map_Kd Wheelrl1_diff.png
+map_d Wheelrl1_diff.png
+
+map_Bump Wheelrl1_nmap.png
+
+map_Ns Wheelrl1_spec.png
+
+map_Ke Wheelrr1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Lbtaillight1Mtl
+Material Color
+Ka 0.180144 0 0
+Kd 0.180144 0 0
+Ks 0.0713513 0 0 
+
+d 1
+
+Ns 0
+
+map_Ka Lbacklight1_diff.png
+map_Kd Lbacklight1_diff.png
+map_d Lbacklight1_diff.png
+
+map_Bump Lbacklight1_nmap.png
+
+newmtl Rbbrakes1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl1_diff.png
+map_Kd Wheelrl1_diff.png
+map_d Wheelrl1_diff.png
+
+map_Bump Wheelrl1_nmap.png
+
+map_Ns Wheelrl1_spec.png
+
+map_Ke Rbbrakes1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfl1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl1_diff.png
+map_Kd Wheelrl1_diff.png
+map_d Wheelrl1_diff.png
+
+map_Bump Wheelrl1_nmap.png
+
+map_Ns Wheelrl1_spec.png
+
+map_Ke Wheelfl1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfr2Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl2_diff.png
+map_Kd Wheelrl2_diff.png
+map_d Wheelrl2_diff.png
+
+map_Ns Wheelrl2_spec.png
+
+map_Ke Wheelfr2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfr1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl1_diff.png
+map_Kd Wheelrl1_diff.png
+map_d Wheelrl1_diff.png
+
+map_Bump Wheelrl1_nmap.png
+
+map_Ns Wheelrl1_spec.png
+
+map_Ke Wheelfr1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Spoiler1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Topfan1_diff.png
+map_Kd Topfan1_diff.png
+map_d Topfan1_diff.png
+
+map_Bump Topfan1_nmap.png
+
+map_Ns Topfan1_spec.png
+
+map_Ke Spoiler1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfr6Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfl6_diff.png
+map_Kd Wheelfl6_diff.png
+map_d Wheelfl6_diff.png
+
+map_Bump Wheelfl6_nmap.png
+
+map_Ns Wheelfl6_spec.png
+
+map_Ke Wheelfr6_emap.png
+
+rbx_alphamode overlay
+
+newmtl Interior4Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior4_diff.png
+map_Kd Interior4_diff.png
+map_d Interior4_diff.png
+
+map_Ns Interior4_spec.png
+
+map_Ke Interior4_emap.png
+
+rbx_alphamode overlay
+
+newmtl Topfan1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Topfan1_diff.png
+map_Kd Topfan1_diff.png
+map_d Topfan1_diff.png
+
+map_Bump Topfan1_nmap.png
+
+map_Ns Topfan1_spec.png
+
+map_Ke Topfan1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Glass1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.373615 0.368591 0.383775 
+
+d 0.25098
+
+Ns 0
+
+map_Ka Glass1_diff.png
+map_Kd Glass1_diff.png
+map_d Glass1_diff.png
+
+map_Bump Glass1_nmap.png
+
+map_Ns Glass1_spec.png
+
+newmtl Lbacklight1Mtl
+Material Color
+Ka 0.0581872 0.000367136 0.000175124
+Kd 0.0581872 0.000367136 0.000175124
+Ks 0.0230467 0.000145415 6.93628e-05 
+
+d 1
+
+Ns 0
+
+map_Ka Lbacklight1_diff.png
+map_Kd Lbacklight1_diff.png
+map_d Lbacklight1_diff.png
+
+map_Bump Lbacklight1_nmap.png
+
+newmtl Wheelfr3Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl3_diff.png
+map_Kd Wheelrl3_diff.png
+map_d Wheelrl3_diff.png
+
+map_Ns Wheelrl3_spec.png
+
+map_Ke Wheelfr3_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl13Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfr13_diff.png
+map_Kd Wheelfr13_diff.png
+map_d Wheelfr13_diff.png
+
+map_Bump Wheelfr13_nmap.png
+
+map_Ns Wheelfr13_spec.png
+
+map_Ke Wheelrl13_emap.png
+
+rbx_alphamode overlay
+
+newmtl Lturnleft1Mtl
+Material Color
+Ka 0.101145 0.00902149 0
+Kd 0.101145 0.00902149 0
+Ks 0.0400614 0.00357322 0 
+
+d 1
+
+Ns 0
+
+map_Ka Lbacklight1_diff.png
+map_Kd Lbacklight1_diff.png
+map_d Lbacklight1_diff.png
+
+map_Bump Lbacklight1_nmap.png
+
+newmtl Backlicenseplate2Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate1_diff.png
+map_Kd Frontlicenseplate1_diff.png
+map_d Frontlicenseplate1_diff.png
+
+map_Ns Frontlicenseplate1_spec.png
+
+map_Ke Backlicenseplate2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Exhaust9Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Spoiler3_diff.png
+map_Kd Spoiler3_diff.png
+map_d Spoiler3_diff.png
+
+map_Bump Spoiler3_nmap.png
+
+map_Ns Spoiler3_spec.png
+
+map_Ke Exhaust9_emap.png
+
+rbx_alphamode overlay
+
+newmtl Interior3Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior3_diff.png
+map_Kd Interior3_diff.png
+map_d Interior3_diff.png
+
+map_Bump Interior3_nmap.png
+
+map_Ns Interior3_spec.png
+
+map_Ke Interior3_emap.png
+
+rbx_alphamode overlay
+
+newmtl Exhaust1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Topfan1_diff.png
+map_Kd Topfan1_diff.png
+map_d Topfan1_diff.png
+
+map_Bump Topfan1_nmap.png
+
+map_Ns Topfan1_spec.png
+
+map_Ke Exhaust1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Steeringwheel1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior1_diff.png
+map_Kd Interior1_diff.png
+map_d Interior1_diff.png
+
+map_Bump Interior1_nmap.png
+
+map_Ns Interior1_spec.png
+
+map_Ke Steeringwheel1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Frontlights1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0336986 0.0332455 0.034615 
+
+d 1
+
+Ns 0
+
+newmtl Lturnr1Mtl
+Material Color
+Ka 0.12753 0.0103978 0
+Kd 0.12753 0.0103978 0
+Ks 0.0505118 0.00411835 0 
+
+d 1
+
+Ns 0
+
+map_Ka Lbacklight1_diff.png
+map_Kd Lbacklight1_diff.png
+map_d Lbacklight1_diff.png
+
+map_Bump Lbacklight1_nmap.png
+
+newmtl Lbbrake1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl1_diff.png
+map_Kd Wheelrl1_diff.png
+map_d Wheelrl1_diff.png
+
+map_Bump Wheelrl1_nmap.png
+
+map_Ns Wheelrl1_spec.png
+
+map_Ke Lbbrake1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Exhaust7Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Exhaust7_diff.png
+map_Kd Exhaust7_diff.png
+map_d Exhaust7_diff.png
+
+map_Bump Exhaust7_nmap.png
+
+map_Ns Exhaust7_spec.png
+
+map_Ke Exhaust7_emap.png
+
+rbx_alphamode overlay
+
+newmtl Rfbrake1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl1_diff.png
+map_Kd Wheelrl1_diff.png
+map_d Wheelrl1_diff.png
+
+map_Bump Wheelrl1_nmap.png
+
+map_Ns Wheelrl1_spec.png
+
+map_Ke Rfbrake1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Chassis1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrr5_diff.png
+map_Kd Wheelrr5_diff.png
+map_d Wheelrr5_diff.png
+
+map_Bump Wheelrr5_nmap.png
+
+map_Ns Chassis1_spec.png
+
+map_Ke Chassis1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Lfbrake1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl1_diff.png
+map_Kd Wheelrl1_diff.png
+map_d Wheelrl1_diff.png
+
+map_Bump Wheelrl1_nmap.png
+
+map_Ns Wheelrl1_spec.png
+
+map_Ke Lfbrake1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Sparetire1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl2_diff.png
+map_Kd Wheelrl2_diff.png
+map_d Wheelrl2_diff.png
+
+map_Ns Wheelrl2_spec.png
+
+map_Ke Sparetire1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Zentauribody1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Topfan1_diff.png
+map_Kd Topfan1_diff.png
+map_d Topfan1_diff.png
+
+map_Bump Topfan1_nmap.png
+
+map_Ns Topfan1_spec.png
+
+map_Ke Zentauribody1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfr4Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfr4_diff.png
+map_Kd Wheelfr4_diff.png
+map_d Wheelfr4_diff.png
+
+map_Ns Wheelfr4_spec.png
+
+map_Ke Wheelfr4_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl2Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl2_diff.png
+map_Kd Wheelrl2_diff.png
+map_d Wheelrl2_diff.png
+
+map_Ns Wheelrl2_spec.png
+
+map_Ke Wheelrl2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrr2Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl2_diff.png
+map_Kd Wheelrl2_diff.png
+map_d Wheelrl2_diff.png
+
+map_Ns Wheelrl2_spec.png
+
+map_Ke Wheelrr2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Frontlicenseplate8Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Frontlicenseplate8_emap.png
+
+rbx_alphamode overlay
+
+newmtl Reverselight2Mtl
+Material Color
+Ka 1 0.95737 0.835528
+Kd 1 0.95737 0.835528
+Ks 0.396078 0.379193 0.330935 
+
+d 1
+
+Ns 0
+
+map_Ka Lbacklight1_diff.png
+map_Kd Lbacklight1_diff.png
+map_d Lbacklight1_diff.png
+
+map_Bump Lbacklight1_nmap.png
+
+newmtl Wheelfl6Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfl6_diff.png
+map_Kd Wheelfl6_diff.png
+map_d Wheelfl6_diff.png
+
+map_Bump Wheelfl6_nmap.png
+
+map_Ns Wheelfl6_spec.png
+
+map_Ke Wheelfl6_emap.png
+
+rbx_alphamode overlay
+
+newmtl Exhaust2Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 152
+
+map_Ka Exhaust2_diff.png
+map_Kd Exhaust2_diff.png
+map_d Exhaust2_diff.png
+
+map_Bump Exhaust2_nmap.png
+
+map_Ns Exhaust2_spec.png
+
+map_Ke Exhaust2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Glass6Mtl
+Material Color
+Ka 0.464741 0.585973 0.65237
+Kd 0.464741 0.585973 0.65237
+Ks 0.464741 0.585973 0.65237 
+
+d 0.25098
+
+Ns 0
+
+map_Ka Glass1_diff.png
+map_Kd Glass1_diff.png
+map_d Glass1_diff.png
+
+map_Bump Glass1_nmap.png
+
+map_Ns Glass1_spec.png
+
+newmtl Wheelfl2Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl2_diff.png
+map_Kd Wheelrl2_diff.png
+map_d Wheelrl2_diff.png
+
+map_Ns Wheelrl2_spec.png
+
+map_Ke Wheelfl2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Backlicenseplate3Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate2_diff.png
+map_Kd Frontlicenseplate2_diff.png
+map_d Frontlicenseplate2_diff.png
+
+map_Ns Frontlicenseplate2_spec.png
+
+map_Ke Backlicenseplate3_emap.png
+
+rbx_alphamode overlay
+
+newmtl Lbacklight2Mtl
+Material Color
+Ka 0.0342302 0.000492504 0.000367136
+Kd 0.0342302 0.000492504 0.000367136
+Ks 0.0135578 0.00019507 0.000145415 
+
+d 1
+
+Ns 0
+
+map_Ka Lbacklight1_diff.png
+map_Kd Lbacklight1_diff.png
+map_d Lbacklight1_diff.png
+
+map_Bump Lbacklight1_nmap.png
+
+newmtl Frontlicenseplate11Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate11_diff.png
+map_Kd Frontlicenseplate11_diff.png
+map_d Frontlicenseplate11_diff.png
+
+map_Ns Frontlicenseplate11_spec.png
+
+map_Ke Frontlicenseplate11_emap.png
+
+rbx_alphamode overlay
+
+newmtl Carbody1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior3_diff.png
+map_Kd Interior3_diff.png
+map_d Interior3_diff.png
+
+map_Bump Interior3_nmap.png
+
+map_Ns Interior3_spec.png
+
+map_Ke Carbody1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Backlicenseplate9Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate11_diff.png
+map_Kd Frontlicenseplate11_diff.png
+map_d Frontlicenseplate11_diff.png
+
+map_Ns Frontlicenseplate11_spec.png
+
+map_Ke Backlicenseplate9_emap.png
+
+rbx_alphamode overlay
+
+newmtl Interior2Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior2_diff.png
+map_Kd Interior2_diff.png
+map_d Interior2_diff.png
+
+map_Bump Interior2_nmap.png
+
+map_Ns Interior2_spec.png
+
+map_Ke Interior2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wronklerbody1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wronklerbody1_diff.png
+map_Kd Wronklerbody1_diff.png
+map_d Wronklerbody1_diff.png
+
+map_Bump Wronklerbody1_nmap.png
+
+map_Ns Wronklerbody1_spec.png
+
+map_Ke Wronklerbody1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl3Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl3_diff.png
+map_Kd Wheelrl3_diff.png
+map_d Wheelrl3_diff.png
+
+map_Ns Wheelrl3_spec.png
+
+map_Ke Wheelrl3_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfl3Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl3_diff.png
+map_Kd Wheelrl3_diff.png
+map_d Wheelrl3_diff.png
+
+map_Ns Wheelrl3_spec.png
+
+map_Ke Wheelfl3_emap.png
+
+rbx_alphamode overlay
+
+newmtl Lights1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0234425 0.0231273 0.02408 
+
+d 1
+
+Ns 0
+
+map_Ka Lights1_diff.png
+map_Kd Lights1_diff.png
+map_d Lights1_diff.png
+
+newmtl Rheadlight5Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.0901961 0.0901961 0.0901961 
+
+d 1
+
+Ns 0
+
+map_Ka Rheadlight5_diff.png
+map_Kd Rheadlight5_diff.png
+map_d Rheadlight5_diff.png
+
+newmtl Frontlicenseplate1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate1_diff.png
+map_Kd Frontlicenseplate1_diff.png
+map_d Frontlicenseplate1_diff.png
+
+map_Ns Frontlicenseplate1_spec.png
+
+map_Ke Frontlicenseplate1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl4Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfr4_diff.png
+map_Kd Wheelfr4_diff.png
+map_d Wheelfr4_diff.png
+
+map_Ns Wheelfr4_spec.png
+
+map_Ke Wheelrl4_emap.png
+
+rbx_alphamode overlay
+
+newmtl Frontlicenseplate2Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate2_diff.png
+map_Kd Frontlicenseplate2_diff.png
+map_d Frontlicenseplate2_diff.png
+
+map_Ns Frontlicenseplate2_spec.png
+
+map_Ke Frontlicenseplate2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Carbody2Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior4_diff.png
+map_Kd Interior4_diff.png
+map_d Interior4_diff.png
+
+map_Ns Interior4_spec.png
+
+map_Ke Carbody2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Backlight1Mtl
+Material Color
+Ka 0.91575 0.940601 1
+Kd 0.91575 0.940601 1
+Ks 0.362709 0.372552 0.396078 
+
+d 1
+
+Ns 0
+
+map_Ka Lbacklight1_diff.png
+map_Kd Lbacklight1_diff.png
+map_d Lbacklight1_diff.png
+
+map_Bump Lbacklight1_nmap.png
+
+newmtl Wheelrr5Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrr5_diff.png
+map_Kd Wheelrr5_diff.png
+map_d Wheelrr5_diff.png
+
+map_Bump Wheelrr5_nmap.png
+
+map_Ns Wheelrr5_spec.png
+
+map_Ke Wheelrr5_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrr6Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfl6_diff.png
+map_Kd Wheelfl6_diff.png
+map_d Wheelfl6_diff.png
+
+map_Bump Wheelfl6_nmap.png
+
+map_Ns Wheelfl6_spec.png
+
+map_Ke Wheelrr6_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfl5Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrr5_diff.png
+map_Kd Wheelrr5_diff.png
+map_d Wheelrr5_diff.png
+
+map_Bump Wheelrr5_nmap.png
+
+map_Ns Wheelrr5_spec.png
+
+map_Ke Wheelfl5_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl5Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrr5_diff.png
+map_Kd Wheelrr5_diff.png
+map_d Wheelrr5_diff.png
+
+map_Bump Wheelrr5_nmap.png
+
+map_Ns Wheelrr5_spec.png
+
+map_Ke Wheelrl5_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfr5Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrr5_diff.png
+map_Kd Wheelrr5_diff.png
+map_d Wheelrr5_diff.png
+
+map_Bump Wheelrr5_nmap.png
+
+map_Ns Wheelrr5_spec.png
+
+map_Ke Wheelfr5_emap.png
+
+rbx_alphamode overlay
+
+newmtl Lturnsignal1Mtl
+Material Color
+Ka 1 0.394083 0.0151752
+Kd 1 0.394083 0.0151752
+Ks 0.396078 0.156088 0.00601058 
+
+d 1
+
+Ns 0
+
+map_Ka Lbacklight1_diff.png
+map_Kd Lbacklight1_diff.png
+map_d Lbacklight1_diff.png
+
+map_Bump Lbacklight1_nmap.png
+
+newmtl Interior5Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior2_diff.png
+map_Kd Interior2_diff.png
+map_d Interior2_diff.png
+
+map_Bump Interior2_nmap.png
+
+map_Ns Interior2_spec.png
+
+map_Ke Interior5_emap.png
+
+rbx_alphamode overlay
+
+newmtl Frontlicenseplate3Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Frontlicenseplate3_emap.png
+
+rbx_alphamode overlay
+
+newmtl Backlicenseplate4Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Backlicenseplate4_emap.png
+
+rbx_alphamode overlay
+
+newmtl Frontlicenseplate4Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Frontlicenseplate4_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl6Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfl6_diff.png
+map_Kd Wheelfl6_diff.png
+map_d Wheelfl6_diff.png
+
+map_Bump Wheelfl6_nmap.png
+
+map_Ns Wheelfl6_spec.png
+
+map_Ke Wheelrl6_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl14Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl14_diff.png
+map_Kd Wheelrl14_diff.png
+map_d Wheelrl14_diff.png
+
+map_Bump Wheelrl14_nmap.png
+
+map_Ns Wheelrl14_spec.png
+
+map_Ke Wheelrl14_emap.png
+
+rbx_alphamode overlay
+
+newmtl Backlicenseplate5Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Backlicenseplate5_emap.png
+
+rbx_alphamode overlay
+
+newmtl Exhaust3Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfl6_diff.png
+map_Kd Wheelfl6_diff.png
+map_d Wheelfl6_diff.png
+
+map_Bump Wheelfl6_nmap.png
+
+map_Ns Exhaust3_spec.png
+
+map_Ke Exhaust3_emap.png
+
+rbx_alphamode overlay
+
+newmtl Chassis2Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfl6_diff.png
+map_Kd Wheelfl6_diff.png
+map_d Wheelfl6_diff.png
+
+map_Bump Wheelfl6_nmap.png
+
+map_Ns Exhaust3_spec.png
+
+map_Ke Chassis2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Glass3Mtl
+Material Color
+Ka 0.00715504 0.018913 0.0315514
+Kd 0.00715504 0.018913 0.0315514
+Ks 0.00715504 0.018913 0.0315514 
+
+d 0.25098
+
+Ns 0
+
+map_Ka Glass1_diff.png
+map_Kd Glass1_diff.png
+map_d Glass1_diff.png
+
+map_Bump Glass1_nmap.png
+
+map_Ns Glass1_spec.png
+
+newmtl Lfbrake2Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ke 1 1 1
+Ks 0.0862745 0.0862745 0.0862745 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl11_diff.png
+map_Kd Wheelrl11_diff.png
+map_d Wheelrl11_diff.png
+
+map_Bump Wheelrl11_nmap.png
+
+map_Ns Wheelrl11_spec.png
+
+map_Ke Lfbrake2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Interior6Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior6_diff.png
+map_Kd Interior6_diff.png
+map_d Interior6_diff.png
+
+map_Bump Interior6_nmap.png
+
+map_Ns Interior6_spec.png
+
+map_Ke Interior6_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl7Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl7_diff.png
+map_Kd Wheelrl7_diff.png
+map_d Wheelrl7_diff.png
+
+map_Ns Wheelrl7_spec.png
+
+map_Ke Wheelrl7_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrr7Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl7_diff.png
+map_Kd Wheelrl7_diff.png
+map_d Wheelrl7_diff.png
+
+map_Ns Wheelrl7_spec.png
+
+map_Ke Wheelrr7_emap.png
+
+rbx_alphamode overlay
+
+newmtl Backstoplight1Mtl
+Material Color
+Ka 0.12753 0.00120174 0.000804658
+Kd 0.12753 0.00120174 0.000804658
+Ks 0.0505118 0.000475983 0.000318708 
+
+d 1
+
+Ns 0
+
+map_Ka Lbacklight1_diff.png
+map_Kd Lbacklight1_diff.png
+map_d Lbacklight1_diff.png
+
+map_Bump Lbacklight1_nmap.png
+
+newmtl Wheelfl7Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl7_diff.png
+map_Kd Wheelrl7_diff.png
+map_d Wheelrl7_diff.png
+
+map_Ns Wheelrl7_spec.png
+
+map_Ke Wheelfl7_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfl12Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfr12_diff.png
+map_Kd Wheelfr12_diff.png
+map_d Wheelfr12_diff.png
+
+map_Bump Wheelfr12_nmap.png
+
+map_Ns Wheelfr12_spec.png
+
+map_Ke Wheelfl12_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfr7Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl7_diff.png
+map_Kd Wheelrl7_diff.png
+map_d Wheelrl7_diff.png
+
+map_Ns Wheelrl7_spec.png
+
+map_Ke Wheelfr7_emap.png
+
+rbx_alphamode overlay
+
+newmtl Interior7Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior7_diff.png
+map_Kd Interior7_diff.png
+map_d Interior7_diff.png
+
+map_Ns Interior7_spec.png
+
+map_Ke Interior7_emap.png
+
+rbx_alphamode overlay
+
+newmtl Interior8Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior6_diff.png
+map_Kd Interior6_diff.png
+map_d Interior6_diff.png
+
+map_Bump Interior6_nmap.png
+
+map_Ns Interior6_spec.png
+
+map_Ke Interior8_emap.png
+
+rbx_alphamode overlay
+
+newmtl Frontlicenseplate5Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Frontlicenseplate5_emap.png
+
+rbx_alphamode overlay
+
+newmtl Lights2Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0234425 0.0231273 0.02408 
+
+d 1
+
+Ns 0
+
+map_Ka Lights2_diff.png
+map_Kd Lights2_diff.png
+map_d Lights2_diff.png
+
+newmtl Backlicenseplate6Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Backlicenseplate6_emap.png
+
+rbx_alphamode overlay
+
+newmtl Carbody3Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Carbody3_diff.png
+map_Kd Carbody3_diff.png
+map_d Carbody3_diff.png
+
+map_Bump Carbody3_nmap.png
+
+map_Ns Carbody3_spec.png
+
+map_Ke Carbody3_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl8Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl8_diff.png
+map_Kd Wheelrl8_diff.png
+map_d Wheelrl8_diff.png
+
+map_Bump Wheelrl8_nmap.png
+
+map_Ns Wheelrl8_spec.png
+
+map_Ke Wheelrl8_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrr8Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl8_diff.png
+map_Kd Wheelrl8_diff.png
+map_d Wheelrl8_diff.png
+
+map_Bump Wheelrl8_nmap.png
+
+map_Ns Wheelrl8_spec.png
+
+map_Ke Wheelrr8_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfl8Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl8_diff.png
+map_Kd Wheelrl8_diff.png
+map_d Wheelrl8_diff.png
+
+map_Bump Wheelrl8_nmap.png
+
+map_Ns Wheelrl8_spec.png
+
+map_Ke Wheelfl8_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfr8Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl8_diff.png
+map_Kd Wheelrl8_diff.png
+map_d Wheelrl8_diff.png
+
+map_Bump Wheelrl8_nmap.png
+
+map_Ns Wheelrl8_spec.png
+
+map_Ke Wheelfr8_emap.png
+
+rbx_alphamode overlay
+
+newmtl Spoiler2Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Spoiler2_diff.png
+map_Kd Spoiler2_diff.png
+map_d Spoiler2_diff.png
+
+map_Bump Spoiler2_nmap.png
+
+map_Ns Spoiler2_spec.png
+
+map_Ke Spoiler2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Exhaust4Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Spoiler2_diff.png
+map_Kd Spoiler2_diff.png
+map_d Spoiler2_diff.png
+
+map_Bump Spoiler2_nmap.png
+
+map_Ns Spoiler2_spec.png
+
+map_Ke Exhaust4_emap.png
+
+rbx_alphamode overlay
+
+newmtl Glass31Mtl
+Material Color
+Ka 0.018913 0.0384727 0.0545923
+Kd 0.018913 0.0384727 0.0545923
+Ks 0.018913 0.0384727 0.0545923 
+
+d 0.65098
+
+Ns 0
+
+map_Ka Glass1_diff.png
+map_Kd Glass1_diff.png
+map_d Glass1_diff.png
+
+map_Bump Glass1_nmap.png
+
+map_Ns Glass1_spec.png
+
+newmtl Carbody4Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Carbody4_diff.png
+map_Kd Carbody4_diff.png
+map_d Carbody4_diff.png
+
+map_Bump Carbody4_nmap.png
+
+map_Ns Carbody4_spec.png
+
+map_Ke Carbody4_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl9Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl9_diff.png
+map_Kd Wheelrl9_diff.png
+map_d Wheelrl9_diff.png
+
+map_Bump Wheelrl9_nmap.png
+
+map_Ns Wheelrl9_spec.png
+
+map_Ke Wheelrl9_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrr9Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl9_diff.png
+map_Kd Wheelrl9_diff.png
+map_d Wheelrl9_diff.png
+
+map_Bump Wheelrl9_nmap.png
+
+map_Ns Wheelrl9_spec.png
+
+map_Ke Wheelrr9_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfr9Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl9_diff.png
+map_Kd Wheelrl9_diff.png
+map_d Wheelrl9_diff.png
+
+map_Bump Wheelrl9_nmap.png
+
+map_Ns Wheelrl9_spec.png
+
+map_Ke Wheelfr9_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfl9Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl9_diff.png
+map_Kd Wheelrl9_diff.png
+map_d Wheelrl9_diff.png
+
+map_Bump Wheelrl9_nmap.png
+
+map_Ns Wheelrl9_spec.png
+
+map_Ke Wheelfl9_emap.png
+
+rbx_alphamode overlay
+
+newmtl Interior9Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior2_diff.png
+map_Kd Interior2_diff.png
+map_d Interior2_diff.png
+
+map_Bump Interior2_nmap.png
+
+map_Ns Interior2_spec.png
+
+map_Ke Interior9_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrr12Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfr12_diff.png
+map_Kd Wheelfr12_diff.png
+map_d Wheelfr12_diff.png
+
+map_Bump Wheelfr12_nmap.png
+
+map_Ns Wheelfr12_spec.png
+
+map_Ke Wheelrr12_emap.png
+
+rbx_alphamode overlay
+
+newmtl Rfturnsignal4Mtl
+Material Color
+Ka 1 0.311181 0.00369724
+Kd 1 0.311181 0.00369724
+Ks 0.396078 0.123252 0.0014644 
+
+d 1
+
+Ns 0
+
+map_Ka Lbacklight1_diff.png
+map_Kd Lbacklight1_diff.png
+map_d Lbacklight1_diff.png
+
+map_Bump Lbacklight1_nmap.png
+
+newmtl Frontlicenseplate6Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Frontlicenseplate6_emap.png
+
+rbx_alphamode overlay
+
+newmtl Chassis3Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl9_diff.png
+map_Kd Wheelrl9_diff.png
+map_d Wheelrl9_diff.png
+
+map_Bump Wheelrl9_nmap.png
+
+map_Ns Chassis3_spec.png
+
+map_Ke Chassis3_emap.png
+
+rbx_alphamode overlay
+
+newmtl Exhaust8Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Exhaust8_diff.png
+map_Kd Exhaust8_diff.png
+map_d Exhaust8_diff.png
+
+map_Bump Exhaust8_nmap.png
+
+map_Ns Exhaust8_spec.png
+
+map_Ke Exhaust8_emap.png
+
+rbx_alphamode overlay
+
+newmtl Rbbrake1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ke 1 1 1
+Ks 0.0862745 0.0862745 0.0862745 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl11_diff.png
+map_Kd Wheelrl11_diff.png
+map_d Wheelrl11_diff.png
+
+map_Bump Wheelrl11_nmap.png
+
+map_Ns Wheelrl11_spec.png
+
+map_Ke Rbbrake1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Backlicenseplate7Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Backlicenseplate7_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl10Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl10_diff.png
+map_Kd Wheelrl10_diff.png
+map_d Wheelrl10_diff.png
+
+map_Bump Wheelrl10_nmap.png
+
+map_Ns Wheelrl10_spec.png
+
+map_Ke Wheelrl10_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfr10Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl10_diff.png
+map_Kd Wheelrl10_diff.png
+map_d Wheelrl10_diff.png
+
+map_Bump Wheelrl10_nmap.png
+
+map_Ns Wheelrl10_spec.png
+
+map_Ke Wheelfr10_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrr10Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl10_diff.png
+map_Kd Wheelrl10_diff.png
+map_d Wheelrl10_diff.png
+
+map_Bump Wheelrl10_nmap.png
+
+map_Ns Wheelrl10_spec.png
+
+map_Ke Wheelrr10_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfl10Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl10_diff.png
+map_Kd Wheelrl10_diff.png
+map_d Wheelrl10_diff.png
+
+map_Bump Wheelrl10_nmap.png
+
+map_Ns Wheelrl10_spec.png
+
+map_Ke Wheelfl10_emap.png
+
+rbx_alphamode overlay
+
+newmtl Frontlicenseplate7Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Frontlicenseplate7_emap.png
+
+rbx_alphamode overlay
+
+newmtl Backlicenseplate8Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Backlicenseplate8_emap.png
+
+rbx_alphamode overlay
+
+newmtl Interior10Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior2_diff.png
+map_Kd Interior2_diff.png
+map_d Interior2_diff.png
+
+map_Bump Interior2_nmap.png
+
+map_Ns Interior2_spec.png
+
+map_Ke Interior10_emap.png
+
+rbx_alphamode overlay
+
+newmtl Exhaust5Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Exhaust5_diff.png
+map_Kd Exhaust5_diff.png
+map_d Exhaust5_diff.png
+
+map_Bump Exhaust5_nmap.png
+
+map_Ns Exhaust5_spec.png
+
+map_Ke Exhaust5_emap.png
+
+rbx_alphamode overlay
+
+newmtl Chassis4Mtl
+Material Color
+Ka 0.948965 0.923993 0.867136
+Kd 0.948965 0.923993 0.867136
+Ke 1 1 1
+Ks 0.0818715 0.0797171 0.0748117 
+
+d 1
+
+Ns 249
+
+map_Ka Exhaust5_diff.png
+map_Kd Exhaust5_diff.png
+map_d Exhaust5_diff.png
+
+map_Bump Exhaust5_nmap.png
+
+map_Ns Exhaust5_spec.png
+
+map_Ke Chassis4_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl11Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ke 1 1 1
+Ks 0.0862745 0.0862745 0.0862745 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl11_diff.png
+map_Kd Wheelrl11_diff.png
+map_d Wheelrl11_diff.png
+
+map_Bump Wheelrl11_nmap.png
+
+map_Ns Wheelrl11_spec.png
+
+map_Ke Wheelrl11_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrr11Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ke 1 1 1
+Ks 0.0862745 0.0862745 0.0862745 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl11_diff.png
+map_Kd Wheelrl11_diff.png
+map_d Wheelrl11_diff.png
+
+map_Bump Wheelrl11_nmap.png
+
+map_Ns Wheelrl11_spec.png
+
+map_Ke Wheelrr11_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfl11Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ke 1 1 1
+Ks 0.0862745 0.0862745 0.0862745 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl11_diff.png
+map_Kd Wheelrl11_diff.png
+map_d Wheelrl11_diff.png
+
+map_Bump Wheelrl11_nmap.png
+
+map_Ns Wheelrl11_spec.png
+
+map_Ke Wheelfl11_emap.png
+
+rbx_alphamode overlay
+
+newmtl Rfbrake2Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ke 1 1 1
+Ks 0.0862745 0.0862745 0.0862745 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl11_diff.png
+map_Kd Wheelrl11_diff.png
+map_d Wheelrl11_diff.png
+
+map_Bump Wheelrl11_nmap.png
+
+map_Ns Wheelrl11_spec.png
+
+map_Ke Rfbrake2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfr11Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ke 1 1 1
+Ks 0.0862745 0.0862745 0.0862745 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl11_diff.png
+map_Kd Wheelrl11_diff.png
+map_d Wheelrl11_diff.png
+
+map_Bump Wheelrl11_nmap.png
+
+map_Ns Wheelrl11_spec.png
+
+map_Ke Wheelfr11_emap.png
+
+rbx_alphamode overlay
+
+newmtl Frontlicenseplate12Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate11_diff.png
+map_Kd Frontlicenseplate11_diff.png
+map_d Frontlicenseplate11_diff.png
+
+map_Ns Frontlicenseplate11_spec.png
+
+map_Ke Frontlicenseplate12_emap.png
+
+rbx_alphamode overlay
+
+newmtl Backtire1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ke 1 1 1
+Ks 0.0862745 0.0862745 0.0862745 
+
+d 1
+
+Ns 255
+
+map_Ka Backtire1_diff.png
+map_Kd Backtire1_diff.png
+map_d Backtire1_diff.png
+
+map_Bump Backtire1_nmap.png
+
+map_Ns Backtire1_spec.png
+
+map_Ke Backtire1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfr13Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfr13_diff.png
+map_Kd Wheelfr13_diff.png
+map_d Wheelfr13_diff.png
+
+map_Bump Wheelfr13_nmap.png
+
+map_Ns Wheelfr13_spec.png
+
+map_Ke Wheelfr13_emap.png
+
+rbx_alphamode overlay
+
+newmtl Interior11Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ke 1 1 1
+Ks 0.0862745 0.0862745 0.0862745 
+
+d 1
+
+Ns 255
+
+map_Ka Interior11_diff.png
+map_Kd Interior11_diff.png
+map_d Interior11_diff.png
+
+map_Bump Interior11_nmap.png
+
+map_Ns Interior11_spec.png
+
+map_Ke Interior11_emap.png
+
+rbx_alphamode overlay
+
+newmtl Exhaust6Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ke 1 1 1
+Ks 0.0862745 0.0862745 0.0862745 
+
+d 1
+
+Ns 255
+
+map_Ka Backtire1_diff.png
+map_Kd Backtire1_diff.png
+map_d Backtire1_diff.png
+
+map_Bump Backtire1_nmap.png
+
+map_Ns Backtire1_spec.png
+
+map_Ke Exhaust6_emap.png
+
+rbx_alphamode overlay
+
+newmtl Body1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ke 1 1 1
+Ks 0.0862745 0.0862745 0.0862745 
+
+d 1
+
+Ns 27
+
+map_Ka Backtire1_diff.png
+map_Kd Backtire1_diff.png
+map_d Backtire1_diff.png
+
+map_Bump Backtire1_nmap.png
+
+map_Ns Backtire1_spec.png
+
+map_Ke Body1_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfr12Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfr12_diff.png
+map_Kd Wheelfr12_diff.png
+map_d Wheelfr12_diff.png
+
+map_Bump Wheelfr12_nmap.png
+
+map_Ns Wheelfr12_spec.png
+
+map_Ke Wheelfr12_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrl12Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfr12_diff.png
+map_Kd Wheelfr12_diff.png
+map_d Wheelfr12_diff.png
+
+map_Bump Wheelfr12_nmap.png
+
+map_Ns Wheelfr12_spec.png
+
+map_Ke Wheelrl12_emap.png
+
+rbx_alphamode overlay
+
+newmtl Glass7Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.373615 0.368591 0.383775 
+
+d 0.25098
+
+Ns 0
+
+map_Ka Glass1_diff.png
+map_Kd Glass1_diff.png
+map_d Glass1_diff.png
+
+map_Bump Glass1_nmap.png
+
+map_Ns Glass1_spec.png
+
+rbx_doublesided 1
+
+newmtl Body2Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 227
+
+map_Ka Body2_diff.png
+map_Kd Body2_diff.png
+map_d Body2_diff.png
+
+map_Bump Body2_nmap.png
+
+map_Ns Body2_spec.png
+
+map_Ke Body2_emap.png
+
+rbx_alphamode overlay
+
+newmtl Backlicenseplate10Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Backlicenseplate10_emap.png
+
+rbx_alphamode overlay
+
+newmtl Interior12Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior6_diff.png
+map_Kd Interior6_diff.png
+map_d Interior6_diff.png
+
+map_Bump Interior6_nmap.png
+
+map_Ns Interior6_spec.png
+
+map_Ke Interior12_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrr13Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfr13_diff.png
+map_Kd Wheelfr13_diff.png
+map_d Wheelfr13_diff.png
+
+map_Bump Wheelfr13_nmap.png
+
+map_Ns Wheelfr13_spec.png
+
+map_Ke Wheelrr13_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfl13Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelfr13_diff.png
+map_Kd Wheelfr13_diff.png
+map_d Wheelfr13_diff.png
+
+map_Bump Wheelfr13_nmap.png
+
+map_Ns Wheelfr13_spec.png
+
+map_Ke Wheelfl13_emap.png
+
+rbx_alphamode overlay
+
+newmtl Body3Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 144
+
+map_Ka Exhaust8_diff.png
+map_Kd Exhaust8_diff.png
+map_d Exhaust8_diff.png
+
+map_Bump Exhaust8_nmap.png
+
+map_Ns Exhaust8_spec.png
+
+map_Ke Body3_emap.png
+
+rbx_alphamode overlay
+
+newmtl Interior13Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 0
+
+map_Ka Interior3_diff.png
+map_Kd Interior3_diff.png
+map_d Interior3_diff.png
+
+map_Bump Interior3_nmap.png
+
+map_Ns Interior3_spec.png
+
+map_Ke Interior13_emap.png
+
+rbx_alphamode overlay
+
+newmtl Backlicenseplate11Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Backlicenseplate11_emap.png
+
+rbx_alphamode overlay
+
+newmtl Frontlicenseplate9Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Frontlicenseplate9_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfr14Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl14_diff.png
+map_Kd Wheelrl14_diff.png
+map_d Wheelrl14_diff.png
+
+map_Bump Wheelrl14_nmap.png
+
+map_Ns Wheelrl14_spec.png
+
+map_Ke Wheelfr14_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelfl14Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl14_diff.png
+map_Kd Wheelrl14_diff.png
+map_d Wheelrl14_diff.png
+
+map_Bump Wheelrl14_nmap.png
+
+map_Ns Wheelrl14_spec.png
+
+map_Ke Wheelfl14_emap.png
+
+rbx_alphamode overlay
+
+newmtl Wheelrr14Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Wheelrl14_diff.png
+map_Kd Wheelrl14_diff.png
+map_d Wheelrl14_diff.png
+
+map_Bump Wheelrl14_nmap.png
+
+map_Ns Wheelrl14_spec.png
+
+map_Ke Wheelrr14_emap.png
+
+rbx_alphamode overlay
+
+newmtl Spoiler3Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Spoiler3_diff.png
+map_Kd Spoiler3_diff.png
+map_d Spoiler3_diff.png
+
+map_Bump Spoiler3_nmap.png
+
+map_Ns Spoiler3_spec.png
+
+map_Ke Spoiler3_emap.png
+
+rbx_alphamode overlay
+
+newmtl Frontlicenseplate10Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Frontlicenseplate10_emap.png
+
+rbx_alphamode overlay
+
+newmtl Body4Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 75
+
+map_Ka Body4_diff.png
+map_Kd Body4_diff.png
+map_d Body4_diff.png
+
+map_Bump Body4_nmap.png
+
+map_Ns Body4_spec.png
+
+map_Ke Body4_emap.png
+
+rbx_alphamode overlay
+
+newmtl Backlicenseplate12Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Frontlicenseplate3_diff.png
+map_Kd Frontlicenseplate3_diff.png
+map_d Frontlicenseplate3_diff.png
+
+map_Ns Frontlicenseplate3_spec.png
+
+map_Ke Backlicenseplate12_emap.png
+
+rbx_alphamode overlay
+
+newmtl Interior14Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ke 1 1 1
+Ks 0.0322335 0.0318 0.03311 
+
+d 1
+
+Ns 255
+
+map_Ka Interior2_diff.png
+map_Kd Interior2_diff.png
+map_d Interior2_diff.png
+
+map_Bump Interior2_nmap.png
+
+map_Ns Interior2_spec.png
+
+map_Ke Interior14_emap.png
+
+rbx_alphamode overlay
+
