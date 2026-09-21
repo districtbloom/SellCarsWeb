@@ -144,14 +144,14 @@ test('sales advisor resumes an old photo-stage save with a visible delay and no 
   assert.equal(s.car.status,'buyer');assert.equal(s.car.history.filter(event=>event==='Photographed and listed').length,1);assert.equal(s.sales,0);
 });
 
-test('the hired advisor handles the level-60 photo department without automating unrelated manual jobs',()=>{
-  for(const [id,automation,automatic] of [['Photo_Listing',true,true],['Photo_Listing',false,false],['Body_Restoration',true,false]]){
+test('hired repair staff handle every department even with manual deals; the advisor can start photos immediately',()=>{
+  for(const [id,automation,automatic] of [['Photo_Listing',true,true],['Photo_Listing',false,true],['Body_Restoration',true,true]]){
     const s=M.freshJourney();s.cash=100000;s.journey.step=60;s.journey.tutorialComplete=true;s.journey.intakePaused=true;s.journey.automation=automation;
     assert.ok(M.arriveBusiness(s));const plan=J.workPlan(s),task=plan.jobs.find(job=>job.id===id);assert.ok(task);
     s.car.status='repair';s.car.route=undefined;s.car.owned=true;s.car.pos=[...task.position];s.car.plan={...plan,jobs:[task],funded:true};
     assert.equal(M.staffedJob(s),automatic);
-    M.tick(s,.1);assert.equal(task.started,automatic);
-    if(automatic)assert.ok(task.progress>0,'The prepositioned advisor starts photos without another walk countdown');else assert.equal(task.progress,0);
+    M.tick(s,.1);
+    if(id==='Photo_Listing'&&automation)assert.ok(task.progress>0,'The prepositioned advisor starts photos without another walk countdown');
     if(automatic){
       for(let i=0;i<2000&&!task.done;i++)M.tick(s,.1);
       assert.ok(task.done,'The advisor completes listing photos without player taps');assert.equal(task.manual,false);
@@ -162,9 +162,9 @@ test('the hired advisor handles the level-60 photo department without automating
   }
 });
 
-test('the mechanic unlocks at functional step 40 and manual mode still disables automatic repair work',()=>{
+test('the mechanic unlocks at functional step 40 and manual deals do not disable repairs',()=>{
   assert.equal(F.featureSteps.mechanic,40);assert.match(F.entries[39].title,/mechanic/i);
-  for(const [step,automation,staffed] of [[39,true,false],[40,true,true],[40,false,false]]){
+  for(const [step,automation,staffed] of [[39,true,false],[40,true,true],[40,false,true]]){
     const s=M.freshJourney();s.cash=100000;s.journey.step=step;s.journey.tutorialComplete=true;s.journey.intakePaused=true;s.journey.automation=automation;
     assert.ok(M.arriveBusiness(s));const plan=J.workPlan(s),task=plan.jobs.find(job=>job.id==='Mechanical');assert.ok(task);
     s.car.status='repair';s.car.route=undefined;s.car.owned=true;s.car.pos=[...task.position];s.car.plan={...plan,jobs:[task],funded:true};

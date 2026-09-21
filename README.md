@@ -6,6 +6,21 @@ The [hands-on expansion](docs/tycoon-expansion.md) adds repair minigames, Parts 
 delivery drivers, curved automatic driving, a residential driving tutorial, and
 **Shift** sprint. Repair progress and delivery cargo save with your dealership.
 
+Characters now breathe, shift their weight and look around while idle. Collisions,
+repairs, purchases and other interactions have particles and distinct sound cues,
+including wordless NPC chatter. See [effects and MP3 replacement instructions](docs/interaction-feedback.md)
+and the editable [sound manifest](public/audio/sound-map.json).
+
+The dealership geometry was rechecked against all 25,446 parts in the connected
+Studio source. See [geometry alignment and stage audit](docs/geometry-alignment.md)
+for the support, fixture and floor-contact corrections.
+
+Dealership NPCs have name labels. Hired mechanics now handle the complete repair
+flow. Press **E** near a repaired car travelling to sales to keep it, then browse
+your named vehicles, respawn them, and change paint at the **Personal Garage** sign
+or **Garage** button. Duplicate models are supported. See the
+[staff and personal collection guide](docs/personal-garage.md).
+
 `npm run dev` starts the Sell Cars tycoon with its $400 opening, 224 functional upgrades and 16 optional cosmetics,
 recurring car deals, department work and staff automation. Integration's
 customization, buyer preferences and rare Phoenix lead remain available.

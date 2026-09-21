@@ -1,0 +1,28 @@
+{
+  "description": "Replace file: null with a filename relative to public/audio, e.g. npc-greeting.mp3. Null uses a built-in procedural placeholder. Volume is a per-file multiplier (0 to 2). Reload after changing files; rebuild for standalone distribution.",
+  "sounds": {
+    "npc.greeting": { "file": null, "volume": 1, "use": "Opening a deal or answering a phone call; friendly wordless greeting" },
+    "npc.chatter": { "file": null, "volume": 1, "use": "Counteroffers and nearby NPC conversations; short wordless chatter" },
+    "npc.agreement": { "file": null, "volume": 1, "use": "Accepted deal, parts purchase, courier hiring, staff training" },
+    "npc.decline": { "file": null, "volume": 1, "use": "Declining a deal; descending wordless response" },
+    "phone.ring": { "file": null, "volume": 1, "use": "Incoming phone call, repeats every six seconds until answered or snoozed" },
+    "ui.click": { "file": null, "volume": 1, "use": "Other successful gameplay actions" },
+    "ui.denied": { "file": null, "volume": 1, "use": "Action blocked by cost, distance or progression" },
+    "purchase.build": { "file": null, "volume": 1, "use": "Buying a build pad, parts station upgrade or personal car" },
+    "cash.receive": { "file": null, "volume": 1, "use": "New committed income, including automatic parts sales" },
+    "repair.tool": { "file": null, "volume": 1, "use": "Mechanical repair actions and nearby working mechanics" },
+    "repair.spray": { "file": null, "volume": 1, "use": "Washing, painting, polishing and customization" },
+    "repair.pour": { "file": null, "volume": 1, "use": "Oil pouring, rate limited while held" },
+    "repair.complete": { "file": null, "volume": 1, "use": "Completed repair job or car discovery" },
+    "camera.shutter": { "file": null, "volume": 1, "use": "Listing photos and repair photo targets" },
+    "car.impact.light": { "file": null, "volume": 1, "use": "Minor chassis collision above 1.4 m/s normal impact speed" },
+    "car.impact.heavy": { "file": null, "volume": 1, "use": "Hard chassis collision above 5 m/s normal impact speed" },
+    "car.door": { "file": null, "volume": 1, "use": "Entering or exiting a drivable car" },
+    "car.start": { "file": null, "volume": 1, "use": "Engine ignition when entering a drivable car" },
+    "car.rev": { "file": null, "volume": 1, "use": "Short vroom after a successful UI action sends a tycoon car on a route, sells it for departure, or places a selected personal car" },
+    "garage.store": { "file": null, "volume": 1, "use": "Poof and chime when keeping a repaired car in the personal collection" },
+    "player.footstep": { "file": null, "volume": 1, "use": "Distance-driven grounded footsteps" },
+    "player.jump": { "file": null, "volume": 1, "use": "Successful jump takeoff" },
+    "player.land": { "file": null, "volume": 1, "use": "Landing after a jump" }
+  }
+}

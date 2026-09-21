@@ -1,0 +1,100 @@
+{
+  "placeId": 105869926920733,
+  "parts": 25446,
+  "sourceFingerprint": "1d56fa4983575f60c8f1b45740e1e188575696ad544cf1478d9bad2394731970",
+  "studioComparison": "all exported properties match the connected Sell Cars Integration model",
+  "stages": [
+    {
+      "step": 0,
+      "visibleSourceParts": 114,
+      "separatedParts": 0,
+      "addedFootings": 0,
+      "addedMounts": 0
+    },
+    {
+      "step": 1,
+      "visibleSourceParts": 148,
+      "separatedParts": 2,
+      "addedFootings": 3,
+      "addedMounts": 4
+    },
+    {
+      "step": 3,
+      "visibleSourceParts": 241,
+      "separatedParts": 19,
+      "addedFootings": 9,
+      "addedMounts": 4
+    },
+    {
+      "step": 6,
+      "visibleSourceParts": 326,
+      "separatedParts": 41,
+      "addedFootings": 17,
+      "addedMounts": 4
+    },
+    {
+      "step": 22,
+      "visibleSourceParts": 887,
+      "separatedParts": 107,
+      "addedFootings": 66,
+      "addedMounts": 8
+    },
+    {
+      "step": 24,
+      "visibleSourceParts": 964,
+      "separatedParts": 109,
+      "addedFootings": 71,
+      "addedMounts": 10
+    },
+    {
+      "step": 62,
+      "visibleSourceParts": 2642,
+      "separatedParts": 489,
+      "addedFootings": 167,
+      "addedMounts": 4
+    },
+    {
+      "step": 64,
+      "visibleSourceParts": 2726,
+      "separatedParts": 507,
+      "addedFootings": 162,
+      "addedMounts": 4
+    },
+    {
+      "step": 120,
+      "visibleSourceParts": 5267,
+      "separatedParts": 768,
+      "addedFootings": 216,
+      "addedMounts": 5
+    },
+    {
+      "step": 140,
+      "visibleSourceParts": 6365,
+      "separatedParts": 901,
+      "addedFootings": 273,
+      "addedMounts": 5
+    },
+    {
+      "step": 183,
+      "visibleSourceParts": 11378,
+      "separatedParts": 1437,
+      "addedFootings": 337,
+      "addedMounts": 7
+    },
+    {
+      "step": 196,
+      "visibleSourceParts": 15426,
+      "separatedParts": 1874,
+      "addedFootings": 398,
+      "addedMounts": 7
+    },
+    {
+      "step": 240,
+      "visibleSourceParts": 20309,
+      "separatedParts": 2423,
+      "addedFootings": 412,
+      "addedMounts": 8
+    }
+  ],
+  "checkedStages": 241
+}

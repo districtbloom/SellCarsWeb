@@ -29,7 +29,7 @@ export class World {
     this.scene = await loadAuthoredScene(`${import.meta.env.BASE_URL}scenes/main.scene.json`);
     const { camera } = sceneCamera(this.scene);
     this.camera = camera;
-    this.driving = new DrivingSystem(this.scene, camera, this.renderer.domElement);
+    this.driving = new DrivingSystem(this.scene, camera, this.renderer.domElement, import.meta.env.BASE_URL);
     this.town = new OpenWorldTown(this.scene, this.driving.physics.world, () => this.driving.focusPosition);
     this.driving.setTycoonObstacles([], this.town.cameraObstacles);
     if (new URLSearchParams(location.search).get('tycoon') !== 'off') {

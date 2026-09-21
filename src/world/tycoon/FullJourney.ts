@@ -86,10 +86,11 @@ export function workPlan(s: TycoonState, good = false): Plan {
 }
 export function staffedJob(s: TycoonState): boolean {
   const c = s.car, job = c?.plan?.jobs.find(j => !j.done);
+  if (s.worker.hired || feature(s, 'mechanic')) return true;
   if (staffedPhoto(s)) return true;
   if (!c?.business) return s.worker.hired;
-  if (c.business.tutorial || !s.journey?.automation || !job || job.staffAt === undefined) return false;
-  return s.journey.step >= job.staffAt || (job.staffAt === 40 && s.worker.hired);
+  if (!job || job.staffAt === undefined) return false;
+  return (s.journey?.step ?? 0) >= job.staffAt;
 }
 export function businessDefinition(s: TycoonState): { definition: CarDefinition; index: number; templateId: string; consignment: boolean } {
   const j = s.journey!, tutorial = !j.tutorialComplete;

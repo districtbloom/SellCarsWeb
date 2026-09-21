@@ -54,7 +54,7 @@ test('a successful physics jump keeps its airborne pose through apex and descent
       if(player.jumping&&player.body.velocity.y< -1){sawDescent=true;airbornePose();}
     }
     assert.ok(sawApex&&sawDescent);assert.ok(player.grounded);assert.equal(player.jumping,false);
-    assert.ok(limbs.every(limb=>Math.abs(limb.rotation.x)<1e-8&&Math.abs(limb.rotation.z)<1e-8),'Landing restores the idle pose');
+    assert.ok(limbs.every(limb=>Math.abs(limb.rotation.x)<1e-8&&Math.abs(limb.rotation.z)<.06),'Landing restores the relaxed idle pose, including subtle arm sway');
     player.requestJump();tick(20);assert.ok(player.jumping);player.requestJump();player.place(new Vec3(2,.92,0));
     assert.equal(player.jumping,false);assert.equal(player.jumpTime,0);assert.equal(player.jumpPending,false);assert.ok(limbs.every(limb=>limb.rotation.x===0));
     tick(60);player.requestJump();tick(20);assert.ok(player.jumping);player.setSeated(true);player.sync(0);
@@ -137,6 +137,8 @@ test('typing moves both hands rapidly while torso, head and legs remain still',(
 });
 
 test('built NPCs use player proportions and visibly walk, talk and repair instead of static imported figures',async()=>{
+  const {Element}=await import('./test-dom.mjs');
+  const previousDocument=globalThis.document;globalThis.document={createElement:()=>new Element()};
   const {createNPCCharacter}=await importTypescript(new URL('components/blockCharacter.ts',root));
   const {NPCRoutine,importedNPCs,BuiltNPCRoutines}=await importTypescript(new URL('tycoon/NPCRoutines.ts',root));
   const {freshJourney}=await importTypescript(new URL('tycoon/TycoonModel.ts',root));
@@ -145,10 +147,11 @@ test('built NPCs use player proportions and visibly walk, talk and repair instea
   const npc=createNPCCharacter('Staff',0x56b5ef),player=new PlayerController(new World(),new Scene()),routine=new NPCRoutine(npc);
   const castRoot=new Group();new BuiltNPCRoutines(castRoot,source.parts);
   try {
-    const npcSize=new Box3().setFromObject(npc).getSize(new Vector3()),playerSize=new Box3().setFromObject(player.mesh).getSize(new Vector3());
+    const npcSize=new Box3().setFromObject(npc.getObjectByName('Character rig')).getSize(new Vector3()),playerSize=new Box3().setFromObject(player.mesh.getObjectByName('Character rig')).getSize(new Vector3());
     assert.ok(npcSize.distanceTo(playerSize)<1e-9);
     assert.ok(importedNPCs(source.parts).length>50,'Authored cast is detected by complete humanoid stems');
     assert.ok(castRoot.children.every(person=>person.getObjectByName('Face')&&person.getObjectByName('Left arm pivot')));
+    assert.ok(castRoot.children.every(person=>person.getObjectByName('NPC name')&&person.userData.npcName));
     const target=new Vector3(12,0,0);routine.walk(target,.1,new Vector3());routine.animate(.1,0);
     const start=npc.position.clone();for(let i=0;i<30;i++){routine.walk(target,.1);routine.animate(.1,i*.1);}
     assert.ok(npc.position.distanceTo(start)>5);assert.ok(npc.position.distanceTo(target)<.5);
@@ -159,5 +162,5 @@ test('built NPCs use player proportions and visibly walk, talk and repair instea
     const early=cast.cast.filter(actor=>actor.person.visible).length;state.journey.step=240;cast.sync(state,.1);
     assert.ok(cast.cast.filter(actor=>actor.person.visible).length>early,'NPCs honor construction gates');
     for(const actor of cast.cast)disposeBlockCharacter(actor.person);
-  } finally {player.dispose();disposeBlockCharacter(npc);for(const person of [...castRoot.children])disposeBlockCharacter(person);}
+  } finally {player.dispose();disposeBlockCharacter(npc);for(const person of [...castRoot.children])disposeBlockCharacter(person);globalThis.document=previousDocument;}
 });

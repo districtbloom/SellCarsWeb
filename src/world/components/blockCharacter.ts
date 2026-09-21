@@ -1,4 +1,4 @@
-import { BoxGeometry, BufferGeometry, Float32BufferAttribute, Group, Mesh, MeshBasicMaterial, MeshStandardMaterial, Vector3 } from 'three';
+import { BoxGeometry, BufferGeometry, Float32BufferAttribute, Group, Mesh, MeshBasicMaterial, MeshStandardMaterial, Sprite, Vector3 } from 'three';
 
 /** Shared block-person model for sellers, staff, and the player's UI portrait. */
 export function createBlockCharacter(name: string, shirtColor: number): Group {
@@ -32,16 +32,30 @@ export function createBlockCharacter(name: string, shirtColor: number): Group {
 
 /** Distance-driven, opposite arm/leg swings; teleports and stationary actors settle to idle. */
 export class BlockCharacterAnimator {
+  private static serial = 0;
   private readonly last = new Vector3();
   private initialized = false;
   private wasVisible = false;
   private phase = 0;
   private amount = 0;
+  private idleTime = 0;
+  private readonly offset: number;
   private readonly rig;
   private readonly limbs;
+  private readonly head;
+  private readonly face;
+  private readonly torso;
   constructor(private character: Group, private motion = character, private faceMovement = false) {
     this.rig = character.getObjectByName('Character rig')!;
     this.limbs = ['Left arm pivot', 'Right arm pivot', 'Left leg pivot', 'Right leg pivot'].map(name => character.getObjectByName(name)!);
+    this.head = character.getObjectByName('Head')!; this.face = character.getObjectByName('Face')!;
+    this.torso = character.getObjectByName('Root')!;
+    this.offset = (++BlockCharacterAnimator.serial * .61803398875 % 1) * 12;
+  }
+  /** Keep the separate pixel face rigidly attached through every head pose. */
+  look(pitch: number, yaw = 0, roll = 0) {
+    this.head.rotation.set(pitch, yaw, roll); this.face.rotation.copy(this.head.rotation);
+    this.face.position.set(0, 0, -1.006).applyEuler(this.head.rotation).add(this.head.position);
   }
   update(delta: number, canWalk = true) {
     const dt = Math.min(Math.max(delta, 0), .1), position = this.motion.position;
@@ -51,13 +65,22 @@ export class BlockCharacterAnimator {
     this.last.copy(position); this.initialized = true; this.wasVisible = this.motion.visible;
     this.amount += (Math.min(1, speed / 10) - this.amount) * (1 - Math.exp(-14 * dt));
     if (moving) this.phase += distance * .65;
+    this.idleTime += dt;
     const swing = Math.sin(this.phase) * .7 * this.amount;
     this.limbs.forEach((limb, i) => { limb.rotation.set(swing * [1, -1, -1, 1][i], 0, 0); });
-    this.rig.position.y = Math.abs(Math.sin(this.phase * 2)) * .09 * this.amount;
-    this.rig.rotation.x = 0;
-    this.character.getObjectByName('Head')!.rotation.x = 0;
-    this.character.getObjectByName('Face')!.rotation.x = 0;
-    this.character.getObjectByName('Face')!.position.set(0, 2.5, -1.006);
+    const idle = canWalk && this.motion.visible ? (1 - this.amount) * Math.min(1, this.idleTime / .7) : 0;
+    const t = this.idleTime + this.offset, breath = Math.sin(t * 1.7), shift = Math.sin(t * .65);
+    this.torso.scale.y = 1 + breath * .018 * idle;
+    this.rig.position.y = Math.abs(Math.sin(this.phase * 2)) * .09 * this.amount + breath * .035 * idle;
+    this.rig.position.x = shift * .055 * idle;
+    this.rig.rotation.set(0, Math.sin(this.phase) * .035 * this.amount, shift * .016 * idle);
+    this.limbs[0].rotation.z = -( .035 + breath * .016) * idle;
+    this.limbs[1].rotation.z = (.035 + Math.sin(t * 1.7 + .5) * .016) * idle;
+    // Glance, hold, return, then rest before looking the other way.
+    const cycle = (t % 12) / 12, glance = cycle < .5 ? Math.pow(Math.sin(cycle * Math.PI * 2), 2) : 0;
+    const direction = Math.floor(t / 12) % 2 ? -1 : 1;
+    this.look((breath * .025 + Math.sin(t * .8) * .035) * idle,
+      direction * glance * .42 * idle, shift * .025 * idle);
     if (this.faceMovement && speed > .1) {
       const turn = Math.atan2(-dx, -dz) - this.character.rotation.y;
       this.character.rotation.y += Math.atan2(Math.sin(turn), Math.cos(turn)) * (1 - Math.exp(-12 * dt));
@@ -68,7 +91,8 @@ export class BlockCharacterAnimator {
     const reach = Math.min(1, Math.max(0, seconds) / .12);
     const lift = reach * reach * (3 - 2 * reach);
     const rising = Math.max(0, Math.min(1, verticalSpeed / 5.5));
-    this.rig.position.y = 0; this.rig.rotation.x = -.08 * lift;
+    this.torso.scale.y = 1; this.rig.position.set(0, 0, 0); this.rig.rotation.set(-.08 * lift, 0, 0);
+    this.look(.06 * lift);
     this.limbs[0].rotation.set((1.9 + .35 * rising) * lift, 0, -.18 * lift);
     this.limbs[1].rotation.set((1.9 + .35 * rising) * lift, 0, .18 * lift);
     this.limbs[2].rotation.set((.25 + .25 * rising) * lift, 0, -.04 * lift);
@@ -77,15 +101,16 @@ export class BlockCharacterAnimator {
   /** Rapid typing with a stationary body. */
   typing(seconds: number) {
     // Only the hands/arms move; feet, torso and head remain completely still.
-    this.rig.position.y = 0; this.rig.rotation.set(0, 0, 0);
+    this.torso.scale.y = 1; this.rig.position.set(0, 0, 0); this.rig.rotation.set(0, 0, 0);
     this.limbs[2].rotation.set(0, 0, 0); this.limbs[3].rotation.set(0, 0, 0);
     this.limbs[0].rotation.set(1.15 + Math.sin(seconds * 36) * .13, 0, -.08);
     this.limbs[1].rotation.set(1.15 + Math.sin(seconds * 36 + Math.PI) * .13, 0, .08);
-    this.character.getObjectByName('Head')!.rotation.set(0, 0, 0);
-    const face = this.character.getObjectByName('Face')!; face.rotation.set(0, 0, 0); face.position.set(0, 2.5, -1.006);
+    this.look(0);
   }
   /** Two-handed latch reach, then a weighted lift; arms lead torso and knees. */
   opening(progress: number) {
+    this.torso.scale.y = 1; this.rig.position.x = 0; this.rig.rotation.y = this.rig.rotation.z = 0;
+    this.limbs.forEach(limb => { limb.rotation.y = limb.rotation.z = 0; });
     const ease = (n: number) => { const t = Math.max(0, Math.min(1, n)); return t * t * (3 - 2 * t); };
     const reach = ease(progress / .3), lift = ease((progress - .36) / .55);
     const follow = ease((progress - .48) / .5);
@@ -93,14 +118,14 @@ export class BlockCharacterAnimator {
     this.limbs[2].rotation.x = this.limbs[3].rotation.x = -.14 * reach * (1 - follow);
     this.rig.rotation.x = -.17 * reach * (1 - follow);
     this.rig.position.y = -.18 * reach + .34 * follow;
-    for (const name of ['Head', 'Face']) this.character.getObjectByName(name)!.rotation.x = -.4 * reach + .3 * lift;
     const headAngle = -.4 * reach + .3 * lift;
-    this.character.getObjectByName('Face')!.position.set(0, 2.5 + 1.006 * Math.sin(headAngle), -1.006 * Math.cos(headAngle));
+    this.look(headAngle);
   }
 }
 
 export function disposeBlockCharacter(character: Group) {
   character.traverse(object => {
+    if (object instanceof Sprite) { object.material.map?.dispose(); object.material.dispose(); return; }
     if (!(object instanceof Mesh)) return;
     object.geometry.dispose();
     for (const material of Array.isArray(object.material) ? object.material : [object.material]) material.dispose();

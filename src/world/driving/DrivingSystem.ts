@@ -5,8 +5,10 @@ import { PlayerController } from './PlayerController.js';
 import { CarInstance } from './CarInstance.js';
 import { SmartFollowCamera } from './SmartFollowCamera.js';
 import { localBounds, METERS_PER_UNIT, physicsVector } from './CarRig.js';
+import { GameFeedback } from '../feedback/GameFeedback.js';
 
 export class DrivingSystem {
+  readonly feedback: GameFeedback;
   readonly cars: CarInstance[] = [];
   private selected: CarInstance;
   private scriptedCar?: CarInstance;
@@ -58,7 +60,7 @@ export class DrivingSystem {
     if (next) next.physics.vehicle.removeFromWorld(this.physics.world);
   }
 
-  constructor(private scene: Scene, private camera: PerspectiveCamera, private canvas: HTMLElement = document.body) {
+  constructor(private scene: Scene, private camera: PerspectiveCamera, private canvas: HTMLElement = document.body, baseUrl = '/') {
     // All chassis and wheel suspensions share one world and one fixed clock.
     this.selected = new CarInstance(scene, 14);
     this.cars.push(this.selected);
@@ -68,6 +70,12 @@ export class DrivingSystem {
     const spawn = this.player.findExit(this.physics.body);
     if (!spawn) throw new Error('Car 14 needs a clear, grounded space beside it for the player spawn');
     this.player.place(spawn);
+    this.feedback = new GameFeedback(scene, camera, baseUrl);
+    this.feedback.bindCars(this.cars);
+    this.player.onMotion = kind => {
+      const feet = new Vector3(this.player.body.position.x, this.player.body.position.y - .9, this.player.body.position.z).multiplyScalar(1 / METERS_PER_UNIT);
+      this.feedback.cue(kind === 'jump' ? 'player.jump' : 'player.land', feet, 'dust', kind === 'jump' ? .5 : 1);
+    };
     camera.fov = 60;
     camera.near = 0.2;
     camera.far = 2500;
@@ -132,11 +140,14 @@ export class DrivingSystem {
           this.driving = false;
           this.player.place(exit);
           this.player.setSeated(false);
-        } else this.exitBlockedTime = 3;
+          this.feedback.cue('car.door', this.car.position);
+        } else { this.exitBlockedTime = 3; this.feedback.audio.play('ui.denied'); }
       } else if (this.nearby) {
         this.selected = this.nearby;
         this.driving = true;
         this.player.setSeated(true);
+        this.feedback.cue('car.door', this.car.position);
+        this.feedback.cue('car.start', this.car.position);
       }
       this.input.clear();
       this.followCamera.setOnFoot(!this.driving);
@@ -171,6 +182,7 @@ export class DrivingSystem {
     this.syncVisuals();
     if (!this.presentation) this.updateCamera(delta, reset);
     this.updatePrompt();
+    this.feedback.tick(delta, this.focusPosition, this.player, this.driving ? this.selected : undefined);
   }
 
   private findNearby(): CarInstance | undefined {
@@ -220,6 +232,7 @@ export class DrivingSystem {
   }
 
   dispose() {
+    this.player.onMotion = undefined; this.feedback.dispose();
     this.setScriptedCar();
     this.input.dispose();
     this.followCamera.dispose();

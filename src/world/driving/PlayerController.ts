@@ -20,6 +20,7 @@ export class PlayerController {
   private jumpTime = 0;
   openingProgress?: number;
   typingTime?: number;
+  onMotion?: (kind: 'jump' | 'land') => void;
 
   constructor(private world: World, scene: Scene) {
     // The movement motor handles acceleration/stopping. Contact friction would
@@ -60,6 +61,7 @@ export class PlayerController {
     if (!this.jumpPending) this.tryStep(desired, dt);
     if (this.jumpPending && this.grounded && !this.jumping) {
       this.body.velocity.y = 5.5; this.jumping = true; this.jumpTime = 0;
+      this.onMotion?.('jump');
     }
     this.jumpPending = false;
     if (desired.lengthSq() > 0.01) {
@@ -125,7 +127,10 @@ export class PlayerController {
 
   sync(delta = 0) {
     this.mesh.position.copy(this.body.position as unknown as Vector3).multiplyScalar(1 / METERS_PER_UNIT);
-    if (this.grounded && this.body.velocity.y <= .1) this.jumping = false;
+    if (this.grounded && this.body.velocity.y <= .1) {
+      if (this.jumping && this.jumpTime > .15) this.onMotion?.('land');
+      this.jumping = false;
+    }
     this.animator.update(delta, this.grounded && this.mesh.visible);
     if (this.jumping && this.mesh.visible) {
       this.jumpTime += Math.max(0, Math.min(delta, .1));

@@ -15,6 +15,7 @@ export type Action = { type: 'RepairInput'; input: RepairInput } | { type: 'Pad'
   | { type: 'Plan'; depth: Depth } | { type: 'Custom'; choice: Look }
   | { type: 'SpecialDeal'; index: 2 | 3 }
   | { type: 'BuyPersonal' | 'SelectPersonal'; modelId: number }
+  | { type: 'KeepCar'; carId: string } | { type: 'SpawnPersonal'; vehicleId: string } | { type: 'PaintPersonal'; vehicleId: string; paint: string }
   | { type: 'ToggleIntake' | 'ToggleAutomation' | 'NextSeller' | 'SellParts' | 'UpgradeParts' | 'AnswerCall' | 'RemindCall' }
   | { type: 'Deal' | 'Decline' | 'Repair' | 'Photo' | 'Train' | 'Invite' | 'Recovery' | 'Visit' | 'Leave' | 'Discover' };
 export interface InteractionContext { position: Point; onFoot: boolean }
@@ -60,6 +61,9 @@ export class TycoonSession {
       case 'Invite': return { ok: M.invite(s) };
       case 'Recovery': return { ok: !c && s.sales >= 3 && M.arrive(s, 3) };
       case 'BuyPersonal': case 'SelectPersonal': return { ok: context.onFoot && M.selectPersonal(s, action.modelId, action.type === 'BuyPersonal') };
+      case 'KeepCar': return { ok: !!c && near(c.pos, 22) && M.keepCar(s, action.carId) };
+      case 'SpawnPersonal': return { ok: context.onFoot && M.spawnPersonal(s, action.vehicleId) };
+      case 'PaintPersonal': return { ok: context.onFoot && M.paintPersonal(s, action.vehicleId, action.paint) };
       case 'Visit': return { ok: context.onFoot && M.visit(s) };
       case 'Leave': return { ok: M.leave(s) };
       case 'Discover': return { ok: M.discover(s) };

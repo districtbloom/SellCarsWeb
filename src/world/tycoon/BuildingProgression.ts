@@ -98,5 +98,11 @@ export function partPose(part: ImportedPart, n: number, opening?: TycoonState): 
     if (r.FJ_First === 20 && Math.abs(r.FJ_CF[0] - 3090) < .1 && part.path.includes('P020_Rough_Boundary')) { p.cf = [...r.FJ_CF]; p.cf[0] += 16; }
   }
   if (removedDisplayPart(path)) p.visible = false;
+  // The source stamps these ceiling fixtures with the parking purchase (22/43/...)
+  // although their owner-workshop roof is not built until 62 and expands at 120/183.
+  if (/Personal_Fleet_Setting_\d+[/.](?:FixtureSuspension|ShieldedPersonalLight)$/.test(path)) {
+    const roofStep = p.cf[2] <= 66 ? 62 : p.cf[2] <= 94 ? 120 : 183;
+    if (n < roofStep) p.visible = false;
+  }
   return p;
 }

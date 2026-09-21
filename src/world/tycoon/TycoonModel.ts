@@ -9,7 +9,7 @@ import * as F from './FullJourneyCatalog.js';
 import * as J from './FullJourney.js';
 import { tickParts } from './PartsStation.js';
 import { STARTER_PARTS, pricePlan, repairCost, partsStock, restockBudget, fundRepair, tickCouriers } from './PartsEconomy.js';
-import { garageUnlocked, ownedPersonalModels, personalCarOption } from './PersonalCars.js';
+import { addGarageVehicle, ensureGarage, garageVehicles, garageUnlocked, personalCarOption, GARAGE_PAINTS } from './PersonalCars.js';
 import type { Buyer, CarDefinition, Condition, Depth, Grade, Look, Moving, Pad, PartId, Plan, Point, TycoonState } from './types.js';
 
 export const copy = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
@@ -190,16 +190,25 @@ export function plan(s: TycoonState, depth: Depth): boolean {
   if (!c?.owned || c.plan || !['choose', 'owned'].includes(c.status) || !['Quick', 'Good'].includes(depth) || (depth === 'Good' && !has(s, 'finish'))) return false;
   if (c.business && s.journey!.step < 3) return false;
   const q = workQuote(s, depth);
-  if (!fundRepair(s, q, !!c.business?.consignment)) return false;
+  if (!fundStaffRepair(s, q, !!c.business?.consignment)) return false;
   randomWorkOrder(q, depth, c.condition, !!c.business?.tutorial);
   q.funded = true; c.workSpent += q.cost;
   c.plan = q; c.depth = depth; event(s, `Chose ${depth}`); route(s, 'repair'); return true;
 }
 export const job = (s: TycoonState) => s.car?.plan?.jobs.find(j => !j.done);
+function fundStaffRepair(s: TycoonState, plan: Plan, deferred = false) {
+  const cost = repairCost(plan), restock = restockBudget(cost.parts, partsStock(s));
+  if (restock && (s.worker.hired || has(s, 'mechanic') || staffedJob(s))) {
+    if (s.cash < restock + (deferred ? 0 : cost.cash)) { note(s, 'Your mechanic is waiting for repair funds. Work resumes automatically.'); return false; }
+    s.cash -= restock; s.partsStock = partsStock(s) + restock / 10;
+    s.ledger.push({ amount: -restock, kind: 'parts-purchase', subject: 'Mechanic ordered repair Parts' });
+  }
+  return fundRepair(s, plan, deferred);
+}
 export function startJob(s: TycoonState): boolean {
   const c = s.car, j = job(s);
   if (!c || c.status !== 'repair' || !j || j.started || (staffedJob(s) && !J.staffedPhoto(s) && s.worker.activity !== 'Working')) return false;
-  if (!c.plan?.funded) { if (!fundRepair(s, { jobs: [j], cost: j.cost, seconds: j.seconds })) return false; c.workSpent += j.cost; }
+  if (!c.plan?.funded) { if (!fundStaffRepair(s, { jobs: [j], cost: j.cost, seconds: j.seconds })) return false; c.workSpent += j.cost; }
   j.started = true; j.manual = !staffedJob(s); if (j.manual) repairProgress(j, s.clock); j.speed = staffedJob(s) && s.worker.level > 1 ? 1.25 : 1; return true;
 }
 export function list(s: TycoonState): boolean {
@@ -308,16 +317,48 @@ export function upgrade(s: TycoonState): boolean {
 export function selectPersonal(s: TycoonState, modelId: number, purchase: boolean): boolean {
   const option = personalCarOption(modelId), current = s.personal;
   if (!option || !garageUnlocked(s) || current?.route || (current && current.status !== 'parked')) return false;
-  const owned = [...ownedPersonalModels(current)];
+  const owned = garageVehicles(s).map(c => c.modelId);
   if (purchase) {
     if (owned.includes(modelId)) return false;
     if (s.cash - reserve(s) < option.price) { note(s, 'Keep enough cash for this car and your current work.'); return false; }
     if (!pay(s, option.price, 'personal-car', 'Car ' + modelId + ' · ' + option.name)) return false;
-    owned.push(modelId);
+    addGarageVehicle(s, modelId);
   } else if (!owned.includes(modelId)) return false;
+  return spawnPersonal(s, ensureGarage(s).find(c => c.modelId === modelId)!.id);
+}
+export function spawnPersonal(s: TycoonState, vehicleId: string): boolean {
+  const current = s.personal, vehicle = garageVehicles(s).find(c => c.id === vehicleId);
+  if (!vehicle || current?.route || current && current.status !== 'parked') return false;
+  const cars = ensureGarage(s);
   const home = copy(current?.home ?? DEALERSHIP_GARAGE);
-  s.personal = { id: 'personal-' + modelId, modelId, ownedModels: owned, pos: copy(home), home, status: 'parked' };
-  note(s, option.name + ' is ready at your garage.'); return true;
+  s.personal = { id: vehicle.id, modelId: vehicle.modelId, ownedModels: [...new Set(cars.map(c => c.modelId))], pos: copy(home), home, status: 'parked' };
+  note(s, vehicle.name + ' is ready at your garage.'); return true;
+}
+export function paintPersonal(s: TycoonState, vehicleId: string, paint: string): boolean {
+  if (s.personal?.route || s.personal && s.personal.status !== 'parked') return false;
+  if (!GARAGE_PAINTS.some(([, color]) => color === paint) || !garageVehicles(s).some(c => c.id === vehicleId)) return false;
+  ensureGarage(s).find(c => c.id === vehicleId)!.paint = paint; return true;
+}
+export const canKeepCar = (s: TycoonState) => !!s.car?.owned && s.car.status === 'moving'
+  && s.car.route?.target === 'sales' && !!s.car.plan && s.car.plan.jobs.every(j => j.done) && s.car.sale === undefined;
+export const keepCarCost = (s: TycoonState) => (s.car?.business?.consignment ? F.acquisitionCost(s.journey?.step ?? 0) : 0) + (s.car?.plan?.deferredCash ?? 0);
+export function keepCar(s: TycoonState, carId: string): boolean {
+  const c = s.car;
+  if (!canKeepCar(s) || !c || c.id !== carId) return false;
+  const cost = keepCarCost(s);
+  if (cost > s.cash) { note(s, `Need $${cost} to settle this consignment before keeping it.`); return false; }
+  if (cost && !pay(s, cost, 'personal-car', 'Consignment ownership settlement')) return false;
+  const modelId = ({ rusty: 9, Rusty: 9, hatch: 10, HondoCivixEK: 10, desert: 12, Bavora: 14, Gblock: 11, phoenix: 6 } as Record<string, number>)[c.business?.templateId ?? def(s).id] ?? 9;
+  const colors = { original: def(s).color, cream: '#ead8aa', blue: '#357dc3', red: '#b54736', green: '#3d8063' };
+  const saved = addGarageVehicle(s, modelId, colors[c.custom?.paint ?? 'original'], c.id);
+  if (c.plan) c.plan.deferredCash = undefined;
+  c.keptAs = saved.name; event(s, `Kept as ${saved.name}`); s.history.push(copy(c)); s.car = undefined;
+  if (s.journey) {
+    if (c.business?.tutorial) s.journey.tutorialComplete = true;
+    s.journey.cycle++; s.journey.nextSellerAt = s.clock + F.sellerDelay(s.journey.step);
+  }
+  if (c.index === 4 && !c.business) s.completed = true;
+  note(s, saved.name + ' is stored in your garage.'); return true;
 }
 export function visit(s: TycoonState): boolean {
   if (s.personal?.status !== 'parked' || s.car || s.lead?.kind !== 'rare') return false;
@@ -394,6 +435,7 @@ export function tick(s: TycoonState, dt: number, throttle = 0, typingParts = fal
     else w.activity = j ? 'Working' : inspecting ? 'Inspecting vehicle' : 'Ready';
   }
   if (!c) return;
+  if ((w.hired || has(s, 'mechanic')) && c.owned && !c.plan && ['choose', 'owned'].includes(c.status)) plan(s, 'Quick');
   if (c.route) {
     const dest = moveVehicle(c, dt, 7);
     if (dest === 'intake') { if (c.owned) { c.remote = false; c.status = 'choose'; } else c.status = c.index === 4 && !s.seen ? 'discovery' : 'seller'; }

@@ -37,6 +37,7 @@ export interface TradingCar extends Moving {
   arrivalGrade: Grade; depth: Depth; workSpent: number; purchase: number; history: string[];
   remote: boolean; buyerAttempt: number; photo: boolean; listing?: boolean; quote?: Quote;
   plan?: Plan; custom?: Look; wait?: number; sale?: number; soldTo?: Buyer; receiptUntil?: number;
+  keptAs?: string;
   definition?: CarDefinition;
   business?: { tutorial: boolean; templateId: string; consignment: boolean; offer?: number };
 }
@@ -47,6 +48,9 @@ export interface PersonalCar extends Moving {
   // Physics yaw and height are separate from the legacy guided-route heading.
   yaw?: number; height?: number;
 }
+export interface GarageVehicle {
+  id: string; name: string; modelId: number; paint?: string; sourceCarId?: string;
+}
 export interface Lead { kind: 'rare' | 'ordinary'; index: number; status: string; caller: string; text: string; remindAt?: number }
 export interface Courier extends Moving { id: number; phase: 'idle' | 'outbound' | 'loading' | 'returning' | 'unloading'; wait: number; cargo: number; trips: number }
 export interface TycoonState {
@@ -54,6 +58,7 @@ export interface TycoonState {
   ledger: { amount: number; kind: string; subject: string }[]; worker: Worker;
   seen: boolean; lowballPassed: boolean; completed: boolean; car?: TradingCar;
   personal?: PersonalCar; lead?: Lead; rareCallAt?: number; notice?: string; noticeUntil?: number;
+  garage?: GarageVehicle[]; garageSerial?: number;
   journey?: JourneyState;
   revenue?: { at: number; amount: number }[];
   parts?: { level: number; completed: number; remaining?: number; manual?: boolean };

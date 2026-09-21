@@ -9,7 +9,7 @@ import { PARTS_POSITION, PARTS_MAX_LEVEL, partsUnlocked, partsPayout, partsUpgra
 import type { Guidance } from './TycoonGuidance.js';
 import type { Action, ActionResult } from './TycoonSession.js';
 import { RESET_AND_CLOSE_SHORTCUT } from '../systems/resetAndClose.js';
-import { garageUnlocked, ownedPersonalModels, personalCars, personalCarOption, personalModel } from './PersonalCars.js';
+import { garageUnlocked, garageVehicles, GARAGE_PAINTS, personalCars, personalCarOption, personalModel } from './PersonalCars.js';
 import type { PersonalCarOption } from './PersonalCars.js';
 import type { Depth, Look, OfflineReceipt, Receipt, TycoonState } from './types.js';
 import type { WebGLRenderer } from 'three';
@@ -20,11 +20,11 @@ import { CashGainEffects } from './CashGainEffects.js';
 import { padColor } from './PurchaseCategories.js';
 import './phone.css';
 
-type Panel = 'world' | 'deal' | 'build' | 'prepare' | 'custom' | 'worker' | 'phone' | 'call' | 'journal' | 'wallet' | 'result' | 'complete' | 'personal' | 'journey' | 'offline' | 'index' | 'parts' | 'cosmetics';
+type Panel = 'world' | 'deal' | 'build' | 'prepare' | 'custom' | 'worker' | 'phone' | 'call' | 'journal' | 'wallet' | 'result' | 'complete' | 'personal' | 'collection' | 'journey' | 'offline' | 'index' | 'parts' | 'cosmetics';
 export interface HUDHost {
   state: TycoonState; dispatch(action: Action): ActionResult; navigate(target: Guidance): void; setMenu(open: boolean): void; saveStatus(): string;
   offline?(): OfflineReceipt | undefined; dismissOffline?(): void;
-  cars?: readonly PersonalCarOption[]; previewCar?(id?: number): void; canChangeCar?(): boolean; goToCar?(): void;
+  cars?: readonly PersonalCarOption[]; previewCar?(id?: number, paint?: string): void; canChangeCar?(): boolean; goToCar?(): void;
 }
 function element<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string) {
   const node = document.createElement(tag); if (className) node.className = className; if (text) node.textContent = text; return node;
@@ -83,7 +83,7 @@ export class TycoonHUD {
     this.wallet.onclick = () => this.open('wallet'); this.phone.onclick = () => this.togglePhone();
     this.smartphone = new Smartphone(this.root, () => this.answerCall(), () => this.remindCall(), () => { this.smartphone.hide(); this.tab = 'Home'; this.open('phone'); });
     this.building.onclick = () => this.open('journey');
-    this.garage.onclick = () => this.open('personal');
+    this.garage.onclick = () => this.open('collection');
     const stockIcon = element('span');
     stockIcon.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 3h14l7 13-7 13H9L2 16z" fill="#c5d6dc" stroke="#526975" stroke-width="2"/><circle cx="16" cy="16" r="6" fill="#263b47"/></svg>';
     this.stock.append(stockIcon, this.stockCount);
@@ -107,7 +107,7 @@ export class TycoonHUD {
   private keyDown = (e: KeyboardEvent) => {
     if (this.root.hidden) return;
     if (e.ctrlKey || e.altKey || e.metaKey || /^(INPUT|TEXTAREA|SELECT)$/.test((e.target as HTMLElement)?.tagName)) return;
-    if (this.page === 'personal' && !e.repeat && ['ArrowLeft', 'ArrowRight'].includes(e.code)) {
+    if (['personal', 'collection'].includes(this.page) && !e.repeat && ['ArrowLeft', 'ArrowRight'].includes(e.code)) {
       e.preventDefault(); this.changeCar(e.code === 'ArrowLeft' ? -1 : 1); return;
     }
     if (e.code === 'Escape' && this.isOpen) this.close();
@@ -120,6 +120,7 @@ export class TycoonHUD {
   open(page: Panel) {
     if (document.pointerLockElement) document.exitPointerLock();
     if (page === 'personal' && this.page !== 'personal') this.carIndex = Math.max(0, this.cars.findIndex(car => car.id === personalModel(this.host.state.personal)));
+    if (page === 'collection' && this.page !== 'collection') this.carIndex = Math.max(0, garageVehicles(this.host.state).findIndex(car => car.id === this.host.state.personal?.id));
     this.page = page; this.counterAmount = undefined;
     this.draft = page === 'custom' ? M.copy(this.host.state.car?.custom ?? M.originalLook()) : undefined;
     this.host.setMenu(page !== 'world'); this.render();
@@ -193,7 +194,7 @@ export class TycoonHUD {
     const j = M.job(s); this.progress.hidden = this.isOpen || c?.status !== 'repair';
     if (c?.status === 'repair' && j) { this.progress.textContent = `${j.name} · ${Math.floor(j.progress * 100)}%${M.staffedJob(s) ? ' · ' + s.worker.activity : ' · [E] Repair'}`; }
     this.routeDrive.hidden = this.isOpen || !s.personal?.route;
-    const sig = JSON.stringify([this.page, c?.id, c?.status, c?.quote, s.cash, s.worker.level, s.worker.jobs, s.worker.activity, s.lead, s.personal?.status, s.personal?.modelId, s.personal?.ownedModels, this.host.canChangeCar?.(), s.pads.length, s.sales, s.journey?.step, s.journey?.intakePaused, s.journey?.automation, Math.ceil(s.parts?.remaining ?? -1), s.parts?.level]);
+    const sig = JSON.stringify([this.page, c?.id, c?.status, c?.quote, s.cash, s.worker.level, s.worker.jobs, s.worker.activity, s.lead, s.personal?.status, s.personal?.id, s.personal?.modelId, s.personal?.ownedModels, s.garage, this.host.canChangeCar?.(), s.pads.length, s.sales, s.journey?.step, s.journey?.intakePaused, s.journey?.automation, Math.ceil(s.parts?.remaining ?? -1), s.parts?.level]);
     if (sig !== this.signature) { this.signature = sig; if (this.isOpen) this.render(); }
     this.gains.tick(dt, !this.root.hidden);
   }
@@ -202,10 +203,11 @@ export class TycoonHUD {
     const s = this.host.state, c = s.car, d = c ? M.def(s) : undefined;
     this.panel.hidden = !this.isOpen;
     this.guide.hidden = this.isOpen; this.top.hidden = false; this.top.classList.toggle('wallet-only', this.isOpen);
-    this.panel.classList.toggle('tycoon-garage', this.page === 'personal');
+    this.panel.classList.toggle('tycoon-garage', ['personal', 'collection'].includes(this.page));
     this.panel.classList.toggle('tycoon-call-dialog', this.page === 'call');
-    document.body.classList.toggle('has-garage', this.page === 'personal');
-    this.host.previewCar?.(this.page === 'personal' ? this.cars[this.carIndex].id : undefined);
+    document.body.classList.toggle('has-garage', ['personal', 'collection'].includes(this.page));
+    const garageCar = this.page === 'collection' ? garageVehicles(s)[this.carIndex] : undefined;
+    this.host.previewCar?.(this.page === 'personal' ? this.cars[this.carIndex].id : garageCar?.modelId, garageCar?.paint);
     const panels: Partial<Record<Panel, () => void>> = {
       'call': () => {
         const lead = s.lead; if (!lead) { this.close(); return; }
@@ -339,7 +341,8 @@ export class TycoonHUD {
           this.text('Sales advisor · ' + (s.journey.step >= 33 ? 'Automated sales' : 'Unlocks at step 33'));
           this.text('Mechanic · ' + (M.has(s, 'mechanic') ? 'Automated repairs' : 'Unlocks at step 40'));
           for (const d of departments) if (s.journey.step >= d.first) this.text(d.name + ' · ' + (s.journey.step >= d.staff ? 'Staffed' : 'Manual · specialist at step ' + d.staff));
-          this.button(s.journey.automation ? 'Switch to manual deals & work' : 'Enable hired staff', () => this.action({ type: 'ToggleAutomation' }), !s.journey.tutorialComplete, true);
+          this.button(s.journey.automation ? 'Switch to manual deals' : 'Automate deals', () => this.action({ type: 'ToggleAutomation' }), !s.journey.tutorialComplete, true);
+          this.text('Hired repair staff always handle repairs and order missing Parts from your cash.');
         }
       },
         'Garage': () => { this.quote(s.personal ? personalCarOption(personalModel(s.personal)!)!.name : 'Find a car of your own.'); this.button('Choose your car', () => this.open('personal')); this.button('Your car stories', () => this.open('complete'), false, true); }
@@ -350,6 +353,7 @@ export class TycoonHUD {
       'personal': () => {
  this.renderGarage(); 
       },
+      'collection': () => { this.renderCollection(); },
       'journal': () => { if (!(c && d)) { this.close(); return; }
  this.title(d.name, 'Car story'); this.text(`${c.arrivalGrade} on arrival`); for (const line of c.history) this.text(line); 
       },
@@ -373,7 +377,7 @@ export class TycoonHUD {
       'complete': () => {
 
       this.title('Your dealership', `${s.sales} cars sold`);
-      for (const car of s.history) this.text(`${car.definition?.name ?? catalog.cars[car.index - 1].name}\n${money((car.sale ?? 0) - car.purchase - car.workSpent)} profit`, 'tycoon-ledger');
+      for (const car of s.history) this.text(`${car.definition?.name ?? catalog.cars[car.index - 1].name}\n${car.keptAs ? 'Kept as ' + car.keptAs : money((car.sale ?? 0) - car.purchase - car.workSpent) + ' profit'}`, 'tycoon-ledger');
       if (!s.history.length) this.quote('Every car has a story. Your first one starts here.');
     
       },
@@ -438,10 +442,42 @@ export class TycoonHUD {
     panels[this.page]?.();
   }
   private changeCar(direction: number) {
-    this.carIndex = (this.carIndex + direction + this.cars.length) % this.cars.length; this.render();
+    const length = this.page === 'collection' ? garageVehicles(this.host.state).length : this.cars.length;
+    this.carIndex = length ? (this.carIndex + direction + length) % length : 0; this.render();
+  }
+  private renderCollection() {
+    const s = this.host.state, cars = garageVehicles(s), car = cars[this.carIndex];
+    this.title('Personal garage', cars.length + ' vehicles owned');
+    if (!car) {
+      const empty = element('div', 'garage-details');
+      empty.append(this.text('Keep a repaired car on its way to the selling area, or buy one below.'), this.button('Browse cars to buy', () => this.open('personal')));
+      this.content.append(empty); return;
+    }
+    const selector = element('div', 'garage-selector');
+    for (const [label, symbol, direction] of [['Previous car', '‹', -1], ['Next car', '›', 1]] as const) {
+      const arrow = element('button', 'garage-arrow', symbol); arrow.setAttribute('aria-label', label);
+      arrow.onclick = () => this.changeCar(direction); selector.append(arrow);
+    }
+    this.content.append(selector);
+    const details = element('div', 'garage-details'); details.setAttribute('aria-live', 'polite');
+    details.append(element('span', 'garage-eyebrow', `${this.carIndex + 1} / ${cars.length} · ${personalCarOption(car.modelId)!.name}`), element('h2', '', car.name));
+    this.content.append(details);
+    const canChange = (this.host.canChangeCar?.() ?? true) && (!s.personal || s.personal.status === 'parked');
+    details.append(this.button(s.personal?.id === car.id ? 'Respawn at garage' : 'Spawn at garage', () => this.action({ type: 'SpawnPersonal', vehicleId: car.id }), !canChange));
+    if (s.personal?.id === car.id) details.append(this.button('Go to car', () => this.host.goToCar?.(), !canChange, true));
+    details.append(this.text('Paint color', 'tycoon-subtitle'));
+    const palette = element('div', 'garage-paints');
+    for (const [name, paint] of GARAGE_PAINTS) {
+      const button = element('button', 'secondary', name); button.style.borderColor = paint;
+      button.setAttribute('aria-pressed', String(car.paint === paint)); button.disabled = !canChange;
+      button.onclick = () => this.action({ type: 'PaintPersonal', vehicleId: car.id, paint }); palette.append(button);
+    }
+    details.append(palette);
+    details.append(this.text('Each car keeps its own name and paint. Spawning replaces your active personal car; the collection stays saved.', 'tycoon-muted'));
+    details.append(this.button('Browse cars to buy', () => this.open('personal'), false, true));
   }
   private renderGarage() {
-    const s = this.host.state, option = this.cars[this.carIndex], owned = ownedPersonalModels(s.personal);
+    const s = this.host.state, option = this.cars[this.carIndex], owned = [...new Set(garageVehicles(s).map(c => c.modelId))];
     const selected = personalModel(s.personal) === option.id, purchased = owned.includes(option.id);
     const available = Math.max(0, s.cash - M.reserve(s));
     const canChange = (this.host.canChangeCar?.() ?? true) && (!s.personal || s.personal.status === 'parked');
@@ -480,6 +516,7 @@ export class TycoonHUD {
       : purchased ? 'Owned cars are yours to keep. Switch between them for free.' : 'Buy once. Keep it in your garage.';
     details.append(element('p', 'garage-note', message));
     this.content.append(selector, details);
+    details.append(this.button('View owned collection', () => this.open('collection'), false, true));
   }
   dispose() {
     window.removeEventListener('keydown', this.keyDown); window.removeEventListener('blur', this.release);

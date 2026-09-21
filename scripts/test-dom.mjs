@@ -12,7 +12,7 @@ export class Element extends EventTarget {
     toggle: (name, force) => { const has = this.className.split(/\s+/).includes(name); const add = force ?? !has; this.classList[add ? 'add' : 'remove'](name); return add; },
     contains: name => this.className.split(/\s+/).includes(name),
   };
-  append(...nodes) { for (const node of nodes) { node.parentElement = this; this.children.push(node); } }
+  append(...nodes) { for (const node of nodes) { node.remove(); node.parentElement = this; this.children.push(node); } }
   replaceChildren(...nodes) { for (const node of this.children) node.parentElement = null; this.children = []; this.append(...nodes); }
   cloneNode(deep = false) {
     const clone = new Element();

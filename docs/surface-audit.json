@@ -1,0 +1,2143 @@
+{
+  "sourceParts": 25446,
+  "tolerance": 0.0015,
+  "separation": 0.012,
+  "stages": [
+    {
+      "step": 0,
+      "checkedParts": 114,
+      "movedParts": 0,
+      "unresolved": 0,
+      "maxOffset": 0
+    },
+    {
+      "step": 1,
+      "checkedParts": 148,
+      "movedParts": 2,
+      "unresolved": 0,
+      "maxOffset": 0.01200000000000001
+    },
+    {
+      "step": 2,
+      "checkedParts": 177,
+      "movedParts": 12,
+      "unresolved": 0,
+      "maxOffset": 0.012000000000170985
+    },
+    {
+      "step": 3,
+      "checkedParts": 241,
+      "movedParts": 19,
+      "unresolved": 0,
+      "maxOffset": 0.012000000000170985
+    },
+    {
+      "step": 4,
+      "checkedParts": 274,
+      "movedParts": 29,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000002
+    },
+    {
+      "step": 5,
+      "checkedParts": 291,
+      "movedParts": 31,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000002
+    },
+    {
+      "step": 6,
+      "checkedParts": 326,
+      "movedParts": 41,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000002
+    },
+    {
+      "step": 7,
+      "checkedParts": 360,
+      "movedParts": 46,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000002
+    },
+    {
+      "step": 8,
+      "checkedParts": 401,
+      "movedParts": 46,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000002
+    },
+    {
+      "step": 9,
+      "checkedParts": 473,
+      "movedParts": 76,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 10,
+      "checkedParts": 525,
+      "movedParts": 83,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 11,
+      "checkedParts": 564,
+      "movedParts": 83,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 12,
+      "checkedParts": 646,
+      "movedParts": 98,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 13,
+      "checkedParts": 672,
+      "movedParts": 98,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 14,
+      "checkedParts": 685,
+      "movedParts": 99,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 15,
+      "checkedParts": 691,
+      "movedParts": 101,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 16,
+      "checkedParts": 706,
+      "movedParts": 101,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 17,
+      "checkedParts": 740,
+      "movedParts": 101,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 18,
+      "checkedParts": 766,
+      "movedParts": 102,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 19,
+      "checkedParts": 769,
+      "movedParts": 102,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 20,
+      "checkedParts": 834,
+      "movedParts": 102,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 21,
+      "checkedParts": 859,
+      "movedParts": 104,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 22,
+      "checkedParts": 887,
+      "movedParts": 107,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 23,
+      "checkedParts": 934,
+      "movedParts": 109,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 24,
+      "checkedParts": 964,
+      "movedParts": 109,
+      "unresolved": 0,
+      "maxOffset": 0.02400000000000091
+    },
+    {
+      "step": 25,
+      "checkedParts": 1207,
+      "movedParts": 324,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 26,
+      "checkedParts": 1265,
+      "movedParts": 345,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 27,
+      "checkedParts": 1268,
+      "movedParts": 345,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 28,
+      "checkedParts": 1380,
+      "movedParts": 366,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 29,
+      "checkedParts": 1402,
+      "movedParts": 366,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 30,
+      "checkedParts": 1390,
+      "movedParts": 356,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 31,
+      "checkedParts": 1390,
+      "movedParts": 356,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 32,
+      "checkedParts": 1390,
+      "movedParts": 356,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 33,
+      "checkedParts": 1425,
+      "movedParts": 356,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 34,
+      "checkedParts": 1585,
+      "movedParts": 364,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 35,
+      "checkedParts": 1593,
+      "movedParts": 366,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 36,
+      "checkedParts": 1635,
+      "movedParts": 373,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 37,
+      "checkedParts": 1671,
+      "movedParts": 373,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 38,
+      "checkedParts": 1687,
+      "movedParts": 371,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 39,
+      "checkedParts": 1718,
+      "movedParts": 371,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 40,
+      "checkedParts": 1737,
+      "movedParts": 371,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 41,
+      "checkedParts": 1842,
+      "movedParts": 378,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 42,
+      "checkedParts": 1864,
+      "movedParts": 379,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 43,
+      "checkedParts": 1899,
+      "movedParts": 381,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 44,
+      "checkedParts": 1991,
+      "movedParts": 399,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 45,
+      "checkedParts": 1998,
+      "movedParts": 399,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 46,
+      "checkedParts": 2033,
+      "movedParts": 401,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 47,
+      "checkedParts": 2104,
+      "movedParts": 403,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 48,
+      "checkedParts": 2150,
+      "movedParts": 421,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 49,
+      "checkedParts": 2191,
+      "movedParts": 423,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 50,
+      "checkedParts": 2160,
+      "movedParts": 423,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 51,
+      "checkedParts": 2195,
+      "movedParts": 425,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 52,
+      "checkedParts": 2246,
+      "movedParts": 437,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 53,
+      "checkedParts": 2311,
+      "movedParts": 445,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 54,
+      "checkedParts": 2328,
+      "movedParts": 455,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 55,
+      "checkedParts": 2408,
+      "movedParts": 457,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 56,
+      "checkedParts": 2443,
+      "movedParts": 457,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 57,
+      "checkedParts": 2489,
+      "movedParts": 466,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 58,
+      "checkedParts": 2483,
+      "movedParts": 469,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 59,
+      "checkedParts": 2494,
+      "movedParts": 470,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 60,
+      "checkedParts": 2533,
+      "movedParts": 473,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 61,
+      "checkedParts": 2549,
+      "movedParts": 473,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 62,
+      "checkedParts": 2642,
+      "movedParts": 489,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 63,
+      "checkedParts": 2726,
+      "movedParts": 507,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 64,
+      "checkedParts": 2726,
+      "movedParts": 507,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 65,
+      "checkedParts": 2658,
+      "movedParts": 517,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 66,
+      "checkedParts": 3118,
+      "movedParts": 554,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 67,
+      "checkedParts": 3179,
+      "movedParts": 589,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 68,
+      "checkedParts": 3219,
+      "movedParts": 589,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 69,
+      "checkedParts": 3228,
+      "movedParts": 589,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 70,
+      "checkedParts": 3239,
+      "movedParts": 589,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 71,
+      "checkedParts": 3267,
+      "movedParts": 589,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 72,
+      "checkedParts": 3361,
+      "movedParts": 591,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 73,
+      "checkedParts": 3335,
+      "movedParts": 584,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 74,
+      "checkedParts": 3419,
+      "movedParts": 584,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 75,
+      "checkedParts": 3440,
+      "movedParts": 588,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 76,
+      "checkedParts": 3477,
+      "movedParts": 597,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 77,
+      "checkedParts": 3495,
+      "movedParts": 599,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 78,
+      "checkedParts": 3499,
+      "movedParts": 600,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 79,
+      "checkedParts": 3535,
+      "movedParts": 604,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 80,
+      "checkedParts": 3490,
+      "movedParts": 597,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 81,
+      "checkedParts": 3517,
+      "movedParts": 602,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 82,
+      "checkedParts": 3514,
+      "movedParts": 600,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 83,
+      "checkedParts": 3537,
+      "movedParts": 600,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 84,
+      "checkedParts": 3555,
+      "movedParts": 601,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 85,
+      "checkedParts": 3711,
+      "movedParts": 629,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 86,
+      "checkedParts": 3730,
+      "movedParts": 631,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 87,
+      "checkedParts": 3713,
+      "movedParts": 626,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 88,
+      "checkedParts": 3738,
+      "movedParts": 626,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 89,
+      "checkedParts": 3769,
+      "movedParts": 626,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 90,
+      "checkedParts": 3787,
+      "movedParts": 627,
+      "unresolved": 0,
+      "maxOffset": 0.03794733192207465
+    },
+    {
+      "step": 91,
+      "checkedParts": 3906,
+      "movedParts": 632,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 92,
+      "checkedParts": 3921,
+      "movedParts": 632,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 93,
+      "checkedParts": 3969,
+      "movedParts": 637,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 94,
+      "checkedParts": 3954,
+      "movedParts": 608,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 95,
+      "checkedParts": 3982,
+      "movedParts": 608,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 96,
+      "checkedParts": 4003,
+      "movedParts": 610,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 97,
+      "checkedParts": 4080,
+      "movedParts": 610,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 98,
+      "checkedParts": 4095,
+      "movedParts": 610,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 99,
+      "checkedParts": 4148,
+      "movedParts": 614,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 100,
+      "checkedParts": 4197,
+      "movedParts": 621,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 101,
+      "checkedParts": 4248,
+      "movedParts": 623,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 102,
+      "checkedParts": 4276,
+      "movedParts": 624,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 103,
+      "checkedParts": 4339,
+      "movedParts": 624,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 104,
+      "checkedParts": 4420,
+      "movedParts": 624,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 105,
+      "checkedParts": 4455,
+      "movedParts": 625,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 106,
+      "checkedParts": 4469,
+      "movedParts": 625,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 107,
+      "checkedParts": 4549,
+      "movedParts": 634,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 108,
+      "checkedParts": 4583,
+      "movedParts": 634,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 109,
+      "checkedParts": 4705,
+      "movedParts": 650,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 110,
+      "checkedParts": 4717,
+      "movedParts": 651,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 111,
+      "checkedParts": 4742,
+      "movedParts": 651,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 112,
+      "checkedParts": 4775,
+      "movedParts": 650,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 113,
+      "checkedParts": 4794,
+      "movedParts": 654,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 114,
+      "checkedParts": 4807,
+      "movedParts": 654,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 115,
+      "checkedParts": 4879,
+      "movedParts": 654,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 116,
+      "checkedParts": 4913,
+      "movedParts": 658,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 117,
+      "checkedParts": 4966,
+      "movedParts": 658,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 118,
+      "checkedParts": 5167,
+      "movedParts": 759,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 119,
+      "checkedParts": 5225,
+      "movedParts": 761,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 120,
+      "checkedParts": 5267,
+      "movedParts": 768,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 121,
+      "checkedParts": 5391,
+      "movedParts": 774,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 122,
+      "checkedParts": 5391,
+      "movedParts": 774,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 123,
+      "checkedParts": 5389,
+      "movedParts": 778,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 124,
+      "checkedParts": 5535,
+      "movedParts": 799,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 125,
+      "checkedParts": 5557,
+      "movedParts": 800,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 126,
+      "checkedParts": 5614,
+      "movedParts": 812,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 127,
+      "checkedParts": 5633,
+      "movedParts": 812,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 128,
+      "checkedParts": 5633,
+      "movedParts": 812,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 129,
+      "checkedParts": 5810,
+      "movedParts": 848,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 130,
+      "checkedParts": 5834,
+      "movedParts": 848,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 131,
+      "checkedParts": 5974,
+      "movedParts": 861,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 132,
+      "checkedParts": 5995,
+      "movedParts": 861,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 133,
+      "checkedParts": 5995,
+      "movedParts": 861,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 134,
+      "checkedParts": 6088,
+      "movedParts": 869,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 135,
+      "checkedParts": 6132,
+      "movedParts": 870,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 136,
+      "checkedParts": 6230,
+      "movedParts": 878,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 137,
+      "checkedParts": 6246,
+      "movedParts": 879,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 138,
+      "checkedParts": 6347,
+      "movedParts": 901,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 139,
+      "checkedParts": 6365,
+      "movedParts": 901,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 140,
+      "checkedParts": 6365,
+      "movedParts": 901,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 141,
+      "checkedParts": 6383,
+      "movedParts": 907,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 142,
+      "checkedParts": 6543,
+      "movedParts": 876,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 143,
+      "checkedParts": 6782,
+      "movedParts": 957,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 144,
+      "checkedParts": 6786,
+      "movedParts": 957,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 145,
+      "checkedParts": 7141,
+      "movedParts": 990,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 146,
+      "checkedParts": 7209,
+      "movedParts": 1000,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 147,
+      "checkedParts": 7288,
+      "movedParts": 1024,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 148,
+      "checkedParts": 7831,
+      "movedParts": 1067,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 149,
+      "checkedParts": 7831,
+      "movedParts": 1067,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 150,
+      "checkedParts": 8504,
+      "movedParts": 1140,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 151,
+      "checkedParts": 8674,
+      "movedParts": 1196,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 152,
+      "checkedParts": 8733,
+      "movedParts": 1210,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 153,
+      "checkedParts": 9245,
+      "movedParts": 1314,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 154,
+      "checkedParts": 9361,
+      "movedParts": 1324,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 155,
+      "checkedParts": 9361,
+      "movedParts": 1324,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 156,
+      "checkedParts": 9390,
+      "movedParts": 1335,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 157,
+      "checkedParts": 9843,
+      "movedParts": 1343,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 158,
+      "checkedParts": 10151,
+      "movedParts": 1353,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 159,
+      "checkedParts": 10135,
+      "movedParts": 1349,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 160,
+      "checkedParts": 10233,
+      "movedParts": 1344,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 161,
+      "checkedParts": 10301,
+      "movedParts": 1348,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 162,
+      "checkedParts": 10413,
+      "movedParts": 1357,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 163,
+      "checkedParts": 10423,
+      "movedParts": 1357,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 164,
+      "checkedParts": 10433,
+      "movedParts": 1358,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 165,
+      "checkedParts": 10522,
+      "movedParts": 1364,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 166,
+      "checkedParts": 10562,
+      "movedParts": 1364,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 167,
+      "checkedParts": 10574,
+      "movedParts": 1365,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 168,
+      "checkedParts": 10590,
+      "movedParts": 1365,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 169,
+      "checkedParts": 10653,
+      "movedParts": 1376,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 170,
+      "checkedParts": 10702,
+      "movedParts": 1378,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 171,
+      "checkedParts": 10719,
+      "movedParts": 1378,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 172,
+      "checkedParts": 10947,
+      "movedParts": 1387,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 173,
+      "checkedParts": 10994,
+      "movedParts": 1398,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 174,
+      "checkedParts": 11002,
+      "movedParts": 1398,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 175,
+      "checkedParts": 11070,
+      "movedParts": 1402,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 176,
+      "checkedParts": 11123,
+      "movedParts": 1418,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 177,
+      "checkedParts": 11191,
+      "movedParts": 1422,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 178,
+      "checkedParts": 11213,
+      "movedParts": 1422,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 179,
+      "checkedParts": 11218,
+      "movedParts": 1423,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 180,
+      "checkedParts": 11286,
+      "movedParts": 1427,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 181,
+      "checkedParts": 11302,
+      "movedParts": 1432,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 182,
+      "checkedParts": 11302,
+      "movedParts": 1432,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 183,
+      "checkedParts": 11378,
+      "movedParts": 1437,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 184,
+      "checkedParts": 11378,
+      "movedParts": 1437,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 185,
+      "checkedParts": 11652,
+      "movedParts": 1478,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 186,
+      "checkedParts": 11698,
+      "movedParts": 1491,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 187,
+      "checkedParts": 11867,
+      "movedParts": 1531,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 188,
+      "checkedParts": 11904,
+      "movedParts": 1531,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 189,
+      "checkedParts": 11962,
+      "movedParts": 1533,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 190,
+      "checkedParts": 12024,
+      "movedParts": 1554,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 191,
+      "checkedParts": 12367,
+      "movedParts": 1613,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 192,
+      "checkedParts": 13507,
+      "movedParts": 1743,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 193,
+      "checkedParts": 13553,
+      "movedParts": 1746,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 194,
+      "checkedParts": 15110,
+      "movedParts": 1802,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 195,
+      "checkedParts": 15373,
+      "movedParts": 1867,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 196,
+      "checkedParts": 15426,
+      "movedParts": 1874,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 197,
+      "checkedParts": 15426,
+      "movedParts": 1880,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 198,
+      "checkedParts": 15426,
+      "movedParts": 1880,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 199,
+      "checkedParts": 15426,
+      "movedParts": 1880,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 200,
+      "checkedParts": 15440,
+      "movedParts": 1880,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 201,
+      "checkedParts": 15456,
+      "movedParts": 1880,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 202,
+      "checkedParts": 15546,
+      "movedParts": 1888,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 203,
+      "checkedParts": 15726,
+      "movedParts": 1892,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 204,
+      "checkedParts": 15740,
+      "movedParts": 1892,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 205,
+      "checkedParts": 15745,
+      "movedParts": 1892,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 206,
+      "checkedParts": 15761,
+      "movedParts": 1892,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 207,
+      "checkedParts": 15965,
+      "movedParts": 1904,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 208,
+      "checkedParts": 15998,
+      "movedParts": 1908,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 209,
+      "checkedParts": 16090,
+      "movedParts": 1910,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 210,
+      "checkedParts": 16157,
+      "movedParts": 1919,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 211,
+      "checkedParts": 16244,
+      "movedParts": 1962,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 212,
+      "checkedParts": 16250,
+      "movedParts": 1962,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 213,
+      "checkedParts": 16268,
+      "movedParts": 1965,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 214,
+      "checkedParts": 16427,
+      "movedParts": 1986,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 215,
+      "checkedParts": 16434,
+      "movedParts": 1986,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 216,
+      "checkedParts": 16512,
+      "movedParts": 1986,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 217,
+      "checkedParts": 16677,
+      "movedParts": 2015,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 218,
+      "checkedParts": 16720,
+      "movedParts": 2020,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 219,
+      "checkedParts": 16764,
+      "movedParts": 2020,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 220,
+      "checkedParts": 16764,
+      "movedParts": 2020,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 221,
+      "checkedParts": 16816,
+      "movedParts": 2033,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 222,
+      "checkedParts": 16816,
+      "movedParts": 2033,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 223,
+      "checkedParts": 16816,
+      "movedParts": 2033,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 224,
+      "checkedParts": 16816,
+      "movedParts": 2033,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 225,
+      "checkedParts": 16907,
+      "movedParts": 2051,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 226,
+      "checkedParts": 16933,
+      "movedParts": 2052,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 227,
+      "checkedParts": 16937,
+      "movedParts": 2054,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 228,
+      "checkedParts": 17593,
+      "movedParts": 2161,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 229,
+      "checkedParts": 17607,
+      "movedParts": 2171,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 230,
+      "checkedParts": 17667,
+      "movedParts": 2173,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 231,
+      "checkedParts": 17670,
+      "movedParts": 2173,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 232,
+      "checkedParts": 17772,
+      "movedParts": 2186,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 233,
+      "checkedParts": 17772,
+      "movedParts": 2186,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 234,
+      "checkedParts": 17787,
+      "movedParts": 2186,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 235,
+      "checkedParts": 17971,
+      "movedParts": 2257,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 236,
+      "checkedParts": 18067,
+      "movedParts": 2267,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 237,
+      "checkedParts": 18093,
+      "movedParts": 2271,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 238,
+      "checkedParts": 18171,
+      "movedParts": 2305,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 239,
+      "checkedParts": 18294,
+      "movedParts": 2329,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    },
+    {
+      "step": 240,
+      "checkedParts": 20309,
+      "movedParts": 2423,
+      "unresolved": 0,
+      "maxOffset": 0.060000000000854925
+    }
+  ],
+  "examples": [
+    {
+      "source": "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQRearWall1",
+      "offset": [
+        0.012000000000170985,
+        0,
+        0
+      ],
+      "against": [
+        "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQFloor1"
+      ]
+    },
+    {
+      "source": "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQCrownSide",
+      "offset": [
+        0,
+        0.012000000000000455,
+        0
+      ],
+      "against": [
+        "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQCrownRear"
+      ]
+    },
+    {
+      "source": "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQCrownSide",
+      "offset": [
+        0,
+        0.012000000000000455,
+        0.012000000000000455
+      ],
+      "against": [
+        "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQCrownRear",
+        "10_Institution_Fidelity_R1.05_Prestige_And_Public_Realm.02_HQ_Circulation.HQ_Cut_Floor_Decks.Floor3East"
+      ]
+    },
+    {
+      "source": "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQSideWall1",
+      "offset": [
+        0,
+        0.012000000000000455,
+        0.012000000000000455
+      ],
+      "against": [
+        "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQRearWall1",
+        "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQFloor1"
+      ]
+    },
+    {
+      "source": "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQSideWall1",
+      "offset": [
+        0,
+        0.012000000000000455,
+        0.012000000000000455
+      ],
+      "against": [
+        "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQRearWall1",
+        "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQFloor1"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.06_Atmosphere.01_Movement_Surfaces.Exterior_Concrete_Districts.FrontageFinish",
+      "offset": [
+        -0.012000000000170985,
+        0,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.11_Frontage04.01_Unified_Frontage_Ground.Continuous_Physical_Finish.Main_Joined_Substrate"
+      ]
+    },
+    {
+      "source": "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQSideWall2",
+      "offset": [
+        0,
+        0,
+        0.012000000000000455
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.05_Prestige_And_Public_Realm.02_HQ_Circulation.HQ_Cut_Floor_Decks.Floor2East"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.02_Rear_Support.Parts_Logistics.Retained_Shell_And_Low_Annex.OuterUpperWall",
+      "offset": [
+        0,
+        0.012000000000000455,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.02_Rear_Support.Parts_Logistics.Retained_Shell_And_Low_Annex.RearUpperPanel"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.02_Rear_Support.Staff_Operations.Retained_Shell_And_Low_Annex.OuterUpperWall",
+      "offset": [
+        0,
+        0.012000000000000455,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.02_Rear_Support.Staff_Operations.Retained_Shell_And_Low_Annex.RearUpperPanel"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.02_Rear_Support.Parts_Logistics.Retained_Shell_And_Low_Annex.OriginalInnerWall",
+      "offset": [
+        0,
+        0.012000000000000455,
+        0.012000000000000455
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.02_Rear_Support.Parts_Logistics.Retained_Shell_And_Low_Annex.RearUpperPanel",
+        "10_Institution_Fidelity_R1.02_Rear_Support.Parts_Logistics.Retained_Shell_And_Low_Annex.AnnexRoof"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.02_Rear_Support.Staff_Operations.Retained_Shell_And_Low_Annex.OriginalInnerWall",
+      "offset": [
+        0,
+        0.012000000000000455,
+        0.012000000000000455
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.02_Rear_Support.Staff_Operations.Retained_Shell_And_Low_Annex.RearUpperPanel",
+        "10_Institution_Fidelity_R1.02_Rear_Support.Staff_Operations.Retained_Shell_And_Low_Annex.AnnexRoof"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.09_Campus03.02_Operations_Courtyard.02_Operations_Staff_Courtyard.05_Desert_Shade_And_Bench_Island.LimestoneAndWeatheredSteelIsland.GroundedCore",
+      "offset": [
+        0,
+        -0.01200000000000001,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.06_Atmosphere.01_Movement_Surfaces.Exterior_Concrete_Districts.RearServiceFinish"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.04_Frontage_And_Owner.03_Owner.Personal_Workshop_Shell.RearCleanPanel",
+      "offset": [
+        0,
+        -0.012000000000000455,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.04_Frontage_And_Owner.03_Owner.Personal_Workshop_Shell.WorkshopWallPanel"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.05_Prestige_And_Public_Realm.02_HQ_Circulation.HQ_Cut_Floor_Decks.Floor2West",
+      "offset": [
+        0,
+        0,
+        0.012000000000000455
+      ],
+      "against": [
+        "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQSideWall2"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.04_Frontage_And_Owner.03_Owner.Personal_Workshop_Shell.RearCleanPanel",
+      "offset": [
+        0,
+        -0.012000000000000455,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.04_Frontage_And_Owner.03_Owner.Personal_Workshop_Shell.WorkshopWallPanel"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.05_Prestige_And_Public_Realm.01_Collector.Craft_Gallery_Shell.SideGlazing",
+      "offset": [
+        0,
+        0.012000000000000455,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.05_Prestige_And_Public_Realm.01_Collector.Craft_Gallery_Shell.GalleryGlazing"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.05_Prestige_And_Public_Realm.01_Collector.Craft_Gallery_Shell.SideGlazing",
+      "offset": [
+        0,
+        0.012000000000000455,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.05_Prestige_And_Public_Realm.01_Collector.Craft_Gallery_Shell.GalleryGlazing"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.09_Campus03.03_Parts_Work_Yard.03_Parts_Receiving_Courtyard.06_Receiving_Garden_And_Pause_Bench.LowLimestoneGarden.GroundedCore",
+      "offset": [
+        0,
+        -0.01200000000000001,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.06_Atmosphere.01_Movement_Surfaces.Exterior_Concrete_Districts.RearServiceFinish"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.02_Rear_Support.Parts_Logistics.Retained_Shell_And_Low_Annex.OuterBrickBase",
+      "offset": [
+        0,
+        0.01200000000000001,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.02_Rear_Support.Parts_Logistics.Retained_Shell_And_Low_Annex.RearBrickBase"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.02_Rear_Support.Staff_Operations.Retained_Shell_And_Low_Annex.OuterBrickBase",
+      "offset": [
+        0,
+        0.01200000000000001,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.02_Rear_Support.Staff_Operations.Retained_Shell_And_Low_Annex.RearBrickBase"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.04_Frontage_And_Owner.03_Owner.Personal_Workshop_Shell.RearBrickPlinth",
+      "offset": [
+        0.012000000000170985,
+        0.011999999999999567,
+        0.012000000000000455
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.04_Frontage_And_Owner.03_Owner.Personal_Workshop_Shell.RetainedBrickPlinth",
+        "10_Institution_Fidelity_R1.04_Frontage_And_Owner.03_Owner.Personal_Workshop_Shell.RearCleanPanel"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.04_Frontage_And_Owner.03_Owner.Personal_Workshop_Shell.RearBrickPlinth",
+      "offset": [
+        0.012000000000170985,
+        0.011999999999999567,
+        0.012000000000000455
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.04_Frontage_And_Owner.03_Owner.Personal_Workshop_Shell.RetainedBrickPlinth",
+        "10_Institution_Fidelity_R1.04_Frontage_And_Owner.03_Owner.Personal_Workshop_Shell.RearCleanPanel"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.02_Rear_Support.Parts_Logistics.Retained_Shell_And_Low_Annex.OriginalInnerWallBase",
+      "offset": [
+        0,
+        0.01200000000000001,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.02_Rear_Support.Parts_Logistics.Retained_Shell_And_Low_Annex.RearBrickBase"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.02_Rear_Support.Staff_Operations.Retained_Shell_And_Low_Annex.OriginalInnerWallBase",
+      "offset": [
+        0,
+        0.01200000000000001,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.02_Rear_Support.Staff_Operations.Retained_Shell_And_Low_Annex.RearBrickBase"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.05_Prestige_And_Public_Realm.01_Collector.Craft_Gallery_Shell.StoneSkirting",
+      "offset": [
+        0.012000000000170985,
+        -0.012000000000000455,
+        0
+      ],
+      "against": [
+        "10_Institution_Fidelity_R1.05_Prestige_And_Public_Realm.01_Collector.Craft_Gallery_Shell.GalleryGlazing"
+      ]
+    },
+    {
+      "source": "10_Institution_Fidelity_R1.05_Prestige_And_Public_Realm.03_HQ_Art.HQ_Framed_And_Shaded_Facade.FacadeFascia",
+      "offset": [
+        0.012000000000170985,
+        0,
+        0
+      ],
+      "against": [
+        "09_Institution_Production_B.02_Rear_Operations_And_Prestige.07_Institution_Headquarters.HQCrownRoof"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Paint_Exterior.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        -0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Paint_Exterior.OpenCanopy"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Paint_Exterior.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Paint_Exterior.OpenCanopy"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Tune_Performance.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        -0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Tune_Performance.OpenCanopy"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Tune_Performance.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Tune_Performance.OpenCanopy"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Detail_QC.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        -0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Detail_QC.OpenCanopy"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Detail_QC.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Detail_QC.OpenCanopy"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Photo_Listing.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Photo_Listing.OpenCanopy"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Photo_Listing.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        -0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Photo_Listing.OpenCanopy"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Wash.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        -0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Wash.OpenCanopy"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Wash.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Wash.OpenCanopy"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Body_Restoration.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Body_Restoration.OpenCanopy"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Body_Restoration.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        -0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Body_Restoration.OpenCanopy"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Mechanical.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Mechanical.OpenCanopy"
+      ]
+    },
+    {
+      "source": "05_Architecture_Massing.02_Production.Mechanical.OuterCornerColumn",
+      "offset": [
+        0,
+        0,
+        -0.012000000000000455
+      ],
+      "against": [
+        "05_Architecture_Massing.02_Production.Mechanical.OpenCanopy"
+      ]
+    }
+  ]
+}

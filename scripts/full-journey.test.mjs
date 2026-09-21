@@ -24,14 +24,15 @@ function finishCar(s) {
     const c = s.car; if (!c) return;
     if (['seller', 'buyer'].includes(c.status)) { M.openDeal(s); assert.ok(c.status === 'seller' ? M.buy(s) : M.sell(s)); }
     if (c.status === 'choose') {
-      while(E.partsStock(s)<E.repairCost(M.workQuote(s)).parts) {
+      while(!c.plan && E.partsStock(s)<E.repairCost(M.workQuote(s)).parts) {
         while(s.cash<100) {
           if(P.partsAutomated(s)) until(s,()=>s.cash>=100);
           else { if(s.parts.remaining===undefined) assert.ok(P.startParts(s),'Parts laptop provides recovery cash'); until(s,()=>s.parts.remaining===undefined); }
         }
+        if (c.plan) break;
         assert.ok(E.buyParts(s,'small'), 'Business earnings can replenish repair Parts');
       }
-      assert.ok(M.plan(s, 'Quick'));
+      if (!c.plan) assert.ok(M.plan(s, 'Quick'));
     }
     if (c.status === 'photo') assert.ok(M.list(s));
     if (c.status === 'repair' && M.job(s) && !M.job(s).started && !M.staffedJob(s)) assert.ok(M.startJob(s));

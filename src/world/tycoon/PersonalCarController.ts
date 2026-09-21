@@ -4,7 +4,8 @@ import type { CarInstance } from '../driving/CarInstance.js';
 import type { DrivingSystem } from '../driving/DrivingSystem.js';
 import { METERS_PER_UNIT } from '../driving/CarRig.js';
 import { logicalPoint, worldPoint } from './TycoonCoordinates.js';
-import { personalModel } from './PersonalCars.js';
+import { garageVehicles, personalModel } from './PersonalCars.js';
+import { CarPaint } from './CarPaint.js';
 import type { PersonalCar, TycoonState } from './types.js';
 
 /** Uses the existing physical car, so the selected model keeps its real handling. */
@@ -12,6 +13,7 @@ export class PersonalCarController {
   private car?: CarInstance;
   private state?: PersonalCar;
   private scripted = false;
+  private readonly paint = new CarPaint();
   constructor(private driving: DrivingSystem) {}
 
   sync(s: TycoonState) {
@@ -23,6 +25,7 @@ export class PersonalCarController {
       if (this.car && p) this.place(p, true);
     }
     if (!this.car || !p) return;
+    this.paint.apply(this.car.car, garageVehicles(s).find(c => c.id === p.id)?.paint);
     if (p.route) {
       this.driving.setScriptedCar(this.car.id); this.scripted = true;
       this.place(p, false);
@@ -64,5 +67,5 @@ export class PersonalCarController {
     const exit = this.driving.player.findExit(this.car.physics.body);
     return exit ? new Vector3(exit.x, exit.y, exit.z).multiplyScalar(1 / METERS_PER_UNIT) : undefined;
   }
-  dispose() { this.driving.setScriptedCar(); }
+  dispose() { this.paint.dispose(); this.driving.setScriptedCar(); }
 }

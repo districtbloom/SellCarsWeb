@@ -59,7 +59,7 @@ test('work orders roll only after payment and remain fixed through quotes, repea
   const originalRandom=Math.random;let rolls=0;Math.random=()=>{rolls++;return .37;};
   try{
     s.cash=0;assert.equal(M.plan(s,'Good'),false);assert.equal(rolls,0);assert.equal(s.car.plan,undefined);
-    s.cash=100000;s.partsStock=0;assert.equal(M.plan(s,'Good'),false);assert.equal(rolls,0);
+    s.cash=inputs.cash;s.partsStock=0;assert.equal(M.plan(s,'Good'),false);assert.equal(rolls,0,'Mechanic must fund missing Parts before generating a work order');
     s.partsStock=inputs.parts;s.cash=inputs.cash;assert.ok(M.plan(s,'Good'));assert.ok(rolls>0);
     assert.equal(s.cash,0);assert.equal(s.partsStock,0);assert.equal(s.car.plan.cost,quote.cost);assert.equal(s.car.plan.seconds,quote.seconds);
     assert.equal(s.car.workSpent,quote.cost);assert.equal(s.car.plan.pricedServices,quote.jobs.filter(job=>job.id!=='Tune').length);

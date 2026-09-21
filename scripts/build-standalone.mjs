@@ -9,6 +9,7 @@ const types = {
   '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png',
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp',
   '.obj': 'text/plain', '.mtl': 'text/plain', '.woff2': 'font/woff2',
+  '.mp3': 'audio/mpeg', '.wav': 'audio/wav', '.ogg': 'audio/ogg', '.m4a': 'audio/mp4',
 };
 const archive = Object.create(null);
 async function collect(directory, prefix = '') {

@@ -2,7 +2,7 @@ import { catalog } from './catalog.js';
 import { copy, fresh, freshJourney } from './TycoonModel.js';
 import { migrateOpening } from './FullJourney.js';
 import { offlineReward, applyOfflineReward } from './OfflineEarnings.js';
-import { personalCarOption, personalModel } from './PersonalCars.js';
+import { ensureGarage, personalCarOption, personalModel } from './PersonalCars.js';
 import { STARTER_PARTS } from './PartsEconomy.js';
 import { entries } from './FullJourneyCatalog.js';
 import type { OfflineReceipt, TycoonState } from './types.js';
@@ -66,6 +66,13 @@ export function validState(value: unknown): value is TycoonState {
       || !p.ownedModels.includes(personalModel(p)!))) return false;
     if ([p.yaw, p.height].some(n => n !== undefined && (typeof n !== 'number' || !Number.isFinite(n)))) return false;
   }
+  if (s.garage !== undefined && (!Array.isArray(s.garage)
+    || new Set(s.garage.map(c => c?.id)).size !== s.garage.length || new Set(s.garage.map(c => c?.name)).size !== s.garage.length
+    || !s.garage.every(c => c && typeof c.id === 'string' && c.id.length > 0 && c.id.length <= 100
+      && typeof c.name === 'string' && c.name.length > 0 && c.name.length <= 100 && !!personalCarOption(c.modelId)
+      && (c.paint === undefined || /^#[0-9a-f]{6}$/i.test(c.paint))
+      && (c.sourceCarId === undefined || typeof c.sourceCarId === 'string')))) return false;
+  if (s.garageSerial !== undefined && (!Number.isSafeInteger(s.garageSerial) || s.garageSerial < (s.garage?.length ?? 0))) return false;
   for (const moving of [s.car, s.personal, s.worker]) if (moving?.route) {
     const r = moving.route;
     if (r.curved !== undefined && typeof r.curved !== 'boolean' || r.speed !== undefined && (!finite(r.speed) || r.speed > 100)) return false;
@@ -137,6 +144,7 @@ export class TycoonSave {
       if (![1, 2].includes(snapshot.version!) || !validState(snapshot.state)) throw new Error('Incompatible save');
       if (snapshot.version === 2 && (!finite(snapshot.savedAt) || !finite(snapshot.leaseUntil) || !Number.isInteger(snapshot.revision) || typeof snapshot.writer !== 'string')) throw new Error('Malformed save envelope');
       const state = copy(snapshot.state);
+      if (state.personal || state.garage) ensureGarage(state);
       state.partsStock ??= STARTER_PARTS;
       if (state.journey) {
         state.journey.cosmetics ??= entries.filter(e => e.category === 'Cosmetic' && e.step <= state.journey!.step).map(e => e.id);

@@ -114,3 +114,11 @@
 }
 
 .parts-world-prompt{position:fixed;transform:translate(-50%,-100%);z-index:15;display:flex;flex-direction:column;gap:5px;min-width:205px;padding:10px;border:1px solid #a7d5ba80;border-radius:12px;background:#18382deb;color:#f2fff6;font:13px system-ui;box-shadow:0 5px 20px #0004;pointer-events:auto;text-align:center}.parts-world-prompt[hidden]{display:none}.parts-world-prompt button{padding:8px;border:0;border-radius:6px;background:#d5edb9;color:#173c2d;font-weight:700;cursor:pointer}.parts-world-prompt button:disabled{opacity:.5}.parts-world-prompt small{color:#b8d2c3;font-size:10px}
+
+.garage-paints { display:flex; flex-wrap:wrap; gap:6px; }
+.garage-paints button { padding:7px 10px; border:2px solid; font-size:12px; }
+.garage-paints button[aria-pressed=true] { outline:2px solid #f4f3e8; outline-offset:2px; }
+.garage-details { max-height:52vh; overflow-y:auto; }
+.tycoon-garage .tycoon-muted { color:#b9cbbf; }
+@media (max-width:620px) { .has-garage .tycoon-top { display:none; } }
+@media (max-height:500px) and (min-width:621px) { .garage-details { max-height:calc(100vh - 100px); } }

@@ -39,8 +39,10 @@ export class RepairController {
   private tuningPart?: 'filter' | 'plug';
   private holdingOilFilter = false;
   private releaseCamera?: () => void;
+  private feedbackParticles: { node: HTMLElement; age: number }[] = [];
+  private lastPourEffect = -Infinity;
   constructor(private state: TycoonState, private player: PlayerController, private camera: PerspectiveCamera,
-    private send: (input: RepairInput) => boolean, private setMenu: (open: boolean) => void) {
+    private submit: (input: RepairInput) => boolean, private setMenu: (open: boolean) => void) {
     this.root.className = 'repair-overlay'; this.root.hidden = true; this.root.setAttribute('role', 'dialog'); this.root.setAttribute('aria-modal', 'true');
     this.root.setAttribute('aria-label', 'Car repair workbench'); document.body.append(this.root);
     window.addEventListener('keydown', this.key, true); window.addEventListener('blur', this.release);
@@ -71,7 +73,30 @@ export class RepairController {
     }
   };
   private release = () => { this.held = false; };
+  private send(input: RepairInput) {
+    const ok = this.submit(input);
+    if (!ok || !this.board || !this.built) return ok;
+    if (input.kind === 'pour' && this.state.clock - this.lastPourEffect < .25) return ok;
+    if (input.kind === 'pour') this.lastPourEffect = this.state.clock;
+    const kind = this.current?.repair?.kind;
+    const selector = input.kind === 'target' ? `[data-target="${input.index}"]` : input.kind === 'bolt' ? `[data-bolt="${input.index}"]`
+      : input.kind === 'wheel' ? `[data-wheel="${input.index}"]` : input.kind === 'remove' || input.kind === 'install' ? `[data-component="${input.index}"]`
+      : input.kind === 'oil-filter' ? '.repair-filter-socket' : '.repair-funnel';
+    const target = this.board.querySelector<HTMLElement>(selector), bounds = this.board.getBoundingClientRect(), hit = target?.getBoundingClientRect();
+    const x = hit ? hit.left + hit.width / 2 - bounds.left : bounds.width / 2;
+    const y = hit ? hit.top + hit.height / 2 - bounds.top : bounds.height / 2;
+    const color = input.kind === 'pour' ? '#efb846' : kind === 'wash' || kind === 'paint' || kind === 'detail' ? '#92e9ff' : kind === 'photo' ? '#ffffff' : '#ffd277';
+    for (let i = 0; i < 9 && this.feedbackParticles.length < 54; i++) {
+      const node = document.createElement('i'), angle = i / 9 * Math.PI * 2, reach = 18 + Math.random() * 28;
+      node.className = 'repair-feedback-particle'; node.setAttribute('aria-hidden', 'true');
+      node.style.left = x + 'px'; node.style.top = y + 'px'; node.style.background = color;
+      node.style.setProperty('--particle-x', Math.cos(angle) * reach + 'px'); node.style.setProperty('--particle-y', Math.sin(angle) * reach + 12 + 'px');
+      this.board.append(node); this.feedbackParticles.push({ node, age: 0 });
+    }
+    return ok;
+  }
   tick(dt: number) {
+    this.feedbackParticles = this.feedbackParticles.filter(p => { p.age += Math.max(0, Math.min(.1, dt)); if (p.age < .6) return true; p.node.remove(); return false; });
     const j = this.current; if (!j) return;
     restoreCameraPose(this.camera);
     if (j.done || !j.manual || !this.state.car?.plan?.jobs.includes(j)) { this.close(); return; }
@@ -234,6 +259,7 @@ export class RepairController {
     this.root.querySelector('progress')!.value = this.current!.progress; this.positionCursor();
   }
   close() {
+    this.feedbackParticles.forEach(p => p.node.remove()); this.feedbackParticles = []; this.lastPourEffect = -Infinity;
     this.current = undefined; this.held = false; this.player.openingProgress = undefined; this.root.hidden = true; this.root.replaceChildren(); this.setMenu(false); this.previousFocus?.focus();
     this.releaseCamera?.(); this.releaseCamera = undefined;
   }

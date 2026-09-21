@@ -1,6 +1,8 @@
 import { BoxGeometry, CanvasTexture, Group, Mesh, MeshBasicMaterial, MeshStandardMaterial, Sprite, SpriteMaterial, Vector3 } from 'three';
 import { catalog } from './catalog.js';
-import { eligible, has, def, job, staffedJob } from './TycoonModel.js';
+import { eligible, has, def, job, staffedJob, buyer } from './TycoonModel.js';
+import { nameNPC } from './NPCNameplate.js';
+import { GARAGE_ENTRY } from './PersonalCars.js';
 import { TradingCarVisual } from './TradingCarVisual.js';
 import type { CarInstance } from '../driving/CarInstance.js';
 import { createNPCCharacter } from '../components/blockCharacter.js';
@@ -65,17 +67,23 @@ export class TycoonActors {
   private partsLabel = partsSaleLabel(28);
   private partsAmount = 28;
   private readonly partsComputer = new Group();
+  private readonly garageKiosk = new Group();
   private readonly routines: NPCRoutine[];
   private readonly builtNPCs: BuiltNPCRoutines;
   private lastClock = 0;
   constructor(cars: readonly Pick<CarInstance, 'id' | 'cloneModel'>[], parts: ImportedPart[] = [], path?: NPCPath) {
     this.tradingVisual = new TradingCarVisual(cars); this.trading = this.tradingVisual.root;
     this.routines = [this.worker, this.actor, ...this.staff].map(character => new NPCRoutine(character, path));
+    this.staff.forEach((person, i) => nameNPC(person, ['Manny', 'Riley', 'Avery'][i]));
     const camera = box(this.staff[2].getObjectByName('Character rig') as Group, 'Listing camera', [1.2, .65, .45], [0, 2, -1.8], 0x263543);
     camera.visible = false;
     this.builtNPCs = new BuiltNPCRoutines(this.root, parts, path);
     this.worker.rotation.y = this.actor.rotation.y = Math.PI;
     this.root.name = 'Tycoon activity'; this.root.add(this.trading, this.worker, this.actor);
+    this.garageKiosk.name = 'Personal garage entrance'; this.garageKiosk.position.copy(worldPoint(GARAGE_ENTRY, 1.48));
+    box(this.garageKiosk, 'Garage sign post', [.5, 5, .5], [0, 2.5, 0], 0x34464b);
+    const sign = textSprite('PERSONAL GARAGE\n[E] Browse collection', 13); sign.position.y = 5.5; this.garageKiosk.add(sign);
+    this.root.add(this.garageKiosk);
     this.journeyPad.visible = false; this.root.add(...this.staff, this.partsLabel);
     this.partsLabel.position.copy(worldPoint(PARTS_POSITION, 8));
     this.partsComputer.name = 'Parts sales computer'; this.partsComputer.position.copy(worldPoint(PARTS_POSITION, 1.9)); this.root.add(this.partsComputer);
@@ -91,8 +99,15 @@ export class TycoonActors {
       const label = textSprite(p.name, 14, true); label.position.copy(mesh.position).add(new Vector3(0, 6, 0)); this.root.add(label); this.padLabels.set(p.id, label);
     }
   }
+  alignFixtures(groundHeight: (point: Vector3) => number | undefined) {
+    const height = groundHeight(this.partsComputer.position);
+    if (height !== undefined) this.partsComputer.position.y = height;
+    const garageHeight = groundHeight(this.garageKiosk.position);
+    if (garageHeight !== undefined) this.garageKiosk.position.y = garageHeight;
+  }
   sync(s: TycoonState, player: Vector3, draft?: Look, showTarget = true) {
     const c = s.car, g = guidance(s);
+    this.garageKiosk.visible = has(s, 'lot');
     const delta = Math.min(.1, Math.max(0, s.clock - this.lastClock)); this.lastClock = s.clock;
     const tutorial = s.journey ? !s.journey.tutorialComplete : s.sales === 0;
     // One green flash per second; tint the existing text without rebuilding its texture.
@@ -175,6 +190,7 @@ export class TycoonActors {
     this.tradingVisual.sync(s, draft);
     this.actor.visible = !!c && ['seller', 'buyer', 'sold'].includes(c.status);
     if (c) {
+      nameNPC(this.actor, c.status === 'seller' ? def(s).seller : c.soldTo?.name ?? buyer(s).name);
       const target = worldPoint(c.status === 'sold' ? [c.pos[0] + 2, c.pos[1]] : actorPosition(s), 5.5);
       this.routines[1].walk(target, delta, worldPoint([c.pos[0] + 2, c.pos[1]], 5.5));
       this.routines[1].animate(delta, s.clock, c.quote ? 'talk' : 'inspect', c.quote ? player : worldPoint(c.pos, 5.5));

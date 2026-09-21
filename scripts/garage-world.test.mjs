@@ -1,0 +1,74 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { ObjectLoader } from 'three';
+import { Element } from './test-dom.mjs';
+import { importTypescript } from './import-typescript.mjs';
+globalThis.innerWidth = 1280; globalThis.innerHeight = 720;
+globalThis.HTMLElement = Element;
+globalThis.window = Object.assign(new EventTarget(), { innerWidth: 1280, innerHeight: 720 });
+globalThis.document = Object.assign(new EventTarget(), { body: new Element(), createElement(tag) { const e = new Element(); e.tagName = tag.toUpperCase(); return e; }, pointerLockElement: null, hidden: false, exitPointerLock() {} });
+globalThis.location = { search: '?save=off', pathname: '/' };
+const data = JSON.parse(await readFile(new URL('../public/tycoon/dealership.json', import.meta.url)));
+globalThis.fetch = async url => ({ ok: true, json: async () => url.includes('sound-map') ? { sounds: {} } : data });
+const { DrivingSystem } = await importTypescript(new URL('../src/world/driving/DrivingSystem.ts', import.meta.url));
+const root = new URL('../src/world/tycoon/', import.meta.url);
+const { TycoonSystem } = await importTypescript(new URL('TycoonSystem.ts', root));
+const { TycoonSave } = await importTypescript(new URL('TycoonSave.ts', root));
+const { GARAGE_ENTRY } = await importTypescript(new URL('PersonalCars.ts', root));
+const { worldPoint } = await importTypescript(new URL('TycoonCoordinates.ts', root));
+const M = await importTypescript(new URL('TycoonModel.ts', root));
+const nodes = node => [node, ...node.children.flatMap(nodes)];
+
+test('proximity storage commits before poof, garage arrows select instances, and paint stays isolated from authored models', async () => {
+  const json = JSON.parse(await readFile(new URL('../public/scenes/main.scene.json', import.meta.url)));
+  for (const image of json.images ?? []) image.url = { data: [255,255,255,255], width: 1, height: 1, type: 'Uint8Array' };
+  const scene = await new ObjectLoader().parseAsync(json), camera = scene.getObjectByName('MainCamera');
+  const driving = new DrivingSystem(scene, camera, new Element()), tycoon = await TycoonSystem.create(scene, driving, camera, '/'), s = tycoon.state;
+  const effects = [], sounds = [], originalCue = driving.feedback.cue.bind(driving.feedback);
+  driving.feedback.cue = (...args) => { effects.push(args); originalCue(...args); };
+  driving.feedback.audio.play = id => sounds.push(id);
+  try {
+    s.journey.step = 40; s.journey.tutorialComplete = true; s.journey.intakePaused = true; s.journey.automation = false; s.cash = 100000; tycoon.syncEnvironment();
+    const create = () => {
+      assert.ok(M.arriveBusiness(s)); const c = s.car;
+      Object.assign(c, { status: 'moving', owned: true, pos: [0,0], route: { target: 'sales', step: 1, points: [[0,0],[10,0]] },
+        plan: { funded: true, cost: 0, seconds: 1, jobs: [{ id: 'Mechanical', name: 'Engine', cost: 0, seconds: 1, progress: 1, started: true, done: true }] } });
+      c.business.templateId = 'Rusty'; c.business.consignment = false;
+      driving.placePlayer(worldPoint([0,1],6)); driving.feedback.tick(.016, driving.player.mesh.position, driving.player);
+      tycoon.actors.sync(s, driving.player.mesh.position); return c;
+    };
+    const c = create(); const records = new Map(); let fail = false;
+    tycoon.save = new TycoonSave({ getItem: k => records.get(k) ?? null, setItem(k,v) { if (fail) throw Error('quota'); records.set(k,v); }, removeItem: k => records.delete(k) }, { sessionId: 'garage-effects' });
+    assert.ok(tycoon.save.write(s)); fail = true;
+    assert.equal(tycoon.dispatch({ type: 'KeepCar', carId: c.id }).ok, false);
+    assert.equal(s.car.id, c.id); assert.equal(s.garage, undefined); assert.equal(effects.length, 0);
+    fail = false; assert.ok(tycoon.interact());
+    assert.equal(s.car, undefined); assert.equal(tycoon.actors.trading.visible, false);
+    assert.ok(effects.some(([sound,,kind]) => sound === 'garage.store' && kind === 'poof'));
+    driving.feedback.particles.tick(0); assert.ok(driving.feedback.particles.mesh.count >= 55, 'The disappearance creates a visible cloud');
+    assert.equal(s.personal, undefined); assert.equal(s.garage.length, 1);
+    create(); assert.ok(tycoon.interact()); assert.equal(s.garage.length, 2);
+    driving.placePlayer(worldPoint(GARAGE_ENTRY, 6)); assert.ok(tycoon.interact()); assert.equal(tycoon.hud.page, 'collection');
+    const button = text => nodes(tycoon.hud.root).find(e => e.tagName === 'BUTTON' && e.textContent === text);
+    const [first, second] = s.garage; assert.ok(tycoon.hud.root.textContent.includes(first.name));
+    nodes(tycoon.hud.root).find(e => e.getAttribute('aria-label') === 'Next car').onclick();
+    assert.ok(tycoon.hud.root.textContent.includes(second.name)); assert.equal(tycoon.showroom.selected, first.modelId);
+    const live = driving.cars.find(c => c.id === first.modelId), template = live.cloneModel();
+    let shell; template.traverse(o => { if (/^(Body|Chassis)\d*$/.test(o.name) && o.material) shell ??= o; });
+    const original = (Array.isArray(shell.material) ? shell.material[0] : shell.material).color.getHex();
+    button('Red').onclick(); assert.equal(s.garage[1].paint, '#b54736'); assert.notEqual(s.garage[0].paint, '#b54736');
+    assert.equal((Array.isArray(shell.material) ? shell.material[0] : shell.material).color.getHex(), original, 'Preview does not recolor the shared template');
+    button('Spawn at garage').onclick(); assert.equal(s.personal.id, second.id); assert.ok(sounds.includes('car.rev'));
+    const position = live.physics.body.position.clone(); live.physics.body.position.x += 20;
+    button('Respawn at garage').onclick(); assert.ok(live.physics.body.position.almostEquals(position));
+    let painted; live.car.traverse(o => { if (/^(Body|Chassis)\d*$/.test(o.name) && o.material) painted ??= o; });
+    assert.equal((Array.isArray(painted.material) ? painted.material[0] : painted.material).color.getHexString(), 'b54736');
+    const paintMaterial = Array.isArray(painted.material) ? painted.material[0] : painted.material;
+    assert.equal(paintMaterial.emissive.getHexString(), paintMaterial.emissiveMap ? 'b54736' : '000000');
+    assert.equal((Array.isArray(shell.material) ? shell.material[0] : shell.material).color.getHex(), original);
+    tycoon.hud.close(); const exit = tycoon.personalCar.walkingTarget(); assert.ok(exit);
+    driving.placePlayer(exit); assert.equal(tycoon.interact(), false, 'Garage kiosk does not consume E beside the spawned car');
+    for (const person of [tycoon.actors.worker, ...tycoon.actors.staff]) assert.ok(person.getObjectByName('NPC name'));
+  } finally { tycoon.dispose(); driving.dispose(); }
+});

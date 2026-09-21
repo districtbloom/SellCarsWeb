@@ -2,6 +2,7 @@ import { Box3, Color, CylinderGeometry, DirectionalLight, Group, HemisphereLight
   PerspectiveCamera, Scene, Vector2, Vector3 } from 'three';
 import type { WebGLRenderer } from 'three';
 import type { DrivingSystem } from '../driving/DrivingSystem.js';
+import { CarPaint } from './CarPaint.js';
 
 /** Separate preview scene using the main renderer and untouched authored model copies. */
 export class CarShowroom {
@@ -11,6 +12,7 @@ export class CarShowroom {
   private readonly plinth = new Mesh(new CylinderGeometry(1, 1, .2, 64), new MeshStandardMaterial({ color: 0x31473e, roughness: .75 }));
   private readonly size = new Vector2();
   private selected?: number;
+  private readonly paint = new CarPaint();
   private radius = 10;
   private height = 5;
   get active() { return this.selected !== undefined; }
@@ -21,8 +23,9 @@ export class CarShowroom {
     const rim = new DirectionalLight(0x9ac8ff, 1.6); rim.position.set(18, 12, 14);
     this.scene.add(key, rim, this.plinth, this.turntable);
   }
-  select(id?: number) {
-    if (id === this.selected) return;
+  select(id?: number, color?: string) {
+    if (id === this.selected) { if (this.turntable.children[0]) this.paint.apply(this.turntable.children[0], color); return; }
+    this.paint.dispose();
     this.turntable.clear(); this.selected = id;
     const car = this.driving.cars.find(candidate => candidate.id === id);
     if (!car) { this.selected = undefined; return; }
@@ -30,6 +33,7 @@ export class CarShowroom {
     const bounds = new Box3().setFromObject(model), size = bounds.getSize(new Vector3());
     model.position.sub(bounds.getCenter(new Vector3())); model.position.y += size.y / 2;
     this.turntable.add(model);
+    this.paint.apply(model, color);
     this.height = size.y; this.radius = Math.hypot(size.x, size.z) * .6;
     this.plinth.scale.set(this.radius, 1, this.radius); this.plinth.position.y = -.12;
     this.turntable.rotation.y = -.6;
@@ -51,6 +55,7 @@ export class CarShowroom {
     return true;
   }
   dispose() {
+    this.paint.dispose();
     // Clones share their geometry and materials with the live cars.
     this.turntable.clear(); this.plinth.geometry.dispose(); this.plinth.material.dispose(); this.selected = undefined;
   }

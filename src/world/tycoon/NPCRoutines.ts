@@ -4,6 +4,7 @@ import { frameMatrix, worldPoint } from './TycoonCoordinates.js';
 import { openingStep, partPose } from './BuildingProgression.js';
 import { ownsCosmetic } from './FullJourney.js';
 import { COSMETIC_STEPS } from './PurchaseCategories.js';
+import { nameNPC } from './NPCNameplate.js';
 import type { ImportedPart } from './BuildingProgression.js';
 import type { TycoonState } from './types.js';
 
@@ -24,6 +25,7 @@ export class NPCRoutine {
   private shown = false;
   private moving = false;
   constructor(readonly person: Group, private path?: NPCPath) {
+    nameNPC(person, person.name);
     this.animator = new BlockCharacterAnimator(person, person, true);
   }
   walk(target: Vector3, dt: number, spawn = target, speed = 8) {
@@ -40,6 +42,7 @@ export class NPCRoutine {
     }
   }
   ride(position: Vector3, yaw: number, dt: number) {
+    this.person.userData.npcActivity = 'ride';
     this.person.position.copy(position); this.shown = true; this.target = undefined; this.points = []; this.moving = false;
     this.animator.update(dt, false); this.person.rotation.y = yaw;
     for (const side of ['Left', 'Right']) {
@@ -49,6 +52,7 @@ export class NPCRoutine {
   }
   animate(dt: number, clock: number, activity: 'idle' | 'talk' | 'repair' | 'carry' | 'inspect' | 'photo' = 'idle', lookAt?: Vector3) {
     this.animator.update(dt);
+    this.person.userData.npcActivity = this.moving ? 'walk' : activity;
     if (!this.person.visible || this.moving && activity !== 'carry') return;
     if (lookAt && this.person.position.distanceToSquared(lookAt) > .01) {
       const yaw = Math.atan2(this.person.position.x - lookAt.x, this.person.position.z - lookAt.z);
@@ -58,21 +62,24 @@ export class NPCRoutine {
     const arms = ['Left arm pivot', 'Right arm pivot'].map(n => this.person.getObjectByName(n)!);
     const rig = this.person.getObjectByName('Character rig')!;
     if (activity === 'talk') {
-      arms[0].rotation.x = .6 + Math.sin(clock * 3) * .18;
-      arms[1].rotation.x = .24 + Math.sin(clock * 2.4) * .14;
+      const emphasis = Math.pow(Math.max(0, Math.sin(clock * 1.4)), 2);
+      arms[0].rotation.x = .35 + emphasis * .6 + Math.sin(clock * 3) * .12;
+      arms[1].rotation.x = .2 + Math.sin(clock * 2.4) * .14;
+      arms[0].rotation.z = -.12 - emphasis * .18; arms[1].rotation.z = .1;
+      this.animator.look(Math.sin(clock * 3.2) * .07, Math.sin(clock * .8) * .09, Math.sin(clock * 1.3) * .04);
     } else if (activity === 'repair') {
       arms[0].rotation.x = 1.15 + Math.sin(clock * 9) * .16;
       arms[1].rotation.x = 1.04 + Math.sin(clock * 9 + 1.4) * .2;
       rig.rotation.x = -.16;
-      this.person.getObjectByName('Head')!.rotation.x = -.25;
-      const face = this.person.getObjectByName('Face')!;
-      face.rotation.x = -.25; face.position.set(0, 2.5 + 1.006 * Math.sin(-.25), -1.006 * Math.cos(-.25));
+      this.animator.look(-.25 + Math.sin(clock * 4.5) * .025);
     } else if (activity === 'photo') {
       arms.forEach((arm, i) => { arm.rotation.x = 2 + Math.sin(clock * 2) * .06; arm.rotation.z = i ? .35 : -.35; });
+      this.animator.look(-.03);
     } else if (activity === 'carry') arms.forEach(arm => { arm.rotation.x = 1.1; });
     else if (activity === 'inspect') {
       arms[0].rotation.x = .75; arms[1].rotation.x = .55;
       rig.rotation.x = -.08;
+      this.animator.look(-.12, Math.sin(clock * 1.1) * .16);
     }
   }
 }
@@ -84,6 +91,8 @@ export class BuiltNPCRoutines {
     // The active sales advisor is owned by TycoonActors, with listing responsibilities.
     this.cast = importedNPCs(parts).filter(({ stem }) => !/^salesadvisor$/i.test(stem.slice(stem.lastIndexOf('.') + 1).replace(/_/g, ''))).map(({ stem, torso }, index) => {
       const role = stem.slice(stem.lastIndexOf('.') + 1), person = createNPCCharacter(role.replace(/_/g, ' '), new Color(...torso.color).getHex());
+      const names = ['Alex', 'Morgan', 'Sam', 'Robin', 'Jamie', 'Taylor', 'Quinn', 'Jordan', 'Drew', 'Blake', 'Cameron', 'Reese', 'Parker', 'Sage', 'Skyler', 'Rowan', 'Finley', 'Emery', 'Dakota', 'Harper', 'Elliot', 'Charlie', 'Logan', 'Casey', 'Remy', 'Nico', 'Jules'];
+      person.name = names[index % names.length];
       person.visible = false; root.add(person);
       return { role, torso, person, index, routine: new NPCRoutine(person, path) };
     });

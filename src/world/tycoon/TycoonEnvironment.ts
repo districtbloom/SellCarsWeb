@@ -10,6 +10,10 @@ import { assetUrl } from '../../runtimeAssets.js';
 import { ownsCosmetic, cosmeticPads } from './FullJourney.js';
 import { importedNPCs } from './NPCRoutines.js';
 import { COSMETIC_STEPS } from './PurchaseCategories.js';
+import { geometrySupports } from './GeometryAlignment.js';
+import type { GeometryEntry, GeometrySupport } from './GeometryAlignment.js';
+import { separateSurfaces } from './SurfaceSeparation.js';
+import type { SurfaceAdjustment } from './SurfaceSeparation.js';
 
 function wedgeGeometry() {
   const g = new BufferGeometry();
@@ -21,6 +25,8 @@ function wedgeGeometry() {
 export class TycoonEnvironment {
   readonly root = new Group();
   readonly cameraObstacles: Mesh[] = [];
+  alignmentSupports: GeometrySupport[] = [];
+  surfaceAdjustments: SurfaceAdjustment[] = [];
   private readonly colliders: Body[] = [];
   private signature = '';
   private readonly npcStems: string[];
@@ -44,7 +50,7 @@ export class TycoonEnvironment {
     this.signature = signature; this.clear();
     const step = reviewStep ?? s.journey?.step ?? openingStep(s);
     const legacyStep = s.journey && s.pads.length ? openingStep({ ...s, journey: undefined }) : 0;
-    const batches = new Map<string, { part: ImportedPart; pose: PartPose }[]>();
+    const batches = new Map<string, GeometryEntry[]>(); let entries: GeometryEntry[] = [];
     for (const part of this.parts) {
       if (this.npcStems.some(stem => part.path.startsWith(stem))) continue;
       if (reviewStep === undefined && s.journey && !ownsCosmetic(s, part.attributes.FJ_First)) continue;
@@ -59,6 +65,12 @@ export class TycoonEnvironment {
         if (inherited.visible) pose = inherited;
       }
       if (!pose.visible) continue;
+      entries.push({ part, pose });
+    }
+    const separated = separateSurfaces(entries); entries = separated.entries; this.surfaceAdjustments = separated.adjustments;
+    const alignment = geometrySupports(entries); this.alignmentSupports = alignment.audit;
+    entries.push(...alignment.entries);
+    for (const { part, pose } of entries) {
       if (pose.collide) this.addCollider(part, pose);
       if (pose.transparency >= 1) continue;
       const shape = part.mesh?.type === 'Sphere' || part.mesh?.type === 'Head' ? 'Ball' : part.shape;
@@ -116,6 +128,13 @@ export class TycoonEnvironment {
         shrub.name = 'Optional arrival garden shrub'; shrub.position.copy(position).add(new Vector3(x, 1.4, 0)); this.root.add(shrub);
       }
     }
+  }
+  /** Ground-level surface under a runtime prop, in scene coordinates. */
+  groundHeight(point: Vector3): number | undefined {
+    const ray = new Raycaster(new Vector3(point.x, 3 - SOURCE_ORIGIN.y, point.z), new Vector3(0, -1, 0), 0, 4);
+    const hit = ray.intersectObjects(this.cameraObstacles, false).find(h => h.face
+      && h.face.normal.clone().transformDirection(h.object.matrixWorld).y > .8);
+    return hit?.point.y;
   }
   /** FullJourneyService padPlacement: ground support plus six-stud clearance,
    * with cardinal searches and the source's front-lane fallback. */
@@ -214,6 +233,8 @@ export class TycoonEnvironment {
     return path.reverse();
   }
   private clear() {
+    this.alignmentSupports = [];
+    this.surfaceAdjustments = [];
     for (const body of this.colliders) this.physics.removeBody(body); this.colliders.length = 0; this.cameraObstacles.length = 0;
     for (const child of [...this.root.children]) {
       if (child instanceof Mesh) {
