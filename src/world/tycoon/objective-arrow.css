@@ -1,0 +1,4 @@
+.objective-pointer{position:fixed;z-index:90;transform:translate(-50%,-50%);pointer-events:none;text-align:center;color:#d8ff8f;font:800 12px/1.2 system-ui,sans-serif;filter:drop-shadow(0 3px 2px #102719)}
+.objective-pointer[hidden]{display:none}.objective-pointer-arrow{width:54px;height:54px;font:900 52px/1 system-ui;color:#bdff65;-webkit-text-stroke:2px #173729;paint-order:stroke fill}.objective-pointer span{position:absolute;bottom:57px;left:50%;transform:translateX(-50%);width:max-content;max-width:175px;background:#173729ec;padding:5px 8px;border:1px solid #bcff6588;border-radius:5px}
+
+.objective-pointer.below-target span{bottom:auto;top:57px}

@@ -20,7 +20,7 @@ const { TycoonSystem } = await importTypescript(new URL('../src/world/tycoon/Tyc
 const { guidance } = await importTypescript(new URL('../src/world/tycoon/TycoonGuidance.ts', import.meta.url));
 const M = await importTypescript(new URL('../src/world/tycoon/TycoonModel.ts', import.meta.url));
 
-test('Parts world interaction starts typing immediately and awards the shown payout only when the animation finishes',async()=>{
+test('Hill Drive world interaction opens the laptop, locks driving and commits distance rewards once',async()=>{
   location.search='?save=off';
   const json=JSON.parse(await readFile(new URL('../public/scenes/main.scene.json',import.meta.url),'utf8'));
   for(const image of json.images??[])image.url={data:[255,255,255,255],width:1,height:1,type:'Uint8Array'};
@@ -28,39 +28,20 @@ test('Parts world interaction starts typing immediately and awards the shown pay
   const driving=new DrivingSystem(scene,camera,new Element()),tycoon=await TycoonSystem.create(scene,driving,camera,'/'),s=tycoon.state;
   const {PARTS_POSITION}=await importTypescript(new URL('../src/world/tycoon/PartsStation.ts',import.meta.url));
   const {worldPoint}=await importTypescript(new URL('../src/world/tycoon/TycoonCoordinates.ts',import.meta.url));
-  const cameraPose=()=>({position:camera.position.toArray(),quaternion:camera.quaternion.toArray(),fov:camera.fov,zoom:camera.zoom});
-  let actionCamera;
-  const step=n=>{for(let i=0;i<n;i++){driving.tick(1/60);tycoon.tick(1/60);if(actionCamera)assert.deepEqual(cameraPose(),actionCamera,'Typing preserves the exact camera through every real frame');}};
+  const step=n=>{for(let i=0;i<n;i++){driving.tick(1/60);tycoon.tick(1/60);}};
   try {
     s.journey.step=1;s.journey.intakePaused=true;tycoon.syncEnvironment();driving.placePlayer(worldPoint(PARTS_POSITION,6));step(90);
-    const label=()=>tycoon.actors.partsLabel.material.map.image.getContext('2d').commands;
-    assert.ok(label().some(command=>command.kind==='fill'&&command.text==='SELL CARS PART'&&command.color==='#65f279'));
-    assert.ok(label().some(command=>command.kind==='stroke'&&command.text==='SELL CARS PART'));
-    assert.ok(label().some(command=>command.text==='28$/sell'));
-    const cash=s.cash;actionCamera=cameraPose();window.dispatchEvent(Object.assign(new Event('keydown',{cancelable:true}),{code:'KeyE',repeat:false}));step(1);
-    assert.equal(tycoon.partsTyping.active,true,JSON.stringify({player:driving.player.mesh.position.toArray(),station:worldPoint(PARTS_POSITION,6).toArray(),menu:tycoon.menu,parts:s.parts,notice:s.notice,controls:driving.controlsEnabled}));assert.equal(driving.controlsEnabled,false);assert.equal(tycoon.hud.root.hidden,true);
-    const progress=document.body.querySelector('.tycoon-selling-progress');assert.equal(progress.hidden,false);assert.equal(progress.parentElement,document.body);
-    const head=driving.player.mesh.position.clone().add(new Vector3(0,8,0)).project(camera);
-    assert.equal(parseFloat(progress.style.left),(head.x+1)*window.innerWidth/2);assert.equal(parseFloat(progress.style.top),(1-head.y)*window.innerHeight/2);
-    assert.ok(parseFloat(progress.querySelector('.tycoon-selling-fill').style.width)>0);
-    step(298);assert.equal(s.cash,cash);assert.ok(driving.player.typingTime>4.9);
-    assert.ok(parseFloat(progress.querySelector('.tycoon-selling-fill').style.width)>99);assert.equal(document.body.querySelectorAll('.tycoon-cash-gain').length,0);
-    step(1);assert.equal(s.cash,cash+28);assert.equal(s.parts.completed,1);assert.equal(tycoon.partsTyping.active,false);
-    assert.equal(driving.controlsEnabled,true);assert.equal(tycoon.hud.root.hidden,false);
-    assert.ok(progress.hidden);assert.deepEqual(document.body.querySelectorAll('.tycoon-cash-gain').map(node=>node.textContent),['+$28']);
-    s.parts.level=2;step(1);assert.ok(label().some(command=>command.text==='44$/sell'),'World label tracks current per-sale payout');
-    actionCamera=undefined;step(70);assert.equal(document.body.querySelectorAll('.tycoon-cash-gain').length,0);
+    const label=tycoon.actors.partsLabel.material.map.image.getContext('2d').commands;
+    assert.ok(label.some(c=>c.text==='HILL DRIVE'));assert.ok(label.some(c=>c.text.includes('DISTANCE')));
+    const cash=s.cash;assert.ok(driving.onInteract());assert.ok(tycoon.minigameActive);assert.equal(driving.controlsEnabled,false);assert.ok(tycoon.hud.root.hidden);
+    step(360);assert.equal(s.cash,cash,'Waiting at the laptop cannot earn old timer money');
+    const game=tycoon.hillGame;game.start();game.model.distance=123;game.model.ended='time';step(2);
+    assert.equal(s.cash,cash+246);assert.equal(s.parts.completed,1);game.close();assert.equal(driving.controlsEnabled,true);assert.equal(tycoon.hud.root.hidden,false);
     const {TycoonSave}=await importTypescript(new URL('../src/world/tycoon/TycoonSave.ts',import.meta.url));const records=new Map();let fail=false;
-    tycoon.save=new TycoonSave({getItem:key=>records.get(key)??null,setItem(key,value){if(fail)throw Error('quota');records.set(key,value);},removeItem:key=>records.delete(key)},{sessionId:'parts-feedback'});
-    assert.ok(tycoon.save.write(s));const earned=s.cash;
-    window.dispatchEvent(Object.assign(new Event('keydown',{cancelable:true}),{code:'KeyE',repeat:false}));step(299);assert.equal(s.cash,earned);
-    fail=true;step(1);assert.equal(s.cash,earned);assert.equal(s.parts.completed,1);assert.ok(tycoon.partsTyping.active);
-    assert.equal(document.body.querySelectorAll('.tycoon-cash-gain').length,0,'Failed payout persistence cannot show phantom earnings');
-    fail=false;step(1);assert.equal(s.cash,earned+44);assert.equal(s.parts.completed,2);assert.ok(progress.hidden);
-    assert.deepEqual(document.body.querySelectorAll('.tycoon-cash-gain').map(node=>node.textContent),['+$44']);
-    step(70);assert.equal(document.body.querySelectorAll('.tycoon-cash-gain').length,0);
-    window.dispatchEvent(Object.assign(new Event('keydown',{cancelable:true}),{code:'KeyE',repeat:false}));step(1);assert.equal(progress.hidden,false);
-    window.dispatchEvent(Object.assign(new Event('keydown',{cancelable:true}),{code:'Escape',repeat:false}));assert.ok(progress.hidden);assert.equal(tycoon.partsTyping.active,false);
+    tycoon.save=new TycoonSave({getItem:key=>records.get(key)??null,setItem(key,value){if(fail)throw Error('quota');records.set(key,value);},removeItem:key=>records.delete(key)},{sessionId:'hill-feedback'});
+    assert.ok(tycoon.save.write(s));const earned=s.cash;assert.ok(driving.onInteract());game.start();game.model.distance=90;game.model.ended='crashed';fail=true;step(2);
+    assert.equal(s.cash,earned,'Failed persistence rolls back the reward');assert.equal(s.parts.completed,1);game.close();fail=false;
+    assert.ok(driving.onInteract());assert.ok(tycoon.minigameActive,JSON.stringify({parts:s.parts,notice:s.notice,status:tycoon.save.status,menu:tycoon.menu}));game.close();assert.equal(s.cash,earned);assert.equal(s.parts.manual,undefined);
   }finally{tycoon.dispose();driving.dispose();location.search='?save=off&opening=integration';}
 });
 
@@ -193,8 +174,10 @@ test('real car/player physics and imported construction support the complete on-
     const carPosition=worldPoint(s.car.pos,10),repairGuide=guidance(s);
     assert.notDeepEqual(repairGuide.point,s.car.pos,'Walking target remains beside the car');
     assert.deepEqual(guidanceAnchor(s,repairGuide),s.car.pos,'Billboard anchor is the car, independent of its walk-up point');
-    tycoon.actors.sync(s,driving.player.mesh.position);
-    assert.equal(tycoon.actors.targetLabel.position.x,carPosition.x);assert.equal(tycoon.actors.targetLabel.position.z,carPosition.z);
+    tycoon.hud.next.onclick(); // Dismiss the welcome before checking the world objective.
+    let target;const pointAtWorld=tycoon.objectiveArrow.pointAtWorld;tycoon.objectiveArrow.pointAtWorld=point=>{target=point;};
+    tycoon.updateObjective();tycoon.objectiveArrow.pointAtWorld=pointAtWorld;
+    assert.equal(target.x,carPosition.x);assert.equal(target.z,carPosition.z);
     while(s.car.status==='repair') { if (!M.job(s)?.started) { next(); advance(()=>M.job(s)?.started || s.car.status!=='repair',60); } advance(()=>!M.job(s)?.started || s.car.status!=='repair',30); }
     assert.equal(s.car.status,'ready'); next(); advance(()=>M.has(s,'sales'),60); next(); advance(()=>M.has(s,'salesdesk'),60);
     advance(()=>s.car.status==='buyer'); next(); advance(()=>!!s.car.quote && tycoon.hud.isOpen,60);
@@ -274,4 +257,22 @@ test('Sell Cars tutorial purchases, repair interactions and first sale work thro
     assert.equal(records.has(SAVE_KEY),false);assert.equal(records.has(LEGACY_SAVE_KEY),false);
     assert.equal(s.clock,clock,'Shutdown and lifecycle callbacks cannot advance or resave the old session');
   } finally {tycoon.dispose();driving.dispose();}
+});
+
+test('race winnings commit once, survive reload and roll back a failed save',async()=>{
+  location.search='?save=off&opening=integration';const json=JSON.parse(await readFile(new URL('../public/scenes/main.scene.json',import.meta.url),'utf8'));
+  for(const image of json.images??[])image.url={data:[255,255,255,255],width:1,height:1,type:'Uint8Array'};
+  const scene=await new ObjectLoader().parseAsync(json),camera=scene.getObjectByName('MainCamera'),driving=new DrivingSystem(scene,camera,new Element()),tycoon=await TycoonSystem.create(scene,driving,camera,'/');
+  const {TycoonSave}=await importTypescript(new URL('../src/world/tycoon/TycoonSave.ts',import.meta.url));const records=new Map();let fail=false;
+  try{
+    tycoon.save=new TycoonSave({getItem:key=>records.get(key)??null,setItem(key,value){if(fail)throw Error('quota');records.set(key,value);},removeItem:key=>records.delete(key)},{sessionId:'race-payout',legacy:true});
+    const s=tycoon.state;s.onboarding={welcomed:true,phonePrompted:true};assert.ok(tycoon.save.write(s));const cash=s.cash;
+    for(const amount of [0,249,3501,NaN,Infinity,250.5])assert.equal(tycoon.awardRace('invalid',amount),false);
+    assert.equal(tycoon.awardRace('x'.repeat(101),250),false);assert.ok(tycoon.awardRace('first',250));assert.equal(s.cash,cash+250);
+    assert.equal(tycoon.awardRace('first',250),false);assert.ok(tycoon.awardRace('second',3500));assert.equal(s.cash,cash+3750);
+    const restored=tycoon.save.load();assert.equal(restored.cash,s.cash);assert.deepEqual(restored.raceClaims,['first','second']);assert.deepEqual(restored.onboarding,s.onboarding);
+    fail=true;assert.equal(tycoon.awardRace('failed',1000),false);assert.equal(s.cash,cash+3750);assert.deepEqual(s.raceClaims,['first','second']);assert.equal(s.ledger.filter(e=>e.kind==='race').length,2);
+    fail=false;assert.ok(tycoon.awardRace('failed',1000));assert.equal(s.cash,cash+4750);
+    tycoon.save.readOnly=true;assert.equal(tycoon.awardRace('readonly',1000),false);
+  }finally{tycoon.dispose();driving.dispose();}
 });

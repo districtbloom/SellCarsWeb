@@ -451,8 +451,15 @@ test('driving integration follows the physics car and wheel poses, handles input
     assert.ok(camera.position.z > bodyPosition.z + 10, 'Camera follows behind the moving car');
     for (const [index, name] of ['Wheelfl14', 'Wheelfr14', 'Wheelrl14', 'Wheelrr14'].entries()) {
       const wheelCenter = new Box3().setFromObject(scene.getObjectByName(name)).getCenter(new Vector3());
-      const physicsCenter = new Vector3().copy(driving.physics.vehicle.wheelInfos[index].worldTransform.position).multiplyScalar(4);
-      assert.ok(wheelCenter.distanceTo(physicsCenter) < 1e-4, name);
+      const alpha=Math.max(0,Math.min(1,driving.accumulator/driving.physics.fixedStep)),pose=driving.selected.wheelPoses[index];
+      const interpolatedCenter=pose.previous.clone().lerp(pose.current,alpha).multiplyScalar(4);
+      assert.ok(wheelCenter.distanceTo(interpolatedCenter) < 1e-4, name+' renders between consecutive solved wheel poses');
+    }
+    for(const delta of [1/144,1/75,1/100,1/30,1/240]){
+      driving.tick(delta);const body=driving.physics.body,alpha=Math.max(0,Math.min(1,driving.accumulator/driving.physics.fixedStep));
+      const center=new Vector3().copy(body.previousPosition).lerp(new Vector3().copy(body.position),alpha).multiplyScalar(4);
+      assert.ok(driving.selected.renderCenter.distanceTo(center)<1e-7,'Chassis uses the same interpolation fraction at irregular render rates');
+      const before=body.position.clone();driving.selected.sync(alpha);assert.ok(body.position.almostEquals(before),'Rendering does not advance simulation');
     }
     window.dispatchEvent(new Event('blur'));
     for (let i = 0; i < 120; i++) driving.tick(1 / 60);
@@ -469,6 +476,11 @@ test('driving integration follows the physics car and wheel poses, handles input
     assert.ok(driving.physics.world.bodies.includes(driving.player.body));
     for (let i = 0; i < 90; i++) driving.tick(1 / 60);
     assert.ok(driving.player.grounded, 'Exit places the player on supported ground');
+    press('KeyW');for(const delta of [1/144,1/75,1/100,1/30,1/240]){
+      driving.tick(delta);const body=driving.player.body,alpha=Math.max(0,Math.min(1,driving.accumulator/driving.physics.fixedStep));
+      const center=new Vector3().copy(body.previousPosition).lerp(new Vector3().copy(body.position),alpha).multiplyScalar(4);
+      assert.ok(driving.player.mesh.position.distanceTo(center)<1e-7,'Walking uses the same interpolation fraction as driving');
+    }window.dispatchEvent(new Event('blur'));
     driving.player.place(new Vec3(100, 1, 100));
     press('KeyE');
     driving.tick(1 / 60);

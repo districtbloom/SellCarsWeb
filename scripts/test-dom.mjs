@@ -57,6 +57,7 @@ export class Element extends EventTarget {
   setPointerCapture() {} releasePointerCapture() {}
   getBoundingClientRect() { return { left: 0, top: 0, width: 1280, height: 720 }; }
   getContext() { return this.context ??= { commands: [], fillRect(){}, strokeRect(){},
+    beginPath(){}, moveTo(){}, lineTo(){}, closePath(){}, stroke(){}, fill(){}, save(){}, restore(){}, translate(){}, rotate(){}, arc(){},
     fillText(text){this.commands.push({kind:'fill',text,color:this.fillStyle,font:this.font});},
     strokeText(text){this.commands.push({kind:'stroke',text,color:this.strokeStyle,font:this.font});} }; }
 }

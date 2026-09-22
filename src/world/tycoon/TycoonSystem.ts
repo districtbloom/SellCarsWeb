@@ -1,4 +1,4 @@
-import { PartsTyping } from './PartsTyping.js';
+import { HillDriveGame } from '../activities/HillDriveGame.js';
 import { RepairController } from './RepairController.js';
 import './repair.css';
 import { PerspectiveCamera, Scene, Vector3 } from 'three';
@@ -25,10 +25,11 @@ import type { Guidance } from './TycoonGuidance.js';
 import * as M from './TycoonModel.js';
 import { nextEntry } from './FullJourneyCatalog.js';
 import { legacyPadCategory } from './PurchaseCategories.js';
-import { PARTS_POSITION, PARTS_SECONDS, partsUnlocked, partsAutomated } from './PartsStation.js';
+import { PARTS_POSITION, partsUnlocked, completeHillRun, cancelHillRun } from './PartsStation.js';
 import { logicalPoint, LOT_ORIGIN, worldPoint } from './TycoonCoordinates.js';
 import type { TycoonState } from './types.js';
 import './tycoon.css';
+import { ObjectiveArrow } from './ObjectiveArrow.js';
 import { assetUrl } from '../../runtimeAssets.js';
 
 interface JourneyEntry { step: number; title: string; delta: string; chapter: string }
@@ -40,7 +41,7 @@ export class TycoonSystem {
   private readonly showroom: CarShowroom;
   private readonly personalCar: PersonalCarController;
   private readonly repair: RepairController;
-  private readonly partsTyping: PartsTyping;
+  private readonly hillGame: HillDriveGame;
   private readonly partsWorld: PartsWorld;
   private obstacles: Object3D[] = [];
   private readonly staticBodies: Body[] = [];
@@ -57,7 +58,30 @@ export class TycoonSystem {
   private ledgerLength = 0;
   private suspended = false;
   private disposed = false;
+  private readonly objectiveArrow = new ObjectiveArrow();
   get state(): TycoonState { return this.session.state; }
+  get minigameActive() { return this.hillGame.active; }
+  get activityBlocked() { return this.menu || this.riding || this.suspended || this.reviewStep !== undefined; }
+  awardRace(id: string, amount: number): boolean {
+    if (this.save.readOnly || this.suspended || !Number.isInteger(amount) || amount < 250 || amount > 3500 || !id || id.length > 100 || this.state.raceClaims?.includes(id)) return false;
+    const before = M.copy(this.state);
+    this.state.cash += amount; this.state.ledger.push({ amount, kind: 'race', subject: 'City Sprint winner' });
+    (this.state.revenue ??= []).push({ at: this.state.clock, amount });
+    this.state.raceClaims = [...(this.state.raceClaims ?? []), id].slice(-100);
+    if (!this.save.write(this.state) && this.save.requiresCommit) { this.replaceState(before); return false; }
+    this.driving.feedback.audio.play('cash.receive'); return true;
+  }
+  private updateObjective() {
+    if (this.hillGame.active || this.reviewStep !== undefined || this.suspended || this.riding) { this.objectiveArrow.hide(); return; }
+    const target = this.repair.active ? this.repair.objectiveTarget() : this.hud.objectiveTarget();
+    if (target) { this.objectiveArrow.pointAtElement(target); return; }
+    if (this.repair.active || this.menu) { this.objectiveArrow.hide(); return; }
+    const g = guidance(this.state), pad = M.nextPad(this.state);
+    if (g.kind === 'pad' && pad && pad.cost > this.state.cash && partsUnlocked(this.state)) { this.objectiveArrow.pointAtWorld(worldPoint(PARTS_POSITION, 9), this.camera, 'Earn cash · Hill Drive [E]'); return; }
+    const point = guidanceAnchor(this.state, g);
+    if (!point || !g.label || g.kind === 'discover') { this.objectiveArrow.hide(); return; }
+    this.objectiveArrow.pointAtWorld(worldPoint(point, 9), this.camera, g.kind === 'pad' ? 'Build here [E]' : g.label + (g.kind === 'drive' ? '' : ' [E]'));
+  }
   private constructor(scene: Scene, private driving: DrivingSystem, private camera: PerspectiveCamera,
     readonly environment: TycoonEnvironment, private baseUrl: string) {
     this.actors = new TycoonActors(driving.cars, environment.parts, (from, to) => environment.walkPath(from, to));
@@ -76,10 +100,17 @@ export class TycoonSystem {
     this.repair = new RepairController(this.state, driving.player, camera, input => this.dispatch({ type: 'RepairInput', input }).ok, open => {
       this.setMenu(open); this.hud.root.hidden = open;
     });
-    this.partsTyping = new PartsTyping(this.state, driving.player, camera, active => {
+    cancelHillRun(this.state); // Incomplete rounds cannot survive a reload or pay twice.
+    this.hillGame = new HillDriveGame(active => {
       this.setMenu(active); this.hud.root.hidden = active;
       if (!active) this.hud.showSellingProgress();
-    });
+    }, distance => {
+      if (this.save.readOnly || this.suspended) return false;
+      const before = M.copy(this.state);
+      if (!completeHillRun(this.state, distance)) return false;
+      if (!this.save.write(this.state) && this.save.requiresCommit) { this.replaceState(before); cancelHillRun(this.state); return false; }
+      return true;
+    }, () => { cancelHillRun(this.state); this.flush(); });
     scene.add(environment.root, this.actors.root);
     for (const object of this.actors.root.children) {
       const size = object.userData.tycoonStaticSize as [number, number, number] | undefined;
@@ -205,8 +236,7 @@ export class TycoonSystem {
     else if (g.kind === 'drive') this.goToPersonalCar();
   }
   private sellParts() {
-    if (partsAutomated(this.state)) { M.note(this.state, 'Your mechanic handles these sales.'); return; }
-    if (this.state.parts?.remaining !== undefined || this.dispatch({ type: 'SellParts' }).ok) this.partsTyping.begin();
+    if (this.dispatch({ type: 'SellParts' }).ok) this.hillGame.begin();
   }
   private navigate(g: Guidance) {
     if (g.kind === 'drive') { this.goToPersonalCar(); return; }
@@ -251,9 +281,10 @@ export class TycoonSystem {
     this.previousJobs = this.state.worker.jobs; this.ledgerLength = this.state.ledger.length;
   }
   private suspend = () => {
+    this.objectiveArrow.hide();
     if (this.suspended || this.reviewStep !== undefined) return;
     if (this.repair.active) this.repair.close();
-    if (this.partsTyping.active) this.partsTyping.close();
+    if (this.hillGame.active) this.hillGame.close();
     this.personalCar.sync(this.state);
     this.suspended = true; this.blur(); this.save.release(this.state);
   };
@@ -276,9 +307,9 @@ export class TycoonSystem {
     const s = this.state, dt = Math.min(Math.max(0, delta), .1);
     const transactional = (s.couriers ?? []).some(d => !d.route && d.wait <= dt && ['idle', 'unloading'].includes(d.phase)) || (s.parts?.remaining !== undefined && s.parts.remaining <= dt + 1e-8) || s.car && (['seller', 'owned', 'choose', 'buyer'].includes(s.car.status) || s.car.status === 'repair' && !s.car.plan?.funded);
     const before = transactional && this.save.requiresCommit ? M.copy(s) : undefined, cash = s.cash, stock = s.partsStock;
-    this.session.tick(dt, !this.menu && (this.heldW || this.hud.driveHeld) ? 1 : 0, this.partsTyping.active);
+    this.session.tick(dt, !this.menu && (this.heldW || this.hud.driveHeld) ? 1 : 0);
     if ((s.cash !== cash || s.partsStock !== stock) && !this.save.write(s) && before) this.replaceState(before);
-    this.repair.tick(dt); this.partsTyping.tick(dt);
+    this.repair.tick(dt); this.hillGame.tick(dt);
     this.personalCar.sync(s);
     if (M.updatePersonalTravel(s, logicalPoint(this.driving.player.mesh.position), !this.driving.isDriving)) this.flush();
     const riding = !!s.personal?.route;
@@ -311,7 +342,7 @@ export class TycoonSystem {
       const nearGarage = M.has(s, 'lot') && Math.hypot(logical[0] - GARAGE_ENTRY[0], logical[1] - GARAGE_ENTRY[1]) * 3 < 12;
       const text = nearKeep ? '[ E ] Keep as personal car' + (M.keepCarCost(s) ? ' · ' + money(M.keepCarCost(s)) : '')
         : nearGarage ? '[ E ] Personal garage'
-        : nearParts ? partsAutomated(s) ? 'Automated parts sales' : '[ E ] Sell car part'
+        : nearParts ? '[ E ] Hill Drive · Distance × $2'
         : pad ? `[ E ] ${pad.name} · ${pad.cost ? money(pad.cost) : 'FREE'}\nCategory: ${s.journey ? pad.category : legacyPadCategory(pad.name)}`
         : near ? `[ E ] ${g.label}` : g.kind === 'photo' && s.car && pos.distanceTo(worldPoint(s.car.pos, 6)) < 25 ? '[ E ] Prepare for sale' : '';
       const anchorPoint = nearKeep ? s.car!.pos : nearGarage ? GARAGE_ENTRY : nearParts ? PARTS_POSITION : pad?.pos ?? guidanceAnchor(s, g);
@@ -326,9 +357,10 @@ export class TycoonSystem {
     const playerAnchor = this.driving.player.mesh.position.clone().add(new Vector3(0, 8, 0)).project(this.camera);
     const playerScreen = playerAnchor.z >= -1 && playerAnchor.z <= 1 && Math.abs(playerAnchor.x) <= 1 && Math.abs(playerAnchor.y) <= 1
       ? { x: (playerAnchor.x + 1) * window.innerWidth / 2, y: (1 - playerAnchor.y) * window.innerHeight / 2 } : undefined;
-    this.hud.showSellingProgress(this.partsTyping.active ? 1 - (s.parts?.remaining ?? 0) / PARTS_SECONDS : undefined, playerScreen);
+    this.hud.showSellingProgress();
     this.hud.setCashOrigin(playerScreen);
     this.hud.update(dt);
+    this.updateObjective();
     const travel = guidance(s);
     if (travel.kind === 'drive' && travel.point && !this.menu) {
       const goal = worldPoint(travel.point, 10), distance = Math.round(goal.distanceTo(this.driving.focusPosition) * METERS_PER_UNIT);
@@ -382,6 +414,6 @@ export class TycoonSystem {
     this.driving.setTycoonObstacles(this.staticObstacles, []); this.staticBodies.forEach(body => this.driving.physics.world.removeBody(body));
     window.removeEventListener('keydown', this.keyDown); window.removeEventListener('keyup', this.keyUp); window.removeEventListener('blur', this.blur);
     window.removeEventListener('pagehide', this.suspend); window.removeEventListener('pageshow', this.resume); document.removeEventListener('visibilitychange', this.visibility);
-    this.partsTyping.dispose(); this.repair.dispose(); this.hud.dispose(); this.showroom.dispose(); this.personalCar.dispose(); this.partsWorld.dispose(); this.actors.dispose(); this.environment.dispose(); this.reviewUI?.remove();
+    this.objectiveArrow.dispose(); this.hillGame.dispose(); this.repair.dispose(); this.hud.dispose(); this.showroom.dispose(); this.personalCar.dispose(); this.partsWorld.dispose(); this.actors.dispose(); this.environment.dispose(); this.reviewUI?.remove();
   }
 }

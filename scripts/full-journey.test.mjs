@@ -27,7 +27,7 @@ function finishCar(s) {
       while(!c.plan && E.partsStock(s)<E.repairCost(M.workQuote(s)).parts) {
         while(s.cash<100) {
           if(P.partsAutomated(s)) until(s,()=>s.cash>=100);
-          else { if(s.parts.remaining===undefined) assert.ok(P.startParts(s),'Parts laptop provides recovery cash'); until(s,()=>s.parts.remaining===undefined); }
+          else { if(s.parts.remaining===undefined) assert.ok(P.startParts(s),'Parts laptop provides recovery cash'); assert.ok(P.completeHillRun(s, 50)); }
         }
         if (c.plan) break;
         assert.ok(E.buyParts(s,'small'), 'Business earnings can replenish repair Parts');
@@ -198,18 +198,19 @@ test('rolling business revenue excludes offline credits and expires after sixty 
   s.ledger.push({amount:100000,kind:'offline',subject:'Offline'}); assert.equal(O.revenuePerMinute(s),1000);
   s.clock += 61; assert.equal(O.revenuePerMinute(s),0);
 });
-test('parts laptop provides repeatable recovery, level upgrades, saved in-flight work and mechanic automation', () => {
+test('hill laptop replaces manual timers, discards interrupted rounds, and preserves mechanic automation', () => {
   const s=M.freshJourney();s.journey.intakePaused=true;pad(s);s.cash=0;
   const session=new TycoonSession(s),context={position:P.PARTS_POSITION,onFoot:true};
   assert.equal(session.dispatch({type:'SellParts'},{position:[99,99],onFoot:true}).ok,false);
   assert.equal(session.dispatch({type:'SellParts'},{...context,onFoot:false}).ok,false);
   assert.ok(session.dispatch({type:'SellParts'},context).ok);
   assert.equal(session.dispatch({type:'SellParts'},context).ok,false);
-  for(let i=0;i<60;i++)M.tick(s,.1);assert.equal(s.cash,0);assert.equal(s.parts.remaining,5,'Manual recovery cannot pay while player is not typing');
-  for(let i=0;i<25;i++)M.tick(s,.1,0,true);assert.equal(s.cash,0);
+  for(let i=0;i<100;i++)M.tick(s,.1,0,true);assert.equal(s.cash,0);assert.equal(s.parts.remaining,30,'Old typing ticks cannot pay manual runs');
   const storage=memoryStorage(),save=new TycoonSave(storage,{sessionId:'parts'});assert.ok(save.write(s));
-  const restored=save.load();for(let i=0;i<25;i++)M.tick(restored,.1,0,true);assert.equal(restored.cash,28);
-  assert.equal(restored.parts.completed,1);M.tick(restored,.1);assert.equal(restored.cash,28);
+  const restored=save.load();assert.equal(restored.parts.remaining,undefined);assert.equal(restored.cash,0);
+  assert.equal(P.completeHillRun(restored,14),false,'Reloaded rounds cannot settle');
+  assert.ok(P.startParts(restored));assert.ok(P.completeHillRun(restored,14));assert.equal(restored.cash,28);
+  assert.equal(P.completeHillRun(restored,14),false);assert.equal(restored.parts.completed,1);
   restored.cash=220;const resumed=new TycoonSession(restored);
   assert.ok(resumed.dispatch({type:'UpgradeParts'},context).ok);assert.equal(restored.cash,0);assert.equal(restored.parts.level,2);
   assert.equal(P.partsUpgradeCost(2),297);assert.equal(P.partsPayout(2),44);

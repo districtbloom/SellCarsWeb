@@ -1,4 +1,5 @@
 import * as M from './TycoonModel.js';
+import type { UIObjective } from './ObjectiveArrow.js';
 import { workOrderRange } from './RepairWorkOrders.js';
 import { catalog } from './catalog.js';
 import { guidance, money } from './TycoonGuidance.js';
@@ -63,6 +64,8 @@ export class TycoonHUD {
   private signature = '';
   private receipt?: Receipt;
   private counterAmount?: number;
+  private dialogue?: 'welcome' | 'phone-intro' | 'phone-answer';
+  private recommended?: HTMLButtonElement;
   private carIndex = 0;
   private get cars() { return this.host.cars ?? personalCars; }
   draft?: Look;
@@ -88,7 +91,13 @@ export class TycoonHUD {
     stockIcon.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 3h14l7 13-7 13H9L2 16z" fill="#c5d6dc" stroke="#526975" stroke-width="2"/><circle cx="16" cy="16" r="6" fill="#263b47"/></svg>';
     this.stock.append(stockIcon, this.stockCount);
     this.top.append(title, this.wallet, this.stock, this.building, this.garage, this.phone);
-    this.next.onclick = () => this.host.navigate(guidance(this.host.state));
+    this.next.onclick = () => {
+      const flags = this.host.state.onboarding ??= {};
+      if (this.dialogue === 'welcome') { flags.welcomed = true; this.dialogue = undefined; }
+      else if (this.dialogue === 'phone-intro') this.dialogue = 'phone-answer';
+      else if (this.dialogue === 'phone-answer') { flags.phonePrompted = true; this.dialogue = undefined; }
+      this.update();
+    };
     this.guideAvatar.setAttribute('role', 'img'); this.guideAvatar.setAttribute('aria-label', 'Player avatar');
     this.guide.append(this.guideAvatar, this.words, this.next);
     this.panel.append(this.header, this.content); this.root.append(this.top, this.guide, this.panel, this.progress, this.toast, this.hint, this.routeDrive, this.destination);
@@ -160,7 +169,31 @@ export class TycoonHUD {
     if (result.ok && next) this.open(next); else this.render();
   }
   private button(label: string, click: () => void, disabled = false, secondary = false) {
-    const b = element('button', secondary ? 'secondary' : '', label); b.disabled = disabled; b.onclick = click; this.content.append(b); return b;
+    const b = element('button', secondary ? 'secondary' : '', label); b.disabled = disabled; b.onclick = click; this.content.append(b);
+    if (!disabled && !secondary && !this.recommended) this.recommended = b;
+    return b;
+  }
+  objectiveTarget(): UIObjective | undefined {
+    if (this.isOpen) {
+      const element = this.recommended ?? this.header.querySelector<HTMLButtonElement>('.tycoon-close');
+      return element ? { element, label: element === this.recommended ? element.textContent ?? 'Continue' : 'Return to your objective' } : undefined;
+    }
+    if (this.dialogue === 'welcome' || this.dialogue === 'phone-intro') return { element: this.next, label: 'Continue' };
+    const s = this.host.state;
+    if (s.lead && ['ringing', 'missed'].includes(s.lead.status)) return { element: this.smartphone.answerTarget ?? this.phone, label: 'Answer the phone [Enter]' };
+    const next = guidance(s);
+    if (next.kind === 'phone') return { element: this.phone, label: 'Open your phone [P]' };
+    if (next.kind === 'complete') return { element: this.building, label: 'View your journey' };
+    return undefined;
+  }
+  private updateDialogue() {
+    const s = this.host.state, flags = s.onboarding;
+    if (!this.dialogue && !flags?.welcomed && (s.journey ? s.journey.step === 0 : s.pads.length === 0)) this.dialogue = 'welcome';
+    if (!this.dialogue && !flags?.phonePrompted && s.lead && ['ringing', 'missed'].includes(s.lead.status)) this.dialogue = 'phone-intro';
+    if (this.dialogue?.startsWith('phone') && s.lead && !['ringing', 'missed'].includes(s.lead.status)) { (s.onboarding ??= {}).phonePrompted = true; this.dialogue = undefined; }
+    this.guide.hidden = this.isOpen || !this.dialogue;
+    this.words.textContent = this.dialogue === 'welcome' ? "Welcome to Sell Cars! I'll show you the ropes!" : this.dialogue === 'phone-intro' ? 'Your phone is ringing! A caller has a car for you.' : 'Answer the phone to hear the offer. Click Answer or press Enter.';
+    this.next.textContent = this.dialogue === 'phone-answer' ? 'Got it' : 'Continue'; this.next.hidden = !this.dialogue;
   }
   private title(title: string, sub = '') {
     const h = element('div'); h.append(element('h2', '', title), element('p', '', sub));
@@ -177,7 +210,7 @@ export class TycoonHUD {
     this.action({ type, carId: c.id, revision: c.quote.revision, amount: amount ?? c.quote.accepted });
   }
   update(dt = 0) {
-    const s = this.host.state, c = s.car, g = guidance(s);
+    const s = this.host.state, c = s.car;
     this.wallet.textContent = money(s.cash);
     for (const entry of s.ledger.slice(this.ledgerLength)) if (entry.amount > 0) this.gains.credit(entry.amount);
     this.ledgerLength = s.ledger.length;
@@ -186,8 +219,7 @@ export class TycoonHUD {
     const construction = entries.filter(e => e.category !== 'Cosmetic');
     this.building.textContent = 'Build ' + construction.filter(e => e.step <= (s.journey?.step ?? 0)).length + '/' + construction.length;
     this.phone.textContent = 'Phone [P]'; this.smartphone.update(s, this.isOpen);
-    this.words.textContent = g.text; this.next.textContent = g.label; this.next.hidden = !g.label || !!s.personal?.route;
-    this.guide.hidden = this.isOpen;
+    this.updateDialogue();
     this.panel.hidden = !this.isOpen;
     this.top.hidden = false; this.top.classList.toggle('wallet-only', this.isOpen);
     this.toast.textContent = (s.noticeUntil ?? 0) > s.clock ? s.notice ?? '' : ''; this.toast.hidden = !this.toast.textContent;
@@ -199,10 +231,10 @@ export class TycoonHUD {
     this.gains.tick(dt, !this.root.hidden);
   }
   private render() {
-    this.header.replaceChildren(); this.content.replaceChildren();
+    this.header.replaceChildren(); this.content.replaceChildren(); this.recommended = undefined;
     const s = this.host.state, c = s.car, d = c ? M.def(s) : undefined;
     this.panel.hidden = !this.isOpen;
-    this.guide.hidden = this.isOpen; this.top.hidden = false; this.top.classList.toggle('wallet-only', this.isOpen);
+    this.updateDialogue(); this.top.hidden = false; this.top.classList.toggle('wallet-only', this.isOpen);
     this.panel.classList.toggle('tycoon-garage', ['personal', 'collection'].includes(this.page));
     this.panel.classList.toggle('tycoon-call-dialog', this.page === 'call');
     document.body.classList.toggle('has-garage', ['personal', 'collection'].includes(this.page));
@@ -312,7 +344,7 @@ export class TycoonHUD {
         if (s.journey) {
           this.button('Build your dealership', () => this.open('journey'), false, true);
           if (partsUnlocked(s)) {
-            this.button('Sell salvaged parts', () => this.host.navigate({ kind: 'parts', text: 'Parts sales laptop', label: 'Sell parts', point: PARTS_POSITION }), false, true);
+            this.button('Play Hill Drive · Earn cash', () => this.host.navigate({ kind: 'parts', text: 'Hill Drive laptop', label: 'Play Hill Drive', point: PARTS_POSITION }), false, true);
             this.button('Parts laptop upgrades', () => this.open('parts'), false, true);
           }
           this.text(money(revenuePerMinute(s)) + ' earned in the last 60 seconds');
@@ -409,9 +441,10 @@ export class TycoonHUD {
 
       const station = s.parts, running = station.remaining !== undefined, automated = partsAutomated(s);
       this.title('Parts laptop upgrades', 'Level ' + station.level + '/' + PARTS_MAX_LEVEL);
-      this.text(partsPayout(station.level) + '$/sell', 'tycoon-price');
-      this.text(automated ? 'Your mechanic handles sales automatically.' : 'Press E at the laptop to type a sale. Payment arrives after the animation.');
-      this.button(running ? 'Continue at the laptop' : 'Go to the laptop', () => this.host.navigate({ kind: 'parts', point: PARTS_POSITION, label: 'Sell car part', text: 'Parts laptop' }), automated);
+      this.text('Hill Drive: distance × $2', 'tycoon-price');
+      this.text('30 seconds. Hold LMB to accelerate, RMB to reverse. Rotate in the air and collect +5s clocks.');
+      this.text(automated ? 'Mechanic side income: $' + partsPayout(station.level) + ' per batch between games.' : 'Laptop upgrades improve mechanic side income once you hire one. Hill Drive always pays $2 per meter.');
+      this.button(running ? 'Go to the laptop' : 'Play Hill Drive', () => this.host.navigate({ kind: 'parts', point: PARTS_POSITION, label: 'Hill Drive', text: 'Parts laptop' }));
       this.button(station.level >= PARTS_MAX_LEVEL ? 'Fully upgraded' : '+$16 per batch · ' + money(partsUpgradeCost(station.level)),
         () => this.action({ type: 'UpgradeParts' }), station.level >= PARTS_MAX_LEVEL, true);
       this.text(station.completed + ' batches sold. No inventory purchase needed.', 'tycoon-muted');

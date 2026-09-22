@@ -2,6 +2,10 @@
 
 ## Sell Cars dealership tycoon
 
+The game opens on a rotating panorama of the environment. Press **START** (or
+**Enter**) beneath **SELL CARS** to enter your dealership; gameplay and race
+timers begin after the title screen.
+
 The [hands-on expansion](docs/tycoon-expansion.md) adds repair minigames, Parts shops,
 delivery drivers, curved automatic driving, a residential driving tutorial, and
 **Shift** sprint. Repair progress and delivery cargo save with your dealership.
@@ -25,8 +29,8 @@ or **Garage** button. Duplicate models are supported. See the
 recurring car deals, department work and staff automation. Integration's
 customization, buyer preferences and rare Phoenix lead remain available.
 Progress saves in this browser, with capped offline earnings and a repeatable
-parts-sales typing job. Use **E** near interactions, **P** for the smartphone, **Enter** to answer calls, **Build** for
-construction, and the guide button to walk to the next step.
+Hill Drive laptop minigame. Use **E** near interactions, **P** for the smartphone, **Enter** to answer calls, **Build** for
+construction, and follow the green objective arrows to the next button or repair.
 **Ctrl + Shift + Backspace** deletes your tycoon save and closes the game.
 If the browser keeps the tab open, the game stops on a closed screen.
 Open **Garage** to browse all 14 cars with the left/right arrows, compare their
@@ -55,6 +59,16 @@ two seconds without mouse input.
 See the [driving guide](docs/driving.md) for tuning and editor requirements.
 
 ## Open world
+
+The top-left minimap reads the live town roads, blocks and points of interest.
+City Sprint events appear every five minutes; reach the gold flag within five
+minutes and press **F** in a car to join. Beat 2-3 AI rivals for **$250-$3,500**;
+larger prizes bring harder races. Follow the checkpoint beams and arrows;
+**X** cancels a race. At the dealership laptop, press **E** for Hill Drive:
+hold **LMB** to drive forward or **RMB** to reverse and rotate in the air.
+Distance pays **$2 per meter**, with **30 seconds** and collectible **+5s** clocks.
+The four supplied tracks loop and crossfade by location/activity. Use **♫ Music** to mute them.
+See [music, minimap and activities](docs/city-activities.md) for tuning and controls.
 
 Follow the paved road out of the dealership into Maple County. Its street grid
 connects 40 suburban homes with garages, 12 shops, a service district, and parks

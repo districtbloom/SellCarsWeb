@@ -6,6 +6,7 @@ import { CarInstance } from './CarInstance.js';
 import { SmartFollowCamera } from './SmartFollowCamera.js';
 import { localBounds, METERS_PER_UNIT, physicsVector } from './CarRig.js';
 import { GameFeedback } from '../feedback/GameFeedback.js';
+export interface PhysicsParticipant { beforeStep(dt: number): void; afterStep(dt: number): void; render(alpha: number): void }
 
 export class DrivingSystem {
   readonly feedback: GameFeedback;
@@ -31,6 +32,9 @@ export class DrivingSystem {
   private walkTargets: Vector3[] = [];
   private walkStall = 0;
   private lastWalkPosition = new Vector3();
+  private participants = new Set<PhysicsParticipant>();
+  addPhysicsParticipant(participant: PhysicsParticipant) { this.participants.add(participant); return () => this.participants.delete(participant); }
+  get drivenCar() { return this.driving ? this.selected : undefined; }
   onInteract?: () => boolean;
   onFootSpawn?: () => Vector3;
   get walkingToTarget() { return this.walkTargets.length > 0; }
@@ -171,15 +175,20 @@ export class DrivingSystem {
     if (this.input.consumeJump() && !this.driving && this.controlsEnabled) this.player.requestJump();
     this.accumulator += Math.min(Math.max(delta, 0), 0.1);
     while (this.accumulator + 1e-9 >= this.physics.fixedStep) {
+      for (const participant of this.participants) participant.beforeStep(this.physics.fixedStep);
       for (const car of this.cars) {
         if (car !== this.scriptedCar) car.physics.applyInput(this.driving && car === this.selected ? input : { throttle: 0, steering: 0, brake: true });
       }
       if (!this.driving) this.player.step(this.physics.fixedStep, input, this.camera);
       this.physics.world.step(this.physics.fixedStep);
+      this.cars.forEach(car => car.capturePhysicsPose());
+      for (const participant of this.participants) participant.afterStep(this.physics.fixedStep);
       this.accumulator -= this.physics.fixedStep;
     }
-    this.player.sync(delta);
-    this.syncVisuals();
+    const alpha = Math.max(0, Math.min(1, this.accumulator / this.physics.fixedStep));
+    this.player.sync(delta, alpha);
+    this.syncVisuals(alpha);
+    for (const participant of this.participants) participant.render(alpha);
     if (!this.presentation) this.updateCamera(delta, reset);
     this.updatePrompt();
     this.feedback.tick(delta, this.focusPosition, this.player, this.driving ? this.selected : undefined);
@@ -210,8 +219,8 @@ export class DrivingSystem {
     this.prompt.style.top = (bounds.top + (1 - anchor.y) * bounds.height / 2) + 'px';
   }
 
-  private syncVisuals() {
-    this.cars.forEach(car => car.sync());
+  private syncVisuals(alpha = 1) {
+    this.cars.forEach(car => car.sync(alpha));
     this.scene.updateMatrixWorld(true);
   }
 
@@ -226,9 +235,7 @@ export class DrivingSystem {
       this.followCamera.update(delta, this.player.mesh.position, this.player.mesh.quaternion, snap);
       return;
     }
-    const body = this.physics.body;
-    const center = new Vector3(body.position.x, body.position.y, body.position.z).multiplyScalar(1 / METERS_PER_UNIT);
-    this.followCamera.update(delta, center, this.car.quaternion, snap);
+    this.followCamera.update(delta, this.selected.renderCenter, this.car.quaternion, snap);
   }
 
   dispose() {

@@ -48,6 +48,28 @@ export class RepairController {
     window.addEventListener('keydown', this.key, true); window.addEventListener('blur', this.release);
   }
   get active() { return !!this.current; }
+  objectiveTarget() {
+    if (!this.current || !this.built) return undefined;
+    const g = repairProgress(this.current, this.state.clock);
+    const pick = (attribute: string, index: number) => Array.from(this.root.querySelectorAll<HTMLElement>(`[data-${attribute}]`)).find(el => Number(el.dataset[attribute]) === index);
+    let element: HTMLElement | undefined | null, label = '';
+    if (g.kind === 'wheels') {
+      const wheel = g.wheels.findIndex(done => !done), bolt = g.bolts.findIndex(done => !done);
+      element = wheel >= 0 ? pick('wheel', wheel) : pick('bolt', bolt); label = wheel >= 0 ? 'Fit this wheel' : 'Fasten this bolt';
+    } else if (g.kind === 'engine') {
+      if (!g.bolts[0]) { element = pick('bolt', 0); label = 'Remove the drain bolt'; }
+      else if (drainProgress(g, this.state.clock) < 1) return undefined;
+      else if (!g.bolts[1]) { element = pick('bolt', 1); label = 'Remove the used filter'; }
+      else if (!g.filterInstalled) { element = this.root.querySelector<HTMLElement>(this.holdingOilFilter ? '.repair-filter-socket' : '.repair-new-filter'); label = this.holdingOilFilter ? 'Fit the new filter' : 'Pick up a new filter'; }
+      else { element = this.funnel; label = 'Hold the bottle over the funnel'; }
+    } else if (g.kind === 'tuning') {
+      const index = g.targets.findIndex(done => !done), part = index === 0 ? 'filter' : 'plug';
+      if (index < 0) return undefined;
+      if (!g.bolts[index] || this.tuningPart === part) { element = pick('component', index); label = !g.bolts[index] ? 'Remove this part' : 'Install the upgrade'; }
+      else { element = Array.from(this.root.querySelectorAll<HTMLElement>('[data-upgrade]')).find(el => el.dataset.upgrade === part); label = 'Select this upgrade'; }
+    } else { element = pick('target', g.targets.findIndex(done => !done)); label = 'Repair this area'; }
+    return element ? { element, label } : undefined;
+  }
   begin(job: Job) {
     if (this.current || !job.manual) return;
     this.releaseCamera = lockCameraPose(this.camera);

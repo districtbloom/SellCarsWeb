@@ -7,7 +7,7 @@
     "dev": "vite",
     "editor": "node scripts/editor.mjs",
     "scene:seed": "node scripts/seed-scene.mjs",
-    "test": "node --test --test-concurrency=1 scripts/scene.test.mjs scripts/vehicle.test.mjs scripts/camera.test.mjs scripts/tycoon.test.mjs scripts/full-journey.test.mjs scripts/tycoon-world.test.mjs scripts/game-exit.test.mjs scripts/personal-cars.test.mjs scripts/trading-cars.test.mjs scripts/open-world.test.mjs scripts/repair-routing.test.mjs scripts/parts-economy.test.mjs scripts/tycoon-refinement.test.mjs scripts/tycoon-feedback.test.mjs scripts/repair-work-orders.test.mjs scripts/interaction-feedback.test.mjs scripts/geometry-alignment.test.mjs scripts/garage-collection.test.mjs scripts/garage-world.test.mjs scripts/surface-separation.test.mjs",
+    "test": "node --test --test-concurrency=1 scripts/activities.test.mjs scripts/start-screen.test.mjs scripts/race-ai.test.mjs scripts/scene.test.mjs scripts/vehicle.test.mjs scripts/camera.test.mjs scripts/tycoon.test.mjs scripts/full-journey.test.mjs scripts/tycoon-world.test.mjs scripts/game-exit.test.mjs scripts/personal-cars.test.mjs scripts/trading-cars.test.mjs scripts/open-world.test.mjs scripts/repair-routing.test.mjs scripts/parts-economy.test.mjs scripts/tycoon-refinement.test.mjs scripts/tycoon-feedback.test.mjs scripts/repair-work-orders.test.mjs scripts/interaction-feedback.test.mjs scripts/geometry-alignment.test.mjs scripts/garage-collection.test.mjs scripts/garage-world.test.mjs scripts/surface-separation.test.mjs",
     "tycoon:data": "node scripts/extract-tycoon-data.mjs && node scripts/extract-sell-cars.mjs",
     "build": "tsc && vite build",
     "build:standalone": "tsc && node scripts/build-standalone.mjs",

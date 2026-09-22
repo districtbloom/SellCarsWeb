@@ -45,6 +45,7 @@ test('closing stops rendering and disposes controls before attempting tab closur
     globalThis.document={pointerLockElement:container,exitPointerLock(){calls.push('unlock');},createElement(){return new Element();}};
     const world=Object.assign(Object.create(World.prototype),{
       container,closed:false,
+      startScreen:{dispose(){calls.push('title');}},
       loop:{stop(){calls.push('stop');},start(){assert.fail('Closed game restarted');}},
       unbindReset(){calls.push('unbind');},tycoon:{dispose(){calls.push('tycoon');}},
       driving:{dispose(){calls.push('driving');}},resizer:{dispose(){calls.push('resizer');}},
@@ -55,7 +56,7 @@ test('closing stops rendering and disposes controls before attempting tab closur
       if(throws)throw Error('Browser refused closure');
     };
     world.close();world.close();world.start();world.render();
-    assert.deepEqual(calls,['stop','unbind','tycoon','driving','resizer','unlock','renderer','context','close']);
+    assert.deepEqual(calls,['stop','title','unbind','tycoon','driving','resizer','unlock','renderer','context','close']);
     assert.match(container.children[0].children[1].textContent,/close this tab/);
   }
 });

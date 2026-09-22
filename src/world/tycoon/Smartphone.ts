@@ -26,6 +26,7 @@ export class Smartphone {
     this.root.append(screen); parent.append(this.root);
   }
   private currentLead?: object;
+  get answerTarget() { return this.root.classList.contains('visible') && !this.answer.hidden ? this.answer : undefined; }
   toggle(force?: boolean) { this.manual = force ?? !this.manual; this.dismissed = undefined; }
   hide() { this.manual = false; this.dismissed = this.currentLead; this.root.classList.remove('visible'); }
   update(s: TycoonState, modal: boolean) {

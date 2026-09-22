@@ -87,6 +87,7 @@ export class OpenWorldTown {
     }
   }
   private road(x: number,z: number,width: number,depth: number,vertical: boolean) {
+    const marker = new Group(); marker.name = 'Map road'; marker.userData.mapRoad = { x, z, width, depth, vertical }; this.root.add(marker);
     this.box(x,.025,z,width,.05,depth,0x41484b);
     const length = vertical ? depth : width;
     for (let p = -length/2+7; p < length/2-5; p += 14) {
@@ -101,6 +102,7 @@ export class OpenWorldTown {
     const x = TOWN_ROAD_X[col]+110, z = TOWN_ROAD_Z[row]+110;
     const zone = row < 2 && col < 3 || row === 4 ? 'residential' : row === 2 ? 'commercial' : row === 3 && col >= 2 ? 'service' : 'park';
     this.lots.push({ zone,x,z,width:188,depth:188 });
+    const marker = new Group(); marker.name = 'Map block'; marker.userData.mapLot = { zone, x, z, width: 188, depth: 188 }; this.root.add(marker);
     this.box(x,.02,z,188,.04,188,zone==='service'?0x999789:zone==='commercial'?0x75806f:0x83966b);
     for (const side of [-1,1]) {
       for (const [X,Z,w,d] of [[x+side*92,z,5,188],[x,z+side*92,178,5]]) {
@@ -190,6 +192,7 @@ export class OpenWorldTown {
     this.piece('tree',x,height*.75,z,13,height*.8,13,this.choose([0x53765b,0x608060,0x71875b]));
   }
   private signpost(text: string,x: number,z: number,yaw: number) {
+    const marker = new Group(); marker.position.set(x, 0, z); marker.userData.mapPOI = { label: text }; this.root.add(marker);
     this.box(x,5,z,.5,10,.5,0x747c7c); this.box(x,10,z,25,5,.5,0x35564d,yaw);
     this.labels.push({text,x,y:10,z:z-.3,width:24,yaw});
   }

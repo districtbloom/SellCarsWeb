@@ -5,6 +5,8 @@ import { offlineReward, applyOfflineReward } from './OfflineEarnings.js';
 import { ensureGarage, personalCarOption, personalModel } from './PersonalCars.js';
 import { STARTER_PARTS } from './PartsEconomy.js';
 import { entries } from './FullJourneyCatalog.js';
+import { cancelHillRun } from './PartsStation.js';
+import { HILL_CONFIG } from '../activities/HillDriveModel.js';
 import type { OfflineReceipt, TycoonState } from './types.js';
 export interface SaveStorage {
   getItem(key: string): string | null;
@@ -88,8 +90,10 @@ export function validState(value: unknown): value is TycoonState {
       || !Array.isArray(j.seenCars) || !j.seenCars.every(id => typeof id === 'string')) return false;
   }
   if (s.revenue && (!Array.isArray(s.revenue) || !s.revenue.every(e => e && finite(e.at) && finite(e.amount)))) return false;
-  if (s.parts && (!Number.isInteger(s.parts.level) || s.parts.level < 1 || s.parts.level > 20 || !Number.isInteger(s.parts.completed) || s.parts.completed < 0 || (s.parts.remaining !== undefined && (!finite(s.parts.remaining) || s.parts.remaining > 5)))) return false;
+  if (s.parts && (!Number.isInteger(s.parts.level) || s.parts.level < 1 || s.parts.level > 20 || !Number.isInteger(s.parts.completed) || s.parts.completed < 0 || (s.parts.remaining !== undefined && (!finite(s.parts.remaining) || s.parts.remaining > (s.parts.manual ? HILL_CONFIG.seconds : 5))))) return false;
   if (s.parts?.manual !== undefined && typeof s.parts.manual !== 'boolean') return false;
+  if (s.onboarding && (typeof s.onboarding !== 'object' || ['welcomed', 'phonePrompted'].some(key => { const value = (s.onboarding as Record<string, unknown>)[key]; return value !== undefined && typeof value !== 'boolean'; }))) return false;
+  if (s.raceClaims && (!Array.isArray(s.raceClaims) || s.raceClaims.length > 100 || !s.raceClaims.every(id => typeof id === 'string' && id.length <= 100) || new Set(s.raceClaims).size !== s.raceClaims.length)) return false;
   if (s.partsStock !== undefined && (!Number.isInteger(s.partsStock) || s.partsStock < 0 || s.partsStock > 1e12)) return false;
   if (s.couriers && (!Array.isArray(s.couriers) || s.couriers.length > 3 || new Set(s.couriers.map(d => d.id)).size !== s.couriers.length || !s.couriers.every(d =>
     Number.isInteger(d.id) && d.id > 0 && d.id <= 3 && point(d.pos) && ['idle', 'outbound', 'loading', 'returning', 'unloading'].includes(d.phase)
@@ -144,6 +148,7 @@ export class TycoonSave {
       if (![1, 2].includes(snapshot.version!) || !validState(snapshot.state)) throw new Error('Incompatible save');
       if (snapshot.version === 2 && (!finite(snapshot.savedAt) || !finite(snapshot.leaseUntil) || !Number.isInteger(snapshot.revision) || typeof snapshot.writer !== 'string')) throw new Error('Malformed save envelope');
       const state = copy(snapshot.state);
+      cancelHillRun(state);
       if (state.personal || state.garage) ensureGarage(state);
       state.partsStock ??= STARTER_PARTS;
       if (state.journey) {

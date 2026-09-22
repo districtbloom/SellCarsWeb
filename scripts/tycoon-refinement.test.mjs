@@ -58,27 +58,19 @@ test('purchase pads have a smaller raised button and clear green/blue category c
   group.traverse(node=>{node.geometry?.dispose();node.material?.dispose();});
 });
 
-test('Parts typing controller locks movement, pauses without animation, resumes saved work and pays once at completion',async()=>{
-  dom();const {PartsTyping}=await importTypescript(new URL('PartsTyping.ts',root));
-  const {PlayerController}=await importTypescript(new URL('../driving/PlayerController.ts',root));
-  const s=M.freshJourney();s.journey.step=1;s.journey.intakePaused=true;s.cash=0;
-  const session=new TycoonSession(s),player=new PlayerController(new World(),new Scene());let locked=false;
-  const camera=new PerspectiveCamera();camera.position.set(44,29,-31);camera.lookAt(2,5,8);
-  const cameraPose={position:camera.position.toArray(),quaternion:camera.quaternion.toArray()};
-  const typing=new PartsTyping(s,player,camera,value=>locked=value);
-  const tick=count=>{for(let i=0;i<count;i++){session.tick(.1,0,typing.active);typing.tick(.1);}};
+test('hill controller locks movement, cancels without payment, and releases input on exit',async()=>{
+  dom();const {HillDriveGame}=await importTypescript(new URL('../activities/HillDriveGame.ts',root));
+  let locked=false,paid=0,cancelled=0;
+  const game=new HillDriveGame(v=>locked=v,()=>{paid++;return true;},()=>cancelled++);
   try {
-    assert.ok(session.dispatch({type:'SellParts'},{position:PARTS_POSITION,onFoot:true}).ok);
-    tick(60);assert.equal(s.cash,0);assert.equal(s.parts.remaining,5);
-    player.body.velocity.set(2,0,3);typing.begin();assert.ok(locked);assert.equal(player.body.velocity.length(),0);
-    tick(20);assert.equal(s.cash,0);assert.ok(player.typingTime>1.9&&player.typingTime<2.1);
-    assert.deepEqual({position:camera.position.toArray(),quaternion:camera.quaternion.toArray()},cameraPose,'Typing animation preserves the player camera');
+    game.begin();assert.ok(locked);assert.ok(game.active);assert.equal(paid,0);
+    game.start();game.canvas.onpointerdown({button:0,pointerId:1,preventDefault(){}});assert.ok(game.left);
+    game.tick(.1);window.dispatchEvent(new Event('blur'));assert.equal(game.left,false);
     const key=Object.assign(new Event('keydown',{cancelable:true}),{code:'Escape'});window.dispatchEvent(key);
-    assert.equal(typing.active,false);assert.equal(locked,false);const remaining=s.parts.remaining;tick(30);assert.equal(s.parts.remaining,remaining);
-    const save=new TycoonSave(storage(),{sessionId:'typing'});assert.ok(save.write(s));assert.equal(save.load().parts.remaining,remaining);
-    typing.begin();tick(29);assert.equal(s.cash,0);tick(1);assert.equal(s.cash,28);assert.equal(s.parts.completed,1);
-    assert.equal(typing.active,false);assert.equal(locked,false);assert.equal(player.typingTime,undefined);tick(20);assert.equal(s.cash,28);
-  }finally{typing.dispose();player.dispose();}
+    assert.equal(game.active,false);assert.equal(locked,false);assert.equal(cancelled,1);assert.equal(paid,0);
+    game.begin();game.start();game.model.distance=17;game.model.ended='time';game.tick(.1);game.tick(.1);
+    assert.equal(paid,1,'A finished run only settles once');game.close();assert.equal(cancelled,1);
+  }finally{game.dispose();}
 });
 
 test('Phoenix call waits for full delivered affordability, protects its reserve, and keeps ordinary sellers arriving',()=>{

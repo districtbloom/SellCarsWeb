@@ -5,10 +5,11 @@ Run `npm run dev` and open <http://127.0.0.1:5173/>. A new game uses the
 Rusty tutorial. The existing player controller and 14-car driving scene remain
 available. Dealer stock follows business routes; the player does not drive it.
 
-Walk onto purchase pads or press **E** nearby. The guide button walks the player
-to the next interaction; WASD cancels guided walking. **Build** opens the next
+Walk onto purchase pads or press **E** nearby. Green arrows point to the next
+world objective, menu button or repair action. The HUD dialog introduces the
+game and first phone call. **Build** opens the next
 purchase, **P** opens the phone, and **Esc** closes a panel. Phone → Home guides
-you to the parts-sales job. Phone → Team can pause staff automation; Phone →
+you to the Hill Drive laptop. Phone → Team can pause staff automation; Phone →
 Deals can pause arrivals and request an ordinary or special deal.
 
 **Garage** opens the personal-car picker: left/right arrows change the actual
@@ -92,13 +93,12 @@ $10,220. The default is the merged Sell Cars progression.
 
 ### Parts sales and offline earnings
 
-The parts-sales job is available at the opening manual job point. It needs no
-inventory purchase, takes **5 seconds**, starts at **$28 per batch**, gains
-**$16 per level**, and has 20 levels. Upgrades cost
-`floor(220 * 1.35^(level - 1))`, as in the source. Hired mechanics run batches
-between repairs. Levels, partial batch time and completed batches are saved.
-This bridge uses base station timing; it does not invent multipliers for
-FullJourney decoration purchases.
+The opening manual job point now opens [Hill Drive](city-activities.md), a
+30-second hill-driving game paying **distance × $2**. It needs no inventory
+purchase. Time pickups add five seconds; crashes and timeout finish the round.
+Cancelled rounds do not pay or resume. Existing mechanic side income remains
+**$28 per batch**, plus **$16 per level**, with 20 levels and upgrade costs of
+`floor(220 * 1.35^(level - 1))`. These upgrades do not change minigame rewards.
 
 Offline earnings follow the older DataService:
 

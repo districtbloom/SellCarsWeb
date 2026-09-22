@@ -57,7 +57,7 @@ test('HUD animates every new positive transaction once, including income offset 
   dom();const s=M.freshJourney();s.journey.step=1;s.journey.intakePaused=true;const hud=hudFor(s);
   const tick=frames=>{for(let i=0;i<frames;i++)hud.update(.1);};
   try{
-    hud.setCashOrigin({x:600,y:400});assert.ok(P.startParts(s));P.tickParts(s,5,true);assert.ok(E.buyParts(s,'small'));
+    hud.setCashOrigin({x:600,y:400});assert.ok(P.startParts(s));P.completeHillRun(s,14);assert.ok(E.buyParts(s,'small'));
     assert.equal(s.cash,328,'Income and expense share the same observation frame');hud.update(0);assert.deepEqual(gains().map(node=>node.textContent),['+$28']);
     hud.update();hud.update();assert.equal(gains().length,1,'Repeated renders do not duplicate credit');tick(12);assert.equal(gains().length,0);
     assert.ok(E.buyParts(s,'small'));hud.update();assert.equal(gains().length,0,'Spending never creates a positive effect');
@@ -83,4 +83,18 @@ test('loading a save replays only its new offline receipt, while the selling bar
     hud.showSellingProgress(.2);assert.ok(progress.hidden);hud.showSellingProgress();assert.ok(progress.hidden);
   }finally{hud.dispose();}
   assert.equal(document.body.querySelector('.tycoon-selling-progress'),null);
+});
+
+test('onboarding uses only welcome and phone dialogs, then targets actual controls',()=>{
+  dom();const state=M.freshJourney(),hud=hudFor(state);let navigated=0;hud.host.navigate=()=>navigated++;
+  try{
+    assert.equal(hud.words.textContent,"Welcome to Sell Cars! I'll show you the ropes!");assert.equal(hud.guide.hidden,false);
+    assert.equal(hud.objectiveTarget().element,hud.next);hud.next.onclick();assert.equal(state.onboarding.welcomed,true);assert.equal(navigated,0);assert.ok(hud.guide.hidden);
+    const caller=M.fresh();M.lead(caller);state.lead=caller.lead;hud.update();assert.equal(hud.guide.hidden,false);assert.match(hud.words.textContent,/phone is ringing/);
+    hud.next.onclick();assert.match(hud.words.textContent,/Answer the phone/);assert.equal(hud.objectiveTarget().element,hud.smartphone.answerTarget);
+    hud.next.onclick();assert.ok(hud.guide.hidden);assert.ok(state.onboarding.phonePrompted);hud.update();assert.ok(hud.guide.hidden);
+    hud.open('wallet');assert.match(hud.objectiveTarget().label,/Return to your objective/);hud.close();
+    state.lead.status='answered';hud.update();assert.equal(hud.objectiveTarget(),undefined);assert.ok(hud.guide.hidden);
+  }finally{hud.dispose();}
+  const restored=hudFor(M.copy(state));assert.ok(restored.guide.hidden);restored.dispose();
 });

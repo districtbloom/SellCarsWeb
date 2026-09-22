@@ -18,6 +18,8 @@ export class PlayerController {
   private jumpPending = false;
   private jumping = false;
   private jumpTime = 0;
+  private facingYaw?: number;
+  private previousYaw = 0;
   openingProgress?: number;
   typingTime?: number;
   onMotion?: (kind: 'jump' | 'land') => void;
@@ -65,12 +67,14 @@ export class PlayerController {
     }
     this.jumpPending = false;
     if (desired.lengthSq() > 0.01) {
+      this.previousYaw = this.facingYaw ?? this.mesh.rotation.y;
       const targetYaw = Math.atan2(-desired.x, -desired.z);
-      const difference = targetYaw - this.mesh.rotation.y;
+      const difference = targetYaw - this.previousYaw;
       // Smooth along the shortest arc, including across the -PI/PI boundary.
       const shortestTurn = Math.atan2(Math.sin(difference), Math.cos(difference));
-      this.mesh.rotation.y += shortestTurn * (1 - Math.exp(-12 * dt));
-    }
+      this.facingYaw = this.previousYaw + shortestTurn * (1 - Math.exp(-12 * dt));
+      this.mesh.rotation.y = this.facingYaw;
+    } else { this.facingYaw = undefined; }
   }
 
   private tryStep(desired: Vector3, dt: number) {
@@ -105,6 +109,7 @@ export class PlayerController {
   }
 
   place(position: Vec3) {
+    this.facingYaw = undefined;
     this.body.position.copy(position);
     this.body.previousPosition.copy(position);
     this.body.interpolatedPosition.copy(position);
@@ -125,8 +130,9 @@ export class PlayerController {
     this.jumping = false; this.jumpTime = 0;
   }
 
-  sync(delta = 0) {
-    this.mesh.position.copy(this.body.position as unknown as Vector3).multiplyScalar(1 / METERS_PER_UNIT);
+  sync(delta = 0, alpha = 1) {
+    this.mesh.position.copy(this.body.previousPosition as unknown as Vector3).lerp(this.body.position as unknown as Vector3, alpha).multiplyScalar(1 / METERS_PER_UNIT);
+    if (this.facingYaw !== undefined) this.mesh.rotation.y = this.previousYaw + (this.facingYaw - this.previousYaw) * alpha;
     if (this.grounded && this.body.velocity.y <= .1) {
       if (this.jumping && this.jumpTime > .15) this.onMotion?.('land');
       this.jumping = false;

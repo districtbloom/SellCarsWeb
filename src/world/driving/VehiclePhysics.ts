@@ -40,6 +40,7 @@ export class VehiclePhysics {
   readonly vehicle: SuspensionVehicle;
   readonly tuning: VehicleTuning;
   readonly fixedStep = 1 / 120;
+  poseRevision = 0;
   private accumulator = 0;
   private steering = 0;
   private throttle = 0;
@@ -174,6 +175,7 @@ export class VehiclePhysics {
   }
 
   reset() {
+    this.poseRevision++;
     this.body.position.copy(this.spawnPosition);
     this.body.position.y += 0.35;
     this.body.quaternion.copy(this.spawnQuaternion);

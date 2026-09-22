@@ -64,6 +64,8 @@ export interface TycoonState {
   parts?: { level: number; completed: number; remaining?: number; manual?: boolean };
   partsStock?: number;
   couriers?: Courier[];
+  onboarding?: { welcomed?: boolean; phonePrompted?: boolean };
+  raceClaims?: string[];
 }
 export interface JourneyState {
   step: number; tutorialComplete: boolean; cycle: number; nextSellerAt: number;

@@ -224,7 +224,8 @@ test('real repair workbench gates controls, preserves canceled progress, saves b
     advance(19);assert.equal(buttons('wheel').length,0);assert.equal(controller.root.hidden,true);assert.ok(player.openingProgress>.9);
     advance(1);assert.equal(buttons('wheel').length,4);assert.equal(buttons('bolt').length,28);assert.equal(player.openingProgress,undefined);
     assert.deepEqual({position:camera.position.toArray(),quaternion:camera.quaternion.toArray()},cameraPose,'Opening animation preserves the player camera');
-    assert.ok(buttons('bolt').every(b=>b.disabled));buttons('wheel')[0].onclick();
+    assert.equal(controller.objectiveTarget().element,buttons('wheel')[0]);
+    assert.ok(buttons('bolt').every(b=>b.disabled));buttons('wheel')[0].onclick();assert.equal(controller.objectiveTarget().element,buttons('wheel')[1]);
     buttons('bolt')[0].onclick();assert.equal(M.job(state).progress,2/32);assert.equal(controller.tool.hidden,false);
     controller.close();assert.equal(menu,false);assert.equal(controller.root.hidden,true);
     controller.begin(M.job(state));advance(20);
@@ -234,6 +235,7 @@ test('real repair workbench gates controls, preserves canceled progress, saves b
     assert.deepEqual(savedWork,currentWork,'Saved state retains actual wheel and bolt inputs');
     assert.ok(currentOpening>savedOpening,'Reopening plays access animation again');
     for(const wheel of buttons('wheel'))if(!wheel.disabled)wheel.onclick();
+    assert.equal(controller.objectiveTarget().element,buttons('bolt')[1]);
     for(const [index,bolt] of buttons('bolt').entries())if(!bolt.disabled){
       bolt.getBoundingClientRect=()=>({left:index*5,top:index*3,width:10,height:10});bolt.onclick();
       assert.equal(bolt.disabled,true,'Click commits before decorative power-tool motion');
@@ -261,7 +263,7 @@ test('engine workbench uses a single drain bolt and pours only from the tilted b
     controller.begin(M.job(state));advance(20);assert.equal(controller.root.querySelector('.repair-pan'),null);
     const bolts=controller.root.querySelectorAll('[data-bolt]');assert.equal(bolts.length,2);assert.equal(bolts[0].style.left,'50%');assert.equal(bolts[0].style.top,'50%');
     assert.equal(bolts[1].disabled,true);assert.ok(bolts[1].classList.contains('filter'));assert.ok(bolts[1].classList.contains('used-filter'));assert.equal(bolts[1].getAttribute('aria-label'),'Remove used oil filter');
-    bolts[0].onclick();assert.equal(controller.drain.hidden,false);assert.equal(bolts[0].hidden,true);
+    assert.equal(controller.objectiveTarget().element,bolts[0]);bolts[0].onclick();assert.equal(controller.objectiveTarget(),undefined);assert.equal(controller.drain.hidden,false);assert.equal(bolts[0].hidden,true);
     advance(23);assert.equal(bolts[1].disabled,true);advance(2);assert.equal(controller.drain.hidden,true);assert.equal(bolts[1].disabled,false);bolts[1].onclick();
     const gameBeforeFit=repairProgress(M.job(state),state.clock);assert.equal(gameBeforeFit.filterInstalled,false);assert.equal(controller.funnel.hidden,true);
     let replacement=controller.root.querySelector('.repair-new-filter'),socket=controller.root.querySelector('.repair-filter-socket');
@@ -270,7 +272,7 @@ test('engine workbench uses a single drain bolt and pours only from the tilted b
     replacement.onclick();assert.equal(controller.carry.dataset.icon,'oilFilter');controller.close();controller.begin(M.job(state));advance(20);
     replacement=controller.root.querySelector('.repair-new-filter');socket=controller.root.querySelector('.repair-filter-socket');
     socket.onclick();assert.equal(gameBeforeFit.filterInstalled,false,'Reopening retains the empty socket but clears held selection');
-    replacement.onclick();socket.onclick();assert.equal(gameBeforeFit.filterInstalled,true);assert.ok(socket.classList.contains('installed'));assert.ok(socket.disabled);assert.ok(replacement.hidden);
+    assert.equal(controller.objectiveTarget().element,replacement);replacement.onclick();assert.equal(controller.objectiveTarget().element,socket);socket.onclick();assert.equal(controller.objectiveTarget().element,controller.funnel);assert.equal(gameBeforeFit.filterInstalled,true);assert.ok(socket.classList.contains('installed'));assert.ok(socket.disabled);assert.ok(replacement.hidden);
     const installedProgress=M.job(state).progress;socket.onclick();assert.equal(M.job(state).progress,installedProgress,'Repeated fitting cannot grant progress');
     assert.equal(controller.carry.dataset.icon,'bottle');assert.equal(controller.funnel.hidden,false);
     const game=repairProgress(M.job(state),state.clock),board=controller.board;
@@ -310,9 +312,9 @@ test('tuning workbench removes five old parts and fits matching upgrades through
     assert.equal(components()[0].getAttribute('aria-label'),'Remove old air filter');
     for(const button of components()){button.onclick();assert.ok(button.classList.contains('empty'));assert.equal(button.disabled,false);}
     assert.equal(accepted,5);assert.equal(M.job(state).progress,.5);assert.equal(controller.tool.hidden,false);
-    components()[0].onclick();assert.equal(accepted,5,'An empty socket requires a selected replacement');
+    assert.equal(controller.objectiveTarget().element,upgrade('filter'));components()[0].onclick();assert.equal(accepted,5,'An empty socket requires a selected replacement');
     upgrade('plug').onclick();assert.equal(controller.carry.dataset.icon,'plug');components()[0].onclick();assert.equal(accepted,5,'Plug cannot fill the air-filter socket');
-    upgrade('filter').onclick();assert.equal(controller.carry.dataset.icon,'filter');
+    upgrade('filter').onclick();assert.equal(controller.objectiveTarget().element,components()[0]);assert.equal(controller.carry.dataset.icon,'filter');
     controller.board.getBoundingClientRect=()=>({left:100,top:50,width:800,height:400});
     controller.board.onpointermove({clientX:300,clientY:150,pointerType:'touch'});
     assert.equal(controller.carry.style.left,'25%');assert.equal(controller.carry.style.top,'25%');

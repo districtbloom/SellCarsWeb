@@ -17,6 +17,7 @@ export class PartsWorld {
   private clock = 0;
   constructor(scene: Scene, private camera: PerspectiveCamera, private cars: readonly Pick<CarInstance, 'id' | 'cloneModel'>[], dispatch: (action: Action) => unknown) {
     this.root.name = 'Parts delivery fleet'; scene.add(this.root);
+    for (const shop of PART_SHOPS) { const marker = new Group(); marker.position.set(shop.x, 0, shop.z); marker.userData.mapPOI = { label: 'Parts', color: '#ffdd91' }; this.root.add(marker); }
     const panel = (title: string, anchor: Vector3, shopId?: string) => {
       const element = document.createElement('div'); element.className = 'parts-world-prompt'; element.hidden = true;
       const label = document.createElement('strong'); label.textContent = title; element.append(label); document.body.append(element);

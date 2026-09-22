@@ -9,7 +9,7 @@ import { createNPCCharacter } from '../components/blockCharacter.js';
 import { BuiltNPCRoutines, NPCRoutine } from './NPCRoutines.js';
 import type { NPCPath } from './NPCRoutines.js';
 import type { ImportedPart } from './BuildingProgression.js';
-import { guidance, guidanceAnchor } from './TycoonGuidance.js';
+import { guidance } from './TycoonGuidance.js';
 import { purchasePad, purchaseGate, cosmeticPads, staffedListing, staffedPhoto, salesPreparationPoint } from './FullJourney.js';
 import { legacyPadCategory, padColor } from './PurchaseCategories.js';
 import { sourcePoint } from './FullJourneyCatalog.js';
@@ -41,12 +41,12 @@ export function textSprite(text: string, width = 18, nameOnly = false) {
   const lines = text.split('\n'); lines.forEach((line, i) => ctx.fillText(line, 256, 64 + (i - (lines.length - 1) / 2) * 40, 480));
   const sprite = new Sprite(new SpriteMaterial({ map: new CanvasTexture(canvas), depthTest: false, depthWrite: false })); sprite.scale.set(width, width / 4, 1); return sprite;
 }
-function partsSaleLabel(amount: number) {
+function partsSaleLabel(_amount: number) {
   const canvas = document.createElement('canvas'); canvas.width = 768; canvas.height = 192;
   const ctx = canvas.getContext('2d')!; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
   ctx.font = '900 66px system-ui'; ctx.strokeStyle = '#080c08'; ctx.lineWidth = 12;
-  ctx.strokeText('SELL CARS PART', 384, 68); ctx.fillStyle = '#65f279'; ctx.fillText('SELL CARS PART', 384, 68);
-  ctx.font = '700 38px system-ui'; ctx.lineWidth = 7; ctx.strokeText(amount + '$/sell', 384, 144); ctx.fillStyle = '#fff'; ctx.fillText(amount + '$/sell', 384, 144);
+  ctx.strokeText('HILL DRIVE', 384, 68); ctx.fillStyle = '#65f279'; ctx.fillText('HILL DRIVE', 384, 68);
+  ctx.font = '700 38px system-ui'; ctx.lineWidth = 7; ctx.strokeText('DISTANCE × $2  [E]', 384, 144); ctx.fillStyle = '#fff'; ctx.fillText('DISTANCE × $2  [E]', 384, 144);
   const label = new Sprite(new SpriteMaterial({ map: new CanvasTexture(canvas), depthTest: false, depthWrite: false })); label.scale.set(23, 5.75, 1); return label;
 }
 export class TycoonActors {
@@ -56,8 +56,6 @@ export class TycoonActors {
   private readonly tradingVisual: TradingCarVisual;
   readonly worker = createNPCCharacter('Jo', 0x3f7581);
   readonly actor = createNPCCharacter('Deal person', 0x4a8c8a);
-  private targetLabel?: Sprite;
-  private targetName = '';
   private padLabels = new Map<string, Sprite>();
   private readonly journeyPad = createPurchasePad(this.root, 'Next purchase', 'Money-making');
   private readonly cosmetics = new Map<string, { pad: Group; label: Sprite }>();
@@ -81,12 +79,14 @@ export class TycoonActors {
     this.worker.rotation.y = this.actor.rotation.y = Math.PI;
     this.root.name = 'Tycoon activity'; this.root.add(this.trading, this.worker, this.actor);
     this.garageKiosk.name = 'Personal garage entrance'; this.garageKiosk.position.copy(worldPoint(GARAGE_ENTRY, 1.48));
+    this.garageKiosk.userData.mapPOI = { label: 'Garage' };
     box(this.garageKiosk, 'Garage sign post', [.5, 5, .5], [0, 2.5, 0], 0x34464b);
     const sign = textSprite('PERSONAL GARAGE\n[E] Browse collection', 13); sign.position.y = 5.5; this.garageKiosk.add(sign);
     this.root.add(this.garageKiosk);
     this.journeyPad.visible = false; this.root.add(...this.staff, this.partsLabel);
     this.partsLabel.position.copy(worldPoint(PARTS_POSITION, 8));
     this.partsComputer.name = 'Parts sales computer'; this.partsComputer.position.copy(worldPoint(PARTS_POSITION, 1.9)); this.root.add(this.partsComputer);
+    this.partsComputer.userData.mapPOI = { label: 'Hill Drive' };
     box(this.partsComputer, 'Desk', [5.6, .25, 3.2], [0, 4.3, 0], 0x856b4f);
     for (const x of [-2.3, 2.3]) for (const z of [-1.2, 1.2]) box(this.partsComputer, 'Desk leg', [.3, 4.3, .3], [x, 2.15, z], 0x34464b);
     box(this.partsComputer, 'Laptop keyboard', [3.1, .14, 1.6], [0, 4.51, .25], 0x242d35);
@@ -109,21 +109,6 @@ export class TycoonActors {
     const c = s.car, g = guidance(s);
     this.garageKiosk.visible = has(s, 'lot');
     const delta = Math.min(.1, Math.max(0, s.clock - this.lastClock)); this.lastClock = s.clock;
-    const tutorial = s.journey ? !s.journey.tutorialComplete : s.sales === 0;
-    // One green flash per second; tint the existing text without rebuilding its texture.
-    const targetColor = tutorial && s.clock % 1 < .5 ? 0x50ff70 : 0xffffff;
-    const targetName = g.point && g.kind !== 'pad'
-      ? g.kind === 'repair' ? job(s)?.name ?? '' : c ? def(s).name : '' : '';
-    if (targetName && this.targetName !== targetName) {
-      this.targetLabel?.material.map?.dispose(); this.targetLabel?.material.dispose(); this.targetLabel?.removeFromParent();
-      this.targetLabel = textSprite(targetName, 18, true); this.targetName = targetName; this.root.add(this.targetLabel);
-    }
-    if (this.targetLabel) {
-      this.targetLabel.visible = !!targetName && showTarget;
-      this.targetLabel.material.color.setHex(targetColor);
-      const anchor = guidanceAnchor(s, g);
-      if (anchor) this.targetLabel.position.copy(worldPoint(anchor, 10));
-    }
     const payout = partsPayout(s.parts?.level ?? 1);
     if (payout !== this.partsAmount) {
       this.partsLabel.material.map?.dispose(); this.partsLabel.material.dispose(); this.partsLabel.removeFromParent();
@@ -146,7 +131,7 @@ export class TycoonActors {
     if (this.journeyLabel) {
       const target = showTarget && g.kind === 'pad' && g.id === pad?.id;
       this.journeyLabel.visible = this.journeyPad.visible && (target || this.journeyPad.position.distanceTo(player) < 65);
-      this.journeyLabel.material.color.setHex(target ? targetColor : 0xffffff);
+      this.journeyLabel.material.color.setHex(0xffffff);
     }
     for (const visual of this.cosmetics.values()) { visual.pad.visible = false; visual.label.visible = false; }
     for (const optional of cosmeticPads(s)) {
@@ -185,7 +170,7 @@ export class TycoonActors {
       const mesh = this.pads.get(p.id)!, available = eligible(s, p); mesh.visible = available;
       const label = this.padLabels.get(p.id)!, target = showTarget && g.kind === 'pad' && g.id === p.id;
       label.visible = available && (target || mesh.position.distanceTo(player) < 42);
-      label.material.color.setHex(target ? targetColor : 0xffffff);
+      label.material.color.setHex(0xffffff);
     }
     this.tradingVisual.sync(s, draft);
     this.actor.visible = !!c && ['seller', 'buyer', 'sold'].includes(c.status);
