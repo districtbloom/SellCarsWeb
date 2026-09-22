@@ -1,0 +1,232 @@
+/* Shared finish for the game UI. No fonts, images or animation libraries to download. */
+:root {
+  --ui-ink:#19372c; --ui-paper:#fff8e9; --ui-lime:#c3ed94; --ui-focus:#ffe098;
+  --ui-fast:150ms; --ui-ease:cubic-bezier(.2,.8,.2,1);
+  --ui-shadow:0 18px 55px #061b2440,0 2px 0 #ffffff30 inset;
+}
+:is(.tycoon-ui,.repair-overlay,.hill-overlay,.start-screen,.tycoon-review) { -webkit-font-smoothing:antialiased; }
+:is(.tycoon-ui,.repair-overlay,.hill-overlay,.start-screen,.tycoon-review) button,
+.music-toggle,.parts-world-prompt button {
+  -webkit-tap-highlight-color:transparent; touch-action:manipulation;
+  transition:scale var(--ui-fast) var(--ui-ease),transform var(--ui-fast) var(--ui-ease),background-color var(--ui-fast),border-color var(--ui-fast),box-shadow var(--ui-fast),filter var(--ui-fast);
+  transform-origin:center; user-select:none;
+}
+/* Individual scale preserves the translate transforms used to position repair targets. */
+@media(hover:hover) and (pointer:fine) {
+  :is(.tycoon-ui,.repair-overlay,.hill-overlay,.start-screen,.tycoon-review) button:not(:disabled):not(.tycoon-cash-gain):hover,
+  .music-toggle:hover,.parts-world-prompt button:not(:disabled):hover { scale:1.035; filter:brightness(1.065); }
+  .repair-board button:not(:disabled):hover { scale:1.055; }
+}
+:is(.tycoon-ui,.repair-overlay,.hill-overlay,.start-screen,.tycoon-review) button:not(:disabled):not(.tycoon-cash-gain):active,
+.music-toggle:active,.parts-world-prompt button:not(:disabled):active { scale:.965; filter:brightness(.96); }
+:is(.tycoon-ui,.repair-overlay,.hill-overlay,.start-screen,.tycoon-review) button:focus-visible,
+.music-toggle:focus-visible,.parts-world-prompt button:focus-visible {
+  outline:3px solid var(--ui-focus); outline-offset:4px; box-shadow:0 0 0 6px #183e35b3;
+}
+:is(.tycoon-ui,.repair-overlay,.hill-overlay) button:disabled { cursor:not-allowed; }
+.tycoon-ui button:disabled { filter:saturate(.45); }
+:is(.tycoon-panel-content,.garage-details,.repair-workbench,.start-screen,.smartphone-message) {
+  scrollbar-width:thin; scrollbar-color:#77a68c #203c3012; overscroll-behavior:contain;
+}
+.tycoon-panel-content { scrollbar-gutter:stable; }
+:is(.tycoon-price,.tycoon-wallet,.garage-price,.garage-stats,.hill-header,.race-announcement) { font-variant-numeric:tabular-nums; }
+
+/* One entrance on each persistent major frame, never on its re-rendered children. */
+@keyframes ui-frame-open {
+  from { opacity:0; translate:0 18px; scale:.965; }
+  to { opacity:1; translate:0 0; scale:1; }
+}
+.tycoon-panel:not([hidden]),.tycoon-guide:not([hidden]),
+.repair-overlay:not([hidden]) .repair-workbench,
+.hill-overlay:not([hidden]) .hill-laptop,.start-screen-content {
+  animation:ui-frame-open 300ms var(--ui-ease) both;
+}
+
+/* Dealership controls: warm paper, green primary actions, quieter secondary actions. */
+.tycoon-ui { --ink:var(--ui-ink); --paper:var(--ui-paper); --green:var(--ui-lime); }
+.tycoon-ui button { border:1px solid #426646; border-radius:11px; min-height:46px; padding:12px 16px; box-shadow:0 3px 0 #28483224,0 1px 0 #ffffff70 inset; }
+.tycoon-ui .secondary { color:#3f594b; background:#e7eddf; border-color:#a5b8a0; box-shadow:0 2px 0 #28483212; }
+.tycoon-panel:not(.tycoon-garage) {
+  width:390px; border:1px solid #dfebd1; border-radius:22px;
+  background:linear-gradient(145deg,#fffbef,#f4f2e2); box-shadow:var(--ui-shadow),0 0 0 4px #17382b20;
+}
+.tycoon-panel-header { padding:22px 22px 18px; gap:16px; border-bottom:1px solid #3157431c; background:linear-gradient(115deg,#e8f0d9,#fff9e9); }
+.tycoon-panel h2 { font-size:25px; line-height:1.12; letter-spacing:-.7px; }
+.tycoon-panel-header p { font-size:12px; line-height:1.5; color:#58755f; }
+.tycoon-panel-content { padding:22px; gap:14px; }
+.tycoon-ui .tycoon-close { flex:0 0 38px; min-width:38px; min-height:38px; height:38px; border:1px solid #32523b24; background:#34573c0b; border-radius:12px; box-shadow:none; font-size:25px; }
+.tycoon-quote { border:1px solid #76957830; border-left:4px solid #7faa62; border-radius:12px; background:#e9efdf; padding:16px 18px; font-size:16px; line-height:1.55; }
+.tycoon-price { font-size:38px; line-height:1.15; letter-spacing:-1.4px; color:#285b38; }
+.tycoon-subtitle { font-size:17px; letter-spacing:-.2px; padding-top:10px; border-top:1px solid #3157431c; }
+.tycoon-muted { color:#607263; line-height:1.55; }
+.tycoon-category { border:1px solid #94b29c55; padding:6px 9px; font-size:11px; letter-spacing:.04em; }
+.tycoon-ledger { padding:12px 14px; border:1px solid #31574315; background:#fffdf580; border-radius:10px; font-size:13px; }
+.tycoon-tabs { padding:5px; gap:4px; border:1px solid #a5b8a04d; border-radius:13px; background:#dce6d4; }
+.tycoon-ui .tycoon-tabs button { border:0; background:transparent; box-shadow:none; min-height:39px; }
+.tycoon-ui .tycoon-tabs button.selected { background:#fffbee; color:#234e32; box-shadow:0 2px 6px #26453020; }
+.tycoon-ui .tycoon-swatches button { border-color:#a0b594; padding:10px 12px; }
+.tycoon-ui button.selected { box-shadow:0 0 0 2px #447248 inset; }
+.tycoon-counter { padding:8px; background:#e5ecdc; border-radius:13px; }
+.tycoon-counter button { width:46px; padding:0; }
+
+/* Keep the map's left side free and make the top row read as one compact toolbar. */
+.tycoon-top { left:auto; width:max-content; max-width:calc(100vw - 298px); align-items:center; gap:8px; }
+.tycoon-top .tycoon-brand { display:none; }
+.tycoon-top.wallet-only { width:auto; max-width:none; }
+.tycoon-top.wallet-only > :not(.tycoon-wallet) { display:none; }
+.tycoon-top button { min-height:46px; white-space:nowrap; padding:11px 15px; border-radius:13px; }
+.tycoon-ui .tycoon-wallet { min-width:120px; font-size:22px; color:#f4ffe5; background:linear-gradient(145deg,#398d57,#24683d); border-color:#9fcf83; box-shadow:0 4px 16px #122d3140,0 1px 0 #c7ffbe44 inset; }
+.tycoon-top .tycoon-phone { background:#fffaed; border-color:#fff9e9; box-shadow:0 4px 16px #122d3129; }
+.tycoon-stock { border:1px solid #b4d2c12e; min-height:46px; box-sizing:border-box; padding:8px 13px; background:#18382de8; box-shadow:0 4px 16px #122d3129; }
+.tycoon-guide { gap:16px; padding:16px; width:min(570px,calc(100vw - 32px)); border:1px solid #e1ecd1; border-radius:20px; box-shadow:var(--ui-shadow); }
+.tycoon-guide p { line-height:1.5; font-size:14px; }
+.tycoon-guide-avatar { border-color:#8aaf7866; box-shadow:0 2px 0 #ffffff80 inset; }
+.tycoon-toast { top:84px; border:1px solid #d3e4c2; border-radius:13px; box-shadow:0 8px 24px #122d3130; font-weight:650; }
+.tycoon-work { top:84px; border:1px solid #c8debd; box-shadow:0 6px 18px #122d3130; border-radius:12px; font-size:12px; }
+.tycoon-hint.world-billboard,.vehicle-prompt,.tycoon-destination {
+  border:1px solid #c5e3d178; background:#16372feb; border-radius:12px; box-shadow:0 6px 18px #061c2340; color:#f5ffe9; line-height:1.5;
+}
+.tycoon-selling-progress { border-radius:12px; background:#153d30f2; box-shadow:0 5px 20px #08292040; }
+.tycoon-selling-track { height:8px; background:#09281e; }
+.tycoon-selling-fill { background:linear-gradient(90deg,#65d39a,#c2ef8c); transition:width 120ms linear; }
+.tycoon-cash-gain { transition:none!important; }
+.objective-pointer span { border-radius:8px; padding:7px 10px; box-shadow:0 4px 12px #08292040; }
+
+/* Showroom: preserve the unobstructed car view; only the outer panel animates. */
+.tycoon-garage .tycoon-panel-header { background:linear-gradient(#102a25ed,#102a2566,transparent); border:0; padding:26px 32px; }
+.tycoon-garage .tycoon-panel-header h2 { font-size:26px; }
+.tycoon-garage .tycoon-close { background:#153c32d9; color:#f4ffe8; border-color:#abcbb34d; }
+.tycoon-garage .tycoon-panel-content { padding:0; }
+.garage-details { border:1px solid #b6dba84d; background:linear-gradient(135deg,#234837f5,#122e27fa); border-radius:22px; box-shadow:0 20px 65px #001e2559,0 1px 0 #dcffcb22 inset; padding:23px 26px; }
+.garage-price { color:#caf29b; font-weight:850; letter-spacing:-.6px; }
+.garage-stats { gap:10px; padding:14px 0; }
+.garage-stats>div { background:#d7f4d20a; padding:10px 12px; border:1px solid #c4e8c215; border-radius:12px; }
+.garage-stats strong { color:#f2ffe8; font-size:18px; }
+.garage-stats small { color:#b7cdb9; }
+.garage-actions { gap:10px; }
+.tycoon-ui .garage-arrow { background:#173c30e6; border:1px solid #b4d99d73; box-shadow:0 7px 24px #092a2b40; }
+.garage-paints button[aria-pressed=true] { outline-color:#d9ffaf; }
+
+/* The phone keeps its existing single slide-in transition. */
+.tycoon-smartphone { border-color:#a5b9af; box-shadow:0 24px 70px #001e2570,0 0 0 5px #0c1d1755; }
+.smartphone-screen { background:radial-gradient(ellipse at 0 0,#3b715250,transparent 75%),linear-gradient(155deg,#193f3b,#112b30 70%); }
+.smartphone-avatar { background:linear-gradient(145deg,#a1d77d,#4f9678); color:#112f28; box-shadow:0 5px 20px #051b2133; }
+.smartphone-message { border:1px solid #c6ecd514; color:#d2e4dc; }
+.tycoon-ui .tycoon-smartphone button { min-height:40px; border:1px solid #d8f9de1a; border-radius:11px; }
+.tycoon-ui .tycoon-smartphone .smartphone-answer { background:#b9e68f; color:#183f2c; min-height:46px; box-shadow:0 4px 14px #9bd77820; }
+.tycoon-ui .tycoon-smartphone .smartphone-remind { color:#f8e5ae; background:#635331; }
+
+/* Service workbench: clearer instructions and progress, stable hit targets. */
+.repair-overlay { background:#061920d9; }
+.repair-workbench { border:1px solid #8baea887; border-radius:24px; background:linear-gradient(145deg,#294b4b,#102c35 70%); box-shadow:0 30px 100px #00162199,0 1px 0 #e5fff22b inset; }
+.repair-workbench h2 { letter-spacing:-.9px; font-size:32px; }
+.repair-eyebrow { color:#b2eba1; }
+.repair-instruction { margin:16px 0; padding:13px 16px; min-height:0; border:1px solid #c8ebd51c; border-left:3px solid #b6df89; border-radius:9px; background:#c1e3d50a; color:#d2e2dd; font-size:14px; }
+.repair-board { border:1px solid #87a89c3d; box-shadow:0 3px 16px #00182255 inset; }
+.repair-close { border-radius:12px; color:#dcebe2; width:44px; height:44px; flex-shrink:0; }
+.repair-workbench footer { margin-top:18px; padding:14px 0 0; border-top:1px solid #c4e5d51c; gap:18px; letter-spacing:.08em; }
+.repair-status { min-width:85px; color:#caf0a8; }
+.repair-workbench progress { appearance:none; border:0; overflow:hidden; border-radius:8px; background:#0b252d; height:10px; }
+.repair-workbench progress::-webkit-progress-bar { background:#0b252d; border-radius:8px; }
+.repair-workbench progress::-webkit-progress-value { background:linear-gradient(90deg,#63cba6,#c4ed92); border-radius:8px; transition:width 120ms; }
+.repair-workbench progress::-moz-progress-bar { background:linear-gradient(90deg,#63cba6,#c4ed92); border-radius:8px; }
+.repair-bolt:not(:disabled),.repair-target:not(:disabled) { box-shadow:0 3px 8px #00151f66,0 0 0 3px #f5d88612; }
+.repair-target.done { opacity:.38; }
+.repair-wheel:disabled { cursor:default; }
+
+/* Map, event banner and laptop share the green/gold accent family. */
+.runtime-minimap { border:1px solid #a8c99999; border-radius:16px; overflow:hidden; background:#17362eed; box-shadow:0 8px 28px #08232a50; }
+.runtime-minimap div { padding:8px 11px; letter-spacing:.045em; color:#d7f3bd; }
+.runtime-minimap small { padding:7px 10px; color:#c4d6bf; font-size:9px; }
+.runtime-minimap canvas { border-block:1px solid #b6d99e28; }
+.music-toggle { top:266px; min-height:36px; border-radius:10px; padding:8px 12px; background:#17362ee8; border-color:#a8c99980; color:#d7f3bd; box-shadow:0 4px 16px #08232a30; }
+.music-toggle[aria-pressed=true] { color:#bbcec3; border-color:#78948966; }
+.race-announcement { border:1px solid #edcc7a; border-top:3px solid #f9d67b; border-radius:15px; box-shadow:0 10px 35px #051d2559; background:linear-gradient(125deg,#20483bee,#16342bef); font-family:system-ui,sans-serif; letter-spacing:.015em; }
+.race-billboard { border-radius:11px; border-width:1px; border-top:3px solid #f5d47c; box-shadow:0 6px 22px #08232a4d; }
+.hill-overlay { background:#071d26de; padding:16px; box-sizing:border-box; }
+.hill-laptop { border-color:#29443f; outline-color:#92b297; box-shadow:0 25px 90px #00161d99,0 0 0 7px #112b2e; max-height:calc(100dvh - 42px); overflow:auto; }
+.hill-header { background:linear-gradient(115deg,#1e3d34,#152e31); padding:16px; color:#d5ecbc; border-bottom-color:#6c9477; }
+.hill-header strong { letter-spacing:.045em; }
+.hill-header>span { color:#ffe2a1; font-variant-numeric:tabular-nums; text-align:right; }
+.hill-header button { min-width:40px; min-height:40px; padding:6px 10px; }
+.hill-header button,.hill-footer button { border-color:#264832; box-shadow:0 3px 0 #14332333,0 1px 0 #ffffff66 inset; background:#c3e79e; }
+.hill-footer { background:#bfd0b9; padding:16px; gap:14px; border-top-color:#29443f; font-size:12px; line-height:1.6; }
+.hill-footer button { min-height:44px; white-space:nowrap; }
+.hill-touch button { background:#e3ecd4; touch-action:none; }
+.hill-footer>span { min-width:180px; }
+
+.start-screen-content { gap:34px; }
+.start-screen-eyebrow { display:flex; align-items:center; gap:14px; color:#efffd1; font-size:11px; letter-spacing:.3em; font-weight:800; text-shadow:0 2px 8px #163629; }
+.start-screen-eyebrow:before,.start-screen-eyebrow:after { content:''; width:42px; height:1px; background:#d4edb8a6; }
+.start-screen-hint { color:#edffe0; font-size:12px; letter-spacing:.08em; text-shadow:0 2px 6px #0d302b; }
+body.on-title-screen .tycoon-guide,body.on-title-screen .tycoon-panel { animation:none; }
+.start-screen h1 { letter-spacing:-.055em; text-shadow:0 6px 0 #163b2e,0 12px 0 #163b2e66,0 22px 65px #0007; }
+.start-screen-button { background:linear-gradient(#c9eca0,#a6d484); border-color:#284e30; box-shadow:0 7px 0 #203f2b,0 18px 50px #05201f70,0 2px 0 #eaffc980 inset; }
+.tycoon-review { border:1px solid #c4d8b6; background:#f4f5e6f5; box-shadow:var(--ui-shadow); }
+.parts-world-prompt { padding:12px; border-radius:15px; box-shadow:0 12px 30px #061d2659; }
+.parts-world-prompt button { min-height:42px; border-radius:9px; }
+
+@media(max-width:900px) and (min-width:761px) {
+  .tycoon-top { gap:5px; right:14px; }
+  .tycoon-top button { padding:10px; font-size:12px; }
+  .tycoon-ui .tycoon-wallet { min-width:96px; font-size:19px; }
+  .tycoon-stock { padding:8px; font-size:12px; }
+}
+@media(max-width:760px) {
+  .tycoon-top { left:max(10px,env(safe-area-inset-left)); right:max(10px,env(safe-area-inset-right)); width:auto; max-width:none; flex-wrap:wrap; justify-content:flex-end; gap:5px; }
+  .tycoon-top button { min-height:40px; padding:9px 10px; font-size:12px; border-radius:10px; }
+  .tycoon-ui .tycoon-wallet { margin-right:auto; min-width:85px; font-size:17px; }
+  .tycoon-stock { min-height:40px; padding:6px 8px; font-size:11px; border-radius:10px; }
+  .tycoon-stock svg { width:22px; height:22px; }
+  .tycoon-panel:not(.tycoon-garage) { width:min(390px,calc(100vw - 24px)); max-height:calc(100dvh - 24px); }
+  .tycoon-panel-header,.tycoon-panel-content { padding:18px; }
+  .tycoon-panel h2 { font-size:23px; }
+  .runtime-minimap { width:150px; top:76px; }
+  .music-toggle { top:249px; font-size:11px; min-height:32px; }
+  .race-announcement { max-width:calc(100vw - 207px); padding:8px; font-size:11px; }
+  .tycoon-guide { padding:12px; gap:10px; bottom:max(12px,env(safe-area-inset-bottom)); }
+  .tycoon-guide p { font-size:12px; }
+  .tycoon-garage .tycoon-panel-header { padding:18px; }
+  .garage-details { padding:16px; border-radius:17px; }
+  .garage-stats { gap:5px; }
+  .garage-stats>div { padding:8px 6px; border-radius:8px; }
+  .garage-stats strong { font-size:13px; }
+  .garage-stats small { font-size:10px; }
+  .repair-workbench { padding:16px; }
+  .repair-workbench h2 { font-size:25px; }
+  .repair-instruction { font-size:12px; padding:10px 12px; }
+  .hill-header { padding:10px; flex-wrap:wrap; gap:8px; }
+  .hill-header>strong { flex:1; }
+  .hill-header>span { order:3; width:100%; text-align:left; font-size:12px; }
+  .hill-footer { padding:12px; gap:10px; }
+}
+@media(max-width:420px) {
+  .tycoon-top { gap:4px; }
+  .tycoon-top .tycoon-wallet,.tycoon-top .tycoon-stock { flex:1 1 calc(50% - 4px); justify-content:center; }
+  .tycoon-top>.tycoon-phone { flex:1 1 25%; }
+  .tycoon-top button { font-size:11px; padding:8px; }
+  .tycoon-stock { padding:6px; font-size:10px; gap:3px; }
+  .tycoon-stock svg { width:18px; height:18px; }
+  .tycoon-ui .tycoon-wallet { min-width:70px; padding:8px; font-size:15px; }
+  .tycoon-guide-avatar { width:42px; height:48px; flex-basis:42px; }
+  .tycoon-guide { gap:8px; }
+  .tycoon-guide button { padding:8px; min-height:40px; }
+  .runtime-minimap,.race-announcement { top:112px; }
+  .music-toggle { top:285px; }
+  .tycoon-toast,.tycoon-work { top:112px; }
+}
+@media(max-height:500px) {
+  .runtime-minimap { width:130px; top:70px; }
+  .music-toggle { top:226px; }
+  .repair-workbench { max-height:calc(100dvh - 24px); }
+  .hill-laptop { max-height:calc(100dvh - 32px); }
+  .hill-laptop canvas { max-height:40vh; }
+  .start-screen-content { gap:22px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  :is(.tycoon-ui,.repair-overlay,.hill-overlay,.start-screen,.tycoon-review) *,
+  .music-toggle,.parts-world-prompt *,.tycoon-selling-fill { animation:none!important; transition:none!important; }
+  :is(.tycoon-ui,.repair-overlay,.hill-overlay,.start-screen,.tycoon-review) button,
+  .music-toggle,.parts-world-prompt button { scale:1!important; }
+  .start-screen-button:hover:not(:disabled),.start-screen-button:active:not(:disabled) { transform:none; }
+}

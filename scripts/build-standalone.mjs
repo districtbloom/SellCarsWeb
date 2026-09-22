@@ -1,31 +1,20 @@
-import { readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
-import { extname, join } from 'node:path';
+import { readdir, readFile, mkdir, writeFile, unlink } from 'node:fs/promises';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 import { build } from 'vite';
+import { runtimeBuildAssets } from './runtime-build-assets.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const types = {
-  '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png',
-  '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp',
-  '.obj': 'text/plain', '.mtl': 'text/plain', '.woff2': 'font/woff2',
-  '.mp3': 'audio/mpeg', '.wav': 'audio/wav', '.ogg': 'audio/ogg', '.m4a': 'audio/mp4',
-};
-const archive = Object.create(null);
-async function collect(directory, prefix = '') {
-  const entries = (await readdir(directory, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name));
-  for (const entry of entries) {
-    const path = join(directory, entry.name), key = prefix + entry.name;
-    if (entry.isDirectory()) await collect(path, `${key}/`);
-    else if (entry.isFile()) archive[key] = {
-      type: types[extname(entry.name).toLowerCase()] ?? 'application/octet-stream',
-      data: (await readFile(path)).toString('base64'),
-    };
-  }
-}
-
-await collect(join(root, 'public'));
-const payload = gzipSync(JSON.stringify(archive), { level: 9 }).toString('base64');
+const split = process.argv.includes('--split');
+const fileLimit = 2_000_000, partSize = 1_900_000;
+const archive = await runtimeBuildAssets(join(root, 'public'));
+const compressed = gzipSync(JSON.stringify(archive), { level: 9 });
+const parts = Array.from({ length: Math.ceil(compressed.length / partSize) }, (_, index) => {
+  const data = compressed.subarray(index * partSize, (index + 1) * partSize);
+  return { file: `assets-${String(index).padStart(3, '0')}.bin`, bytes: data.length, data };
+});
+const payload = split ? JSON.stringify({ parts: parts.map(({ file, bytes }) => ({ file, bytes })) }) : compressed.toString('base64');
 const result = await build({
   root, configFile: false, base: './', publicDir: false,
   build: {
@@ -54,13 +43,20 @@ const html = template
   .replace(/<script\b[^>]*src="\/src\/main\.ts"[^>]*><\/script>/, () => `
     <p id="standalone-loading" style="position:fixed;top:16px;left:16px;z-index:100;background:#121a25;color:white;padding:16px;font:16px system-ui">Loading game…</p>
     <noscript>Enable JavaScript to play this game.</noscript>
-    <script id="standalone-assets" type="application/octet-stream">${payload}</script>
+    <script id="standalone-assets" type="application/octet-stream" data-format="${split ? 'parts' : 'base64'}">${payload}</script>
     <script>${scripts[0].code.replace(/<\/script/gi, '<\\/script')}</script>`);
 if (!html.includes('id="standalone-assets"') || html.includes('src="/src/main.ts"')) {
   throw new Error('Could not replace the game entry in index.html');
 }
-const directory = join(root, 'dist-standalone');
+if (split && Buffer.byteLength(html) > fileLimit) throw new Error('Game HTML exceeds the 2,000,000-byte upload limit');
+const directory = join(root, split ? 'dist-upload' : 'dist-standalone');
 await mkdir(directory, { recursive: true });
-const destination = join(directory, 'game.html');
+if (split) {
+  // Remove only this generator's old part files, never other files in the output directory.
+  for (const name of await readdir(directory)) if (/^assets-\d+\.bin$/.test(name)) await unlink(join(directory, name));
+  for (const part of parts) await writeFile(join(directory, part.file), part.data);
+}
+const destination = join(directory, split ? 'index.html' : 'game.html');
 await writeFile(destination, html);
-console.log(`\nStandalone game: ${destination}\n${(Buffer.byteLength(html) / 1024 / 1024).toFixed(1)} MB; ${Object.keys(archive).length} embedded assets.\nOpen game.html directly in a current browser. No server required.`);
+console.log(`\n${split ? 'Upload build' : 'Standalone game'}: ${destination}\n${Buffer.byteLength(html).toLocaleString('en-US')} bytes HTML; ${Object.keys(archive).length} runtime assets.`);
+console.log(split ? `${parts.length} asset parts; each file under ${fileLimit.toLocaleString('en-US')} bytes. Total ${(compressed.length + Buffer.byteLength(html)).toLocaleString('en-US')} bytes.\nUpload ALL files together to the same directory on a web host. This is a per-file limit, not a 2 MB total build. Serve over HTTP(S); opening index.html directly cannot fetch the parts.` : 'Open game.html directly in a current browser. No server required.');

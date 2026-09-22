@@ -7,6 +7,7 @@ export class StartScreen {
   active = true;
   private root = document.createElement('main');
   private button = document.createElement('button');
+  private hint = document.createElement('small');
   private camera?: PerspectiveCamera;
   private position = new Vector3();
   private rotation = new Quaternion();
@@ -21,9 +22,11 @@ export class StartScreen {
     this.root.className = 'start-screen'; this.root.setAttribute('aria-label', 'Sell Cars title screen');
     const content = document.createElement('div'); content.className = 'start-screen-content';
     const title = document.createElement('h1'); title.textContent = 'SELL CARS';
+    const eyebrow = document.createElement('span'); eyebrow.className = 'start-screen-eyebrow'; eyebrow.textContent = 'MAPLE COUNTY';
+    this.hint.className = 'start-screen-hint'; this.hint.textContent = 'Preparing your dealership'; this.hint.setAttribute('role', 'status');
     this.button.className = 'start-screen-button'; this.button.textContent = 'LOADING…'; this.button.disabled = true;
     this.button.onclick = this.begin;
-    content.append(title, this.button); this.root.append(content); document.body.append(this.root);
+    content.append(eyebrow, title, this.button, this.hint); this.root.append(content); document.body.append(this.root);
     // Capture before gameplay listeners: title-screen keys cannot move, buy, or open menus.
     window.addEventListener('keydown', this.key, true);
     window.addEventListener('keyup', this.blockKey, true);
@@ -33,6 +36,7 @@ export class StartScreen {
     this.camera = camera; this.position.copy(camera.position); this.rotation.copy(camera.quaternion); this.fov = camera.fov;
     this.center.copy(center); camera.position.copy(center); camera.fov = 65; camera.updateProjectionMatrix();
     this.tick(0); this.ready = true; this.button.disabled = false; this.button.textContent = 'START'; this.button.focus();
+    this.hint.textContent = 'Press Enter to start';
   }
 
   tick(dt: number) {

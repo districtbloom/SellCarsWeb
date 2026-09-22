@@ -66,6 +66,7 @@ export class TycoonHUD {
   private counterAmount?: number;
   private dialogue?: 'welcome' | 'phone-intro' | 'phone-answer';
   private recommended?: HTMLButtonElement;
+  private previousFocus?: HTMLElement;
   private carIndex = 0;
   private get cars() { return this.host.cars ?? personalCars; }
   draft?: Look;
@@ -84,6 +85,8 @@ export class TycoonHUD {
     this.root.setAttribute('aria-label', 'Sell Cars dealership'); this.panel.setAttribute('role', 'dialog'); this.panel.setAttribute('aria-label', 'Dealership panel');
     const title = element('div', 'tycoon-brand', 'SELL CARS'); title.append(element('small', '', 'Your dealership'));
     this.wallet.onclick = () => this.open('wallet'); this.phone.onclick = () => this.togglePhone();
+    this.wallet.title = 'Your cash and transaction history'; this.phone.title = 'Phone (P)';
+    this.building.title = 'Your next construction upgrade'; this.garage.title = 'Browse your personal cars';
     this.smartphone = new Smartphone(this.root, () => this.answerCall(), () => this.remindCall(), () => { this.smartphone.hide(); this.tab = 'Home'; this.open('phone'); });
     this.building.onclick = () => this.open('journey');
     this.garage.onclick = () => this.open('collection');
@@ -115,11 +118,19 @@ export class TycoonHUD {
   }
   private keyDown = (e: KeyboardEvent) => {
     if (this.root.hidden) return;
+    if (e.code === 'Tab' && this.isOpen) {
+      const buttons = this.panelButtons(), index = buttons.indexOf(document.activeElement as HTMLButtonElement);
+      if (buttons.length) {
+        e.preventDefault();
+        buttons[index < 0 ? e.shiftKey ? buttons.length - 1 : 0 : (index + (e.shiftKey ? buttons.length - 1 : 1)) % buttons.length].focus({ preventScroll: false });
+      }
+      return;
+    }
     if (e.ctrlKey || e.altKey || e.metaKey || /^(INPUT|TEXTAREA|SELECT)$/.test((e.target as HTMLElement)?.tagName)) return;
     if (['personal', 'collection'].includes(this.page) && !e.repeat && ['ArrowLeft', 'ArrowRight'].includes(e.code)) {
       e.preventDefault(); this.changeCar(e.code === 'ArrowLeft' ? -1 : 1); return;
     }
-    if (e.code === 'Escape' && this.isOpen) this.close();
+    if (e.code === 'Escape' && this.isOpen) { e.preventDefault(); this.close(); }
     if (e.code === 'Enter' && !e.repeat && !this.isOpen && this.host.state.lead && ['ringing', 'missed', 'answered'].includes(this.host.state.lead.status)) { e.preventDefault(); this.answerCall(); }
     if (e.code === 'KeyP' && !e.repeat) { if (this.isOpen) this.close(); else this.togglePhone(); }
   };
@@ -127,14 +138,22 @@ export class TycoonHUD {
   private answerCall() { if (this.host.dispatch({ type: 'AnswerCall' }).ok) { this.smartphone.hide(); this.open('call'); } }
   private remindCall() { if (this.host.dispatch({ type: 'RemindCall' }).ok) { this.smartphone.hide(); this.close(); } }
   open(page: Panel) {
+    const changed = this.page !== page;
+    if (!this.isOpen && page !== 'world') this.previousFocus = document.activeElement as HTMLElement;
     if (document.pointerLockElement) document.exitPointerLock();
     if (page === 'personal' && this.page !== 'personal') this.carIndex = Math.max(0, this.cars.findIndex(car => car.id === personalModel(this.host.state.personal)));
     if (page === 'collection' && this.page !== 'collection') this.carIndex = Math.max(0, garageVehicles(this.host.state).findIndex(car => car.id === this.host.state.personal?.id));
     this.page = page; this.counterAmount = undefined;
     this.draft = page === 'custom' ? M.copy(this.host.state.car?.custom ?? M.originalLook()) : undefined;
     this.host.setMenu(page !== 'world'); this.render();
+    if (changed && this.isOpen) { this.content.scrollTop = 0; this.panelButtons()[0]?.focus({ preventScroll: true }); }
   }
-  close() { if (this.page === 'offline') this.host.dismissOffline?.(); this.page = 'world'; this.draft = undefined; this.host.setMenu(false); this.render(); }
+  close() {
+    if (this.page === 'offline') this.host.dismissOffline?.();
+    this.page = 'world'; this.draft = undefined; this.host.setMenu(false); this.render();
+    this.previousFocus?.focus({ preventScroll: true }); this.previousFocus = undefined;
+  }
+  private panelButtons() { return Array.from(this.panel.querySelectorAll<HTMLButtonElement>('button')).filter(button => !button.disabled && !button.hidden); }
   showResult(result: ActionResult) {
     if (result.receipt) { this.receipt = result.receipt; this.open('result'); }
     else if (result.openDeal) this.open('deal');
@@ -196,6 +215,7 @@ export class TycoonHUD {
     this.next.textContent = this.dialogue === 'phone-answer' ? 'Got it' : 'Continue'; this.next.hidden = !this.dialogue;
   }
   private title(title: string, sub = '') {
+    this.panel.setAttribute('aria-label', title);
     const h = element('div'); h.append(element('h2', '', title), element('p', '', sub));
     const close = element('button', 'tycoon-close', '×'); close.setAttribute('aria-label', 'Close panel'); close.onclick = () => this.close(); this.header.append(h, close);
   }
@@ -231,6 +251,9 @@ export class TycoonHUD {
     this.gains.tick(dt, !this.root.hidden);
   }
   private render() {
+    const focused = document.activeElement as HTMLButtonElement, wasFocused = this.panelButtons().includes(focused);
+    const focusName = focused?.getAttribute?.('aria-label') ?? focused?.textContent;
+    const scrollTop = this.content.scrollTop;
     this.header.replaceChildren(); this.content.replaceChildren(); this.recommended = undefined;
     const s = this.host.state, c = s.car, d = c ? M.def(s) : undefined;
     this.panel.hidden = !this.isOpen;
@@ -473,6 +496,11 @@ export class TycoonHUD {
       }
     };
     panels[this.page]?.();
+    this.content.scrollTop = scrollTop;
+    if (wasFocused && this.isOpen) {
+      const buttons = this.panelButtons();
+      (buttons.find(button => (button.getAttribute('aria-label') ?? button.textContent) === focusName) ?? buttons[0])?.focus({ preventScroll: true });
+    }
   }
   private changeCar(direction: number) {
     const length = this.page === 'collection' ? garageVehicles(this.host.state).length : this.cars.length;

@@ -1,6 +1,7 @@
 import './style.css';
 import { World } from './world/world.js';
 import { initializeStandaloneAssets } from './runtimeAssets.js';
+import './ui-polish.css';
 
 async function main() {
   await initializeStandaloneAssets();

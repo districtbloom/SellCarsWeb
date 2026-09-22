@@ -98,3 +98,20 @@ test('onboarding uses only welcome and phone dialogs, then targets actual contro
   }finally{hud.dispose();}
   const restored=hudFor(M.copy(state));assert.ok(restored.guide.hidden);restored.dispose();
 });
+
+test('panels keep keyboard focus and scroll through live updates, trap Tab and return focus on Escape',()=>{
+  dom();const state=M.freshJourney(),hud=hudFor(state);
+  const press=(code,shiftKey=false)=>window.dispatchEvent(Object.assign(new Event('keydown',{cancelable:true}),{code,shiftKey}));
+  try {
+    hud.wallet.focus();hud.open('phone');const frame=hud.panel;
+    assert.equal(document.activeElement.getAttribute('aria-label'),'Close panel');
+    press('Tab');assert.equal(document.activeElement.textContent,'Home');
+    const team=hud.content.querySelectorAll('button').find(button=>button.textContent==='Team');team.focus();team.onclick();
+    assert.equal(document.activeElement.textContent,'Team');hud.content.scrollTop=137;
+    state.cash+=50;hud.update();assert.equal(document.activeElement.textContent,'Team');assert.equal(hud.content.scrollTop,137);
+    assert.equal(hud.panel,frame,'Live updates keep the animated outer frame mounted');
+    const buttons=hud.panelButtons();buttons.at(-1).focus();press('Tab');assert.equal(document.activeElement,buttons[0]);
+    press('Tab',true);assert.equal(document.activeElement,buttons.at(-1));
+    press('Escape');assert.equal(hud.isOpen,false);assert.equal(document.activeElement,hud.wallet);
+  } finally { hud.dispose(); }
+});

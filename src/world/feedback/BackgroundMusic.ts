@@ -12,6 +12,7 @@ export class BackgroundMusic {
   constructor(private baseUrl: string) {
     this.button.className = 'music-toggle'; this.button.textContent = '♫ Music';
     this.button.setAttribute('aria-label', 'Mute background music');
+    this.button.setAttribute('aria-pressed', 'false');
     this.button.onclick = () => { this.muted = !this.muted; this.button.textContent = this.muted ? '♫ Muted' : '♫ Music'; this.button.setAttribute('aria-pressed', String(this.muted)); this.button.setAttribute('aria-label', this.muted ? 'Unmute background music' : 'Mute background music'); this.sync(); };
     document.body.append(this.button);
     window.addEventListener('pointerdown', this.unlock, true);

@@ -132,6 +132,11 @@ To make a single HTML file that opens directly in a browser, including offline:
 npm run build:standalone
 ```
 
+For a **2 MB per-file upload limit**, run `npm run build:upload` and upload all
+files in `dist-upload/` together. The HTML is about 1.06 MB and each asset part
+is at most 1.9 MB; total size is about 25.3 MB. This preserves all music and
+features. It does **not** meet a 2 MB total limit. See [upload build instructions](docs/upload-build.md).
+
 Double-click `dist-standalone/game.html`. You can copy that file anywhere; it
 contains the JavaScript, CSS, scene, models, textures, and game data. No server
 or adjacent asset folder is required. Use a current Chrome, Edge, Firefox, or

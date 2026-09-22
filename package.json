@@ -11,6 +11,8 @@
     "tycoon:data": "node scripts/extract-tycoon-data.mjs && node scripts/extract-sell-cars.mjs",
     "build": "tsc && vite build",
     "build:standalone": "tsc && node scripts/build-standalone.mjs",
+    "build:upload": "tsc && node scripts/build-standalone.mjs --split",
+    "test:upload": "npm run build:upload && node --test scripts/upload-build.test.mjs",
     "preview": "vite preview",
     "geometry:audit": "node scripts/audit-tycoon-geometry.mjs",
     "geometry:surfaces": "node scripts/audit-tycoon-surfaces.mjs"
